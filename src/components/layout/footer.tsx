@@ -60,6 +60,14 @@ export function Footer({ lang, dict }: Props) {
                 </li>
                 <li>
                   <Link
+                    href={localePath(lang, '/blog')}
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    {dict.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href={localePath(lang, '/contact')}
                     className="transition-opacity hover:opacity-80"
                   >
