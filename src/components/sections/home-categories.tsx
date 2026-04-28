@@ -8,19 +8,25 @@ type Props = {
   hrefForCategory: (key: CategoryKey) => string
 }
 
-const ITEMS: Array<{ key: CategoryKey; image: string; reverse?: boolean }> = [
+const ITEMS: Array<{
+  key: CategoryKey
+  image: string
+  reverse?: boolean
+  background?: 'surface' | 'white'
+}> = [
   { key: 'windows', image: '/figma/section-windows.png' },
-  { key: 'doors', image: '/figma/section-doors.png', reverse: true },
-  { key: 'systems', image: '/figma/section-systems.png' },
+  { key: 'doors', image: '/figma/section-doors.png', reverse: true, background: 'white' },
+  { key: 'systems', image: '/figma/section-systems.png', background: 'white' },
 ]
 
 export function HomeCategories({ categories, moreDetailsLabel, hrefForCategory }: Props) {
   return (
     <>
-      {ITEMS.map(({ key, image, reverse }) => (
+      {ITEMS.map(({ key, image, reverse, background }) => (
         <FeatureSplit
           key={key}
           reverse={reverse}
+          background={background}
           title={categories[key].title}
           description={categories[key].description}
           href={hrefForCategory(key)}

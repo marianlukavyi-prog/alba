@@ -8,11 +8,20 @@ type Props = {
   ctaLabel: string
   image: { src: string; alt: string }
   reverse?: boolean
+  background?: 'surface' | 'white'
 }
 
-export function FeatureSplit({ title, description, href, ctaLabel, image, reverse }: Props) {
+export function FeatureSplit({
+  title,
+  description,
+  href,
+  ctaLabel,
+  image,
+  reverse,
+  background = 'surface',
+}: Props) {
   return (
-    <section className="bg-[var(--color-surface)]">
+    <section className={background === 'white' ? 'bg-white' : 'bg-[var(--color-surface)]'}>
       <div
         className={`mx-auto flex max-w-[1150px] flex-col lg:min-h-[314px] lg:flex-row lg:items-center ${
           reverse ? 'lg:flex-row' : 'lg:flex-row-reverse'

@@ -53,13 +53,13 @@ function SolutionCard({ item }: { item: SolutionItem }) {
       href={item.href}
       className="group relative flex h-[225px] flex-col justify-between overflow-hidden rounded-[2px] bg-[var(--color-surface)] p-[22px]"
     >
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-[60%] overflow-hidden">
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-[55%] overflow-hidden">
         <Image
           src={item.image.src}
           alt={item.image.alt}
           fill
-          sizes="(min-width: 1024px) 230px, (min-width: 640px) 30vw, 60vw"
-          className="object-contain object-left transition-transform duration-500 group-hover:scale-105"
+          sizes="(min-width: 1024px) 210px, (min-width: 640px) 28vw, 55vw"
+          className="object-cover object-left transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
