@@ -17,7 +17,7 @@ type Props = {
   image?: { src: string; alt?: string }
 }
 
-const DEFAULT_IMAGE = '/figma/banner-hero.png'
+const DEFAULT_IMAGE = '/figma/banner-hero.webp'
 
 export function ArticleBanner({
   title,

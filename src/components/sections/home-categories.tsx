@@ -14,9 +14,9 @@ const ITEMS: Array<{
   reverse?: boolean
   background?: 'surface' | 'white'
 }> = [
-  { key: 'windows', image: '/figma/section-windows.png' },
-  { key: 'doors', image: '/figma/section-doors.png', reverse: true, background: 'white' },
-  { key: 'systems', image: '/figma/section-systems.png', background: 'white' },
+  { key: 'windows', image: '/figma/section-windows.webp' },
+  { key: 'doors', image: '/figma/section-doors.webp', reverse: true, background: 'white' },
+  { key: 'systems', image: '/figma/section-systems.webp', background: 'white' },
 ]
 
 export function HomeCategories({ categories, moreDetailsLabel, hrefForCategory }: Props) {

@@ -3,8 +3,12 @@ import { notFound } from 'next/navigation'
 import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
 import { ContactSection } from '@/components/sections/contact-section'
+import { JsonLd } from '@/components/seo/json-ld'
+import { ADDRESS, EMAIL, PHONES } from '@/data/contact'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -28,9 +32,18 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
+      type: 'website',
+      siteName: 'Alba Ventanas',
       title: t.heroTitle,
       description: t.heroSubtitle,
       url: localePath(lang, '/contact'),
+      images: ['/figma/banner-hero.webp'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.heroTitle,
+      description: t.heroSubtitle,
+      images: ['/figma/banner-hero.webp'],
     },
   }
 }
@@ -41,8 +54,27 @@ export default async function ContactPage({ params }: PageProps<'/[lang]/contact
   const dict = await getDictionary(lang)
   const t = dict.contactPage
 
+  const localBusiness = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Alba Ventanas',
+    image: `${SITE_URL}/figma/banner-hero.webp`,
+    url: `${SITE_URL}${localePath(lang, '/contact')}`,
+    telephone: [...PHONES],
+    email: EMAIL,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Carrer Gabriela Mistral',
+      addressLocality: 'Picanya',
+      addressRegion: 'Valencia',
+      addressCountry: 'ES',
+    },
+    description: ADDRESS,
+  }
+
   return (
     <>
+      <JsonLd data={localBusiness} />
       <Header lang={lang} dict={dict} position="absolute" />
       <main className="flex flex-1 flex-col">
         <Banner

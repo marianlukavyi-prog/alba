@@ -18,7 +18,7 @@ type Props = {
   reserveHeader?: boolean
 }
 
-const DEFAULT_IMAGE = '/figma/banner-hero.png'
+const DEFAULT_IMAGE = '/figma/banner-hero.webp'
 
 export function Banner({
   title,

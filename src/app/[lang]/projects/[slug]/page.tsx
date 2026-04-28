@@ -8,9 +8,12 @@ import { ProjectCard } from '@/components/sections/project-card'
 import { ProjectGallery } from '@/components/sections/project-gallery'
 import { ProjectInfo } from '@/components/sections/project-info'
 import { ProductsCarousel } from '@/components/sections/products-carousel'
+import { JsonLd } from '@/components/seo/json-ld'
 import { getProject, getRelatedProjects, PROJECTS } from '@/data/projects'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -32,6 +35,7 @@ export async function generateMetadata({
   const languages: Record<string, string> = {}
   for (const locale of locales) languages[locale] = localePath(locale, `/projects/${slug}`)
 
+  const ogImages = project.gallery.length > 0 ? project.gallery.slice(0, 1) : ['/figma/banner-hero.webp']
   return {
     title: project.title,
     description: project.subtitle,
@@ -40,10 +44,18 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
+      type: 'website',
+      siteName: 'Alba Ventanas',
       title: project.title,
       description: project.subtitle,
       url: localePath(lang, `/projects/${slug}`),
-      images: project.gallery.length > 0 ? project.gallery.slice(0, 1) : [],
+      images: ogImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.subtitle,
+      images: ogImages,
     },
   }
 }
@@ -61,8 +73,42 @@ export default async function ProjectDetailPage({
   const tDetail = dict.projectDetailPage
   const related = getRelatedProjects(slug, 3)
 
+  const projectUrl = `${SITE_URL}${localePath(lang, `/projects/${slug}`)}`
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: t.breadcrumbHome,
+        item: `${SITE_URL}${localePath(lang)}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t.breadcrumbCurrent,
+        item: `${SITE_URL}${localePath(lang, '/projects')}`,
+      },
+      { '@type': 'ListItem', position: 3, name: project.title, item: projectUrl },
+    ],
+  }
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: project.title,
+    description: project.subtitle,
+    image:
+      project.gallery.length > 0
+        ? project.gallery.map((src) => `${SITE_URL}${src}`)
+        : undefined,
+    url: projectUrl,
+    inLanguage: lang,
+  }
+
   return (
     <>
+      <JsonLd data={[articleLd, breadcrumbLd]} />
       <Header lang={lang} dict={dict} position="fixed" variant="solid" />
       <main className="flex flex-1 flex-col bg-white pt-[76px]">
         <nav aria-label="Breadcrumb" className="mx-auto w-full max-w-[1150px] px-6 pt-7">

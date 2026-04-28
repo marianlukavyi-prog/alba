@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import '../globals.css'
 import { Footer } from '@/components/layout/footer'
 import { LeadModal } from '@/components/lead-modal'
+import { JsonLd } from '@/components/seo/json-ld'
+import { EMAIL, PHONES } from '@/data/contact'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -58,11 +60,13 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
       title: dict.meta.title,
       description: dict.meta.description,
       url: lang === defaultLocale ? '/' : `/${lang}`,
+      images: ['/figma/banner-hero.webp'],
     },
     twitter: {
       card: 'summary_large_image',
       title: dict.meta.title,
       description: dict.meta.description,
+      images: ['/figma/banner-hero.webp'],
     },
     robots: { index: true, follow: true },
   }
@@ -74,12 +78,38 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
 
   const dict = await getDictionary(lang)
 
+  const organization = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Alba Ventanas',
+    url: SITE_URL,
+    logo: `${SITE_URL}/figma/banner-hero.webp`,
+    email: EMAIL,
+    telephone: PHONES[0],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Carrer Gabriela Mistral',
+      addressLocality: 'Picanya',
+      addressRegion: 'Valencia',
+      addressCountry: 'ES',
+    },
+    sameAs: [],
+  }
+  const website = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Alba Ventanas',
+    url: SITE_URL,
+    inLanguage: lang,
+  }
+
   return (
     <html lang={lang} className={`${onest.variable} h-full antialiased`}>
       <body className="bg-background text-foreground flex min-h-full flex-col font-sans">
         {children}
         <Footer lang={lang} dict={dict} />
         <LeadModal homeHref={localePath(lang)} dict={dict.leadModal} />
+        <JsonLd data={[organization, website]} />
       </body>
     </html>
   )

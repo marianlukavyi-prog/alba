@@ -52,7 +52,7 @@ const DEMO_DETAIL: ProductDetail = {
     {
       title: 'Направляючі',
       description: 'В середньому від 2 до 6 тижнів залежно від складності проєкту.',
-      image: '/figma/products/euro-design-60.png',
+      image: '/figma/products/euro-design-60.webp',
     },
     { title: 'Кінцеві планки', description: '' },
     { title: 'Профілі', description: '' },
@@ -68,10 +68,10 @@ const DEMO_DETAIL: ProductDetail = {
     { name: '44 - Dark grey, pearl mat', hex: '#555555' },
   ],
   gallery: [
-    '/figma/products/euro-design-60.png',
-    '/figma/products/euro-design-70.png',
-    '/figma/products/schuco-aws-wooddesign.png',
-    '/figma/products/reynaers-masterline-8.png',
+    '/figma/products/euro-design-60.webp',
+    '/figma/products/euro-design-70.webp',
+    '/figma/products/schuco-aws-wooddesign.webp',
+    '/figma/products/reynaers-masterline-8.webp',
   ],
 }
 
@@ -87,7 +87,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.6' },
       { key: 'sound', value: 'до 41 дБ' },
     ],
-    image: { src: '/figma/products/euro-design-60.png' },
+    image: { src: '/figma/products/euro-design-60.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -101,7 +101,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.3' },
       { key: 'sound', value: 'до 43–44 дБ' },
     ],
-    image: { src: '/figma/products/euro-design-70.png' },
+    image: { src: '/figma/products/euro-design-70.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -115,7 +115,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.2–1.5' },
       { key: 'sound', value: 'до 47–49 дБ' },
     ],
-    image: { src: '/figma/products/schuco-aws-wooddesign.png' },
+    image: { src: '/figma/products/schuco-aws-wooddesign.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -129,7 +129,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.3' },
       { key: 'sound', value: 'до 43–46 дБ' },
     ],
-    image: { src: '/figma/products/reynaers-masterline-8.png' },
+    image: { src: '/figma/products/reynaers-masterline-8.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -143,7 +143,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.4–1.6' },
       { key: 'sound', value: 'до 42–43 дБ' },
     ],
-    image: { src: '/figma/products/schuco-ad-up-75.png' },
+    image: { src: '/figma/products/schuco-ad-up-75.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.5' },
       { key: 'sound', value: 'до 43–46 дБ' },
     ],
-    image: { src: '/figma/products/reynaers-pivot-door.png' },
+    image: { src: '/figma/products/reynaers-pivot-door.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -171,7 +171,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.5' },
       { key: 'sound', value: 'до 48 дБ' },
     ],
-    image: { src: '/figma/products/schuco-fws-50.png' },
+    image: { src: '/figma/products/schuco-fws-50.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -185,7 +185,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Uf ≈ 1.3' },
       { key: 'sound', value: 'до 47–48 дБ' },
     ],
-    image: { src: '/figma/products/schuco-as-fd-90.png' },
+    image: { src: '/figma/products/schuco-as-fd-90.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -199,7 +199,7 @@ export const PRODUCTS: Product[] = [
       { key: 'thermal', value: 'Usb ≈ 0.59–0.73' },
       { key: 'control', value: 'ручне / автоматичне' },
     ],
-    image: { src: '/figma/products/aluprof-skt-opoterm.png' },
+    image: { src: '/figma/products/aluprof-skt-opoterm.webp' },
     detail: DEMO_DETAIL,
   },
   {
@@ -213,7 +213,7 @@ export const PRODUCTS: Product[] = [
       { key: 'lamellaAngle', value: '0–135°' },
       { key: 'control', value: 'автоматичне' },
     ],
-    image: { src: '/figma/products/aluprof-mb-opensky-120.png' },
+    image: { src: '/figma/products/aluprof-mb-opensky-120.webp' },
     detail: DEMO_DETAIL,
   },
 ]

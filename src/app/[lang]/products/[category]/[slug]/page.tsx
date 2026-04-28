@@ -5,9 +5,12 @@ import { ChevronRightIcon } from '@/components/icons/chevron-right'
 import { Header } from '@/components/layout/header'
 import { ProductDetailView } from '@/components/sections/product-detail-view'
 import { ProjectsBento } from '@/components/sections/projects-bento'
+import { JsonLd } from '@/components/seo/json-ld'
 import { PRODUCTS } from '@/data/products'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -38,9 +41,17 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
+      type: 'website',
+      siteName: 'Alba Ventanas',
       title: product.name,
       description: product.detail.subtitle,
       url: localePath(lang, `/products/${category}/${slug}`),
+      images: [product.image.src],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.name,
+      description: product.detail.subtitle,
       images: [product.image.src],
     },
   }
@@ -64,8 +75,36 @@ export default async function ProductDetailPage({
     { label: product.name },
   ]
 
+  const productUrl = `${SITE_URL}${localePath(lang, `/products/${category}/${slug}`)}`
+  const productLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.detail.subtitle,
+    image: `${SITE_URL}${product.image.src}`,
+    category: t.categories[product.category],
+    brand: { '@type': 'Brand', name: product.name.split(' ')[0] },
+    url: productUrl,
+    additionalProperty: product.specs.map((spec) => ({
+      '@type': 'PropertyValue',
+      name: t.specs[spec.key] ?? spec.key,
+      value: spec.value,
+    })),
+  }
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumb.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.label,
+      item: item.href ? `${SITE_URL}${item.href}` : productUrl,
+    })),
+  }
+
   return (
     <>
+      <JsonLd data={[productLd, breadcrumbLd]} />
       <Header lang={lang} dict={dict} position="fixed" variant="solid" />
       <main className="flex flex-1 flex-col bg-white pt-[76px]">
         <nav aria-label="Breadcrumb" className="mx-auto w-full max-w-[1150px] px-6 pt-7 lg:px-0">

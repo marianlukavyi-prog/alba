@@ -26,31 +26,32 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
     description: benefits.items[key].description,
   }))
 
+  const productsAnchor = (cat: string) => `${localePath(lang, '/products')}#products-${cat}`
   const solutionsItems = [
     {
       key: 'aluminumWindows' as const,
-      href: localePath(lang, '/products/windows'),
-      image: { src: '/figma/solution-aluminum-windows.png' },
+      href: productsAnchor('aluminum'),
+      image: { src: '/figma/solution-aluminum-windows.webp' },
     },
     {
       key: 'sliding' as const,
-      href: localePath(lang, '/products/systems'),
-      image: { src: '/figma/solution-sliding.png' },
+      href: productsAnchor('systems'),
+      image: { src: '/figma/solution-sliding.webp' },
     },
     {
       key: 'facade' as const,
-      href: localePath(lang, '/products/systems'),
-      image: { src: '/figma/solution-facade.png' },
+      href: productsAnchor('systems'),
+      image: { src: '/figma/solution-facade.webp' },
     },
     {
       key: 'pivot' as const,
-      href: localePath(lang, '/products/doors'),
-      image: { src: '/figma/solution-pivot.png' },
+      href: productsAnchor('doors'),
+      image: { src: '/figma/solution-pivot.webp' },
     },
     {
       key: 'shading' as const,
-      href: localePath(lang, '/products/systems'),
-      image: { src: '/figma/solution-shading.png' },
+      href: productsAnchor('shading'),
+      image: { src: '/figma/solution-shading.webp' },
     },
   ].map(({ key, href, image }) => ({
     title: solutions.items[key].title,

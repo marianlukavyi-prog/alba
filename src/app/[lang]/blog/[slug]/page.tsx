@@ -5,9 +5,12 @@ import { Header } from '@/components/layout/header'
 import { ArticleBanner } from '@/components/sections/article-banner'
 import { ArticleBody } from '@/components/sections/article-body'
 import { BlogSidebar } from '@/components/sections/blog-sidebar'
+import { JsonLd } from '@/components/seo/json-ld'
 import { BLOG_POSTS, getBlogPost, LATEST_POSTS, POPULAR_POSTS } from '@/data/blog'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -40,7 +43,6 @@ export async function generateMetadata({
   const post = getBlogPost(slug)
   if (!post) return {}
 
-  const dict = await getDictionary(lang)
   const languages: Record<string, string> = {}
   for (const locale of locales) languages[locale] = localePath(locale, `/blog/${slug}`)
 
@@ -52,17 +54,23 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
+      type: 'article',
+      siteName: 'Alba Ventanas',
       title: post.title[lang],
       description: post.excerpt[lang],
       url: localePath(lang, `/blog/${slug}`),
       images: [post.featuredImage],
       publishedTime: post.publishedAt,
       authors: [post.author],
-      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title[lang],
+      description: post.excerpt[lang],
+      images: [post.featuredImage],
     },
     other: {
       'reading-time': String(post.readingMinutes),
-      'site-language': dict.meta.title,
     },
   }
 }
@@ -85,8 +93,47 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
   const minutesForm = tArticle.readingForms[READING_LOCALE[lang].select(minutes) as 'one' | 'few' | 'many' | 'other'] ?? tArticle.readingForms.other
   const readingLabel = `${minutes} ${minutesForm}`
 
+  const articleUrl = `${SITE_URL}${localePath(lang, `/blog/${slug}`)}`
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title[lang],
+    description: post.excerpt[lang],
+    image: `${SITE_URL}${post.featuredImage}`,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: { '@type': 'Person', name: post.author },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Alba Ventanas',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/figma/banner-hero.webp` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+    inLanguage: lang,
+  }
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: t.breadcrumbHome,
+        item: `${SITE_URL}${localePath(lang)}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t.breadcrumbCurrent,
+        item: `${SITE_URL}${localePath(lang, '/blog')}`,
+      },
+      { '@type': 'ListItem', position: 3, name: post.title[lang], item: articleUrl },
+    ],
+  }
+
   return (
     <>
+      <JsonLd data={[article, breadcrumbLd]} />
       <Header lang={lang} dict={dict} position="absolute" />
       <main className="flex flex-1 flex-col">
         <ArticleBanner

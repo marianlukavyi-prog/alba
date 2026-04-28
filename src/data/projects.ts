@@ -33,7 +33,7 @@ export type Project = {
   productAreas: string[]
 }
 
-const PLACEHOLDER = '/projects/placeholder.png'
+const PLACEHOLDER = '/projects/placeholder.webp'
 
 const DEFAULT_GALLERY = [PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER]
 

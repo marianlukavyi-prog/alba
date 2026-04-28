@@ -34,9 +34,18 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
+      type: 'website',
+      siteName: 'Alba Ventanas',
       title: t.heroTitle,
       description: t.heroSubtitle,
       url: localePath(lang, '/projects'),
+      images: ['/figma/banner-hero.webp'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.heroTitle,
+      description: t.heroSubtitle,
+      images: ['/figma/banner-hero.webp'],
     },
   }
 }

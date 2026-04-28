@@ -24,8 +24,8 @@ export type BlogPost = {
   body: ArticleBlock[]
 }
 
-const COMMON_COVER = '/blog/post-cover.png'
-const FEATURED_IMAGE = '/figma/banner-hero.png'
+const COMMON_COVER = '/blog/post-cover.webp'
+const FEATURED_IMAGE = '/figma/banner-hero.webp'
 const AUTHOR = 'Іванина Роман'
 
 const TITLES = {
