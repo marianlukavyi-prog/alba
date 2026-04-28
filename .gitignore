@@ -39,3 +39,50 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Cursor/AI files
+.cursor/
+.vscode/
+*.swp
+*.swo
+*.code-search
+__pycache__/
+*.bak
+*.tmp
+*.log
+
+# AI writing, snapshots, and local tool/runtime state
+*.cursor
+*.agent-cache
+*.skill-cache
+*.session
+*.annotate
+*.prompter
+*.completion
+*.copilot/*
+*.copilot*
+/copilot-*
+/ai-experiments/
+ai-generated/*
+/.snapshots/
+/.snapshots-*/ # some extensions use this for local session states
+.idea/
+*.dmp
+
+# Playwright/test outputs
+/playwright-report/
+/.playwright-mcp/
+/test-results/
+/test-report/
+
+# Prettier/ESLint cache
+.prettierignore
+.prettierrc*
+eslintcache
+
+# OS junk (repeated for completeness)
+*.DS_Store
+Thumbs.db
+Icon?AGENTS.md
+CLAUDE.md

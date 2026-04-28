@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "title": "Alba Ventanas — modern windows and doors",
+    "description": "PVC and aluminium systems by Schüco, Reynaers, Aluprof. Solutions for next-level architecture."
+  },
+  "nav": {
+    "products": "Products",
+    "about": "About",
+    "projects": "Projects",
+    "process": "Process",
+    "blog": "Blog",
+    "contact": "Contacts"
+  },
+  "common": {
+    "consult": "Get consultation",
+    "moreDetails": "More details",
+    "viewAll": "View all"
+  },
+  "home": {
+    "heroEyebrow": "ALBA VENTANAS",
+    "heroTitle": "Modern windows and doors for next-level architecture",
+    "heroSubtitle": "Innovative PVC and aluminium solutions for comfort, silence, and energy efficiency",
+    "categories": {
+      "windows": {
+        "title": "Windows",
+        "description": "PVC and aluminium windows for maximum comfort, warmth, energy efficiency, and a modern look for your space"
+      },
+      "doors": {
+        "title": "Doors",
+        "description": "Entrance and pivot doors — modern solutions for security, comfort, durability, and aesthetics of your space"
+      },
+      "systems": {
+        "title": "Systems",
+        "description": "Sliding, façade systems, and solar shading — modern solutions for comfort, light, space, and energy efficiency"
+      }
+    },
+    "solutions": {
+      "title": "Ready-made solutions for modern architecture",
+      "description": "Explore our most popular systems and configurations",
+      "items": {
+        "aluminumWindows": { "title": "Aluminium windows", "subtitle": "Schüco / Reynaers" },
+        "sliding": { "title": "Sliding systems", "subtitle": "Panoramic solutions" },
+        "facade": { "title": "Façade glazing", "subtitle": "For business" },
+        "pivot": { "title": "Pivot doors", "subtitle": "Modern design" },
+        "shading": { "title": "Solar shading", "subtitle": "Blinds / pergolas" }
+      }
+    },
+    "benefits": {
+      "title": "Why choose us",
+      "description": "Everything you need to know before placing an order",
+      "items": {
+        "energy": {
+          "title": "Energy efficiency",
+          "description": "Heat retention and energy savings"
+        },
+        "sound": {
+          "title": "Comfort and silence",
+          "description": "Reliable sound insulation for your space"
+        },
+        "design": {
+          "title": "Modern design",
+          "description": "Stylish solutions for architecture and interiors"
+        },
+        "quality": {
+          "title": "Quality and reliability",
+          "description": "Proven materials and long-lasting systems"
+        }
+      }
+    },
+    "faq": {
+      "title": "Answers to popular questions",
+      "description": "Everything you need to know before placing an order",
+      "items": [
+        {
+          "question": "How much do windows and doors cost?",
+          "answer": "Pricing depends on the system, dimensions, and configuration. Send us the parameters and we’ll prepare an accurate quote for your project."
+        },
+        {
+          "question": "How long does production take?",
+          "answer": "On average 2 to 6 weeks depending on the complexity of the project."
+        },
+        {
+          "question": "Do you handle installation?",
+          "answer": "Yes — our team delivers professional turnkey installation with a workmanship warranty."
+        },
+        {
+          "question": "What warranty do you offer?",
+          "answer": "Profiles and hardware from 5 years, glazing up to 10 years."
+        },
+        {
+          "question": "Can I order a custom design?",
+          "answer": "Yes. We work with non-standard shapes, colours and configurations tailored to your project."
+        }
+      ]
+    },
+    "consultation": {
+      "title": "Get a free consultation",
+      "description": "We’ll find the optimal solution and calculate the cost for your project, taking all your preferences into account",
+      "fields": {
+        "name": "Name",
+        "phone": "Phone",
+        "comment": "Comment"
+      }
+    }
+  },
+  "productsPage": {
+    "breadcrumbHome": "Home",
+    "heroTitle": "Our products",
+    "heroSubtitle": "Windows, doors and systems for comfort, silence, energy efficiency, and a modern look",
+    "tabAll": "All",
+    "viewAll": "View all products",
+    "prev": "Previous",
+    "next": "Next",
+    "categories": {
+      "pvc": "PVC systems",
+      "aluminum": "Aluminium systems",
+      "doors": "Doors",
+      "systems": "Systems",
+      "shading": "Solar shading"
+    },
+    "specs": {
+      "depth": "Mounting depth",
+      "chambers": "Chambers",
+      "glazing": "Glazing",
+      "thermal": "Thermal insulation",
+      "sound": "Sound insulation",
+      "material": "Material",
+      "type": "Type",
+      "mounting": "Mounting",
+      "control": "Control",
+      "maxSize": "Max size",
+      "lamellaAngle": "Lamella angle"
+    }
+  },
+  "projectsPage": {
+    "heroTitle": "Projects",
+    "heroSubtitle": "Completed projects featuring modern window, door and façade systems",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Projects",
+    "tabAll": "All",
+    "loadMore": "More categories",
+    "prev": "Previous page",
+    "next": "Next page",
+    "categories": {
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "offices": "Offices",
+      "hotels": "Hotels",
+      "facades": "Façades",
+      "terraces": "Terraces"
+    },
+    "filters": {
+      "name": "Project name",
+      "country": "Select country",
+      "city": "Enter city",
+      "system": "Select system",
+      "type": "Select type"
+    }
+  },
+  "productDetailPage": {
+    "tabs": {
+      "general": "General information",
+      "components": "Components",
+      "colors": "Colors"
+    },
+    "relatedProjectsTitle": "Our projects",
+    "viewAllProjects": "View all projects"
+  },
+  "projectDetailPage": {
+    "labels": {
+      "location": "Location",
+      "architects": "Architects",
+      "manufacturer": "Manufacturer",
+      "objectType": "Object type",
+      "client": "Client",
+      "systems": "Systems",
+      "productAreas": "Product areas"
+    },
+    "relatedTitle": "Similar projects",
+    "viewAll": "View all projects",
+    "mapTitle": "Project location map"
+  },
+  "blogPage": {
+    "heroTitle": "Blog",
+    "heroSubtitle": "Useful articles about windows, doors, and modern solutions for comfort, energy efficiency and design",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Blog",
+    "sortByTags": "Sort by tags",
+    "loadMore": "More tags",
+    "prev": "Previous page",
+    "next": "Next page",
+    "search": "Search the blog",
+    "categoriesTitle": "Blog categories",
+    "popularTitle": "Popular articles",
+    "latestTitle": "Latest articles",
+    "categories": {
+      "ai": "AI",
+      "instructions": "Instructions",
+      "foreignPromotion": "International promotion",
+      "cases": "Cases",
+      "internetMarketing": "Internet marketing",
+      "contextualAds": "Contextual ads",
+      "siteSeo": "Website SEO",
+      "socialMedia": "Social media"
+    }
+  },
+  "blogPostPage": {
+    "readingForms": {
+      "one": "minute",
+      "few": "minutes",
+      "many": "minutes",
+      "other": "minutes"
+    }
+  },
+  "contactPage": {
+    "heroTitle": "Contacts",
+    "heroSubtitle": "Energy-efficient windows and doors for comfort, silence and a modern space",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Contacts",
+    "formTitle": "Have a question or need help?",
+    "formDescription": "Fill out the form below — we’ll get back to you as soon as possible.",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone",
+      "comment": "Comment"
+    },
+    "contactLabels": {
+      "phone": "Phone number",
+      "email": "Email"
+    },
+    "mapTitle": "Alba Ventanas location map"
+  },
+  "leadModal": {
+    "title": "Leave a request",
+    "description": "We’ll clarify dimensions, window type, and give you an estimated installation cost. Consultation and preliminary quote — free of charge.",
+    "submit": "Get a free quote",
+    "close": "Close",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone / WhatsApp",
+      "city": "City",
+      "needs": "What you need: apartment / house / commercial space"
+    },
+    "success": {
+      "title": "Thank you for your request!",
+      "description": "We received your information and will get in touch shortly for a consultation",
+      "cta": "Back to home"
+    }
+  },
+  "footer": {
+    "aboutTitle": "About",
+    "aboutText": "We deliver modern glazing solutions for homes and commercial buildings. PVC and aluminium systems that pair style, comfort, and energy efficiency.",
+    "social": "Follow us",
+    "phone": "Phone",
+    "email": "Email"
+  }
+}

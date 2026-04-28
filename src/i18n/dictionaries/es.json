@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "title": "Alba Ventanas — ventanas y puertas modernas",
+    "description": "Sistemas de PVC y aluminio Schüco, Reynaers, Aluprof. Soluciones para arquitectura de nuevo nivel."
+  },
+  "nav": {
+    "products": "Productos",
+    "about": "Sobre nosotros",
+    "projects": "Proyectos",
+    "process": "Proceso",
+    "blog": "Blog",
+    "contact": "Contactos"
+  },
+  "common": {
+    "consult": "Obtener consultoría",
+    "moreDetails": "Más detalles",
+    "viewAll": "Ver todo"
+  },
+  "home": {
+    "heroEyebrow": "ALBA VENTANAS",
+    "heroTitle": "Ventanas y puertas modernas para una arquitectura de nuevo nivel",
+    "heroSubtitle": "Soluciones innovadoras de PVC y aluminio para confort, silencio y eficiencia energética",
+    "categories": {
+      "windows": {
+        "title": "Ventanas",
+        "description": "Ventanas de PVC y aluminio para máximo confort, calidez, eficiencia energética y un aspecto moderno de tu espacio"
+      },
+      "doors": {
+        "title": "Puertas",
+        "description": "Puertas de entrada y pivotantes — soluciones modernas para seguridad, confort, durabilidad y estética de tu espacio"
+      },
+      "systems": {
+        "title": "Sistemas",
+        "description": "Sistemas correderos, fachadas y protección solar — soluciones modernas para confort, luz, espacio y eficiencia energética"
+      }
+    },
+    "solutions": {
+      "title": "Soluciones listas para la arquitectura moderna",
+      "description": "Conoce los sistemas y configuraciones más populares",
+      "items": {
+        "aluminumWindows": { "title": "Ventanas de aluminio", "subtitle": "Schüco / Reynaers" },
+        "sliding": { "title": "Sistemas correderos", "subtitle": "Soluciones panorámicas" },
+        "facade": { "title": "Acristalamiento de fachada", "subtitle": "Para negocios" },
+        "pivot": { "title": "Puertas pivotantes", "subtitle": "Diseño moderno" },
+        "shading": { "title": "Protección solar", "subtitle": "Persianas / pérgolas" }
+      }
+    },
+    "benefits": {
+      "title": "Por qué nos eligen",
+      "description": "Todo lo que necesita saber antes de hacer su pedido",
+      "items": {
+        "energy": {
+          "title": "Eficiencia energética",
+          "description": "Conservación del calor y ahorro de energía"
+        },
+        "sound": {
+          "title": "Confort y silencio",
+          "description": "Aislamiento acústico fiable para tu espacio"
+        },
+        "design": {
+          "title": "Diseño moderno",
+          "description": "Soluciones con estilo para arquitectura e interiores"
+        },
+        "quality": {
+          "title": "Calidad y fiabilidad",
+          "description": "Materiales probados y sistemas duraderos"
+        }
+      }
+    },
+    "faq": {
+      "title": "Respuestas a las preguntas más frecuentes",
+      "description": "Todo lo que necesita saber antes de hacer su pedido",
+      "items": [
+        {
+          "question": "¿Cuánto cuestan las ventanas y puertas?",
+          "answer": "El precio depende del sistema, las dimensiones y el equipamiento. Envíenos los parámetros y prepararemos una propuesta exacta para su proyecto."
+        },
+        {
+          "question": "¿Cuánto tarda la fabricación?",
+          "answer": "De media, entre 2 y 6 semanas según la complejidad del proyecto."
+        },
+        {
+          "question": "¿Realizan ustedes la instalación?",
+          "answer": "Sí, nuestro equipo se encarga de la instalación llave en mano con garantía sobre los trabajos."
+        },
+        {
+          "question": "¿Qué garantía ofrecen?",
+          "answer": "Perfiles y herrajes desde 5 años, acristalamiento hasta 10 años."
+        },
+        {
+          "question": "¿Puedo pedir un diseño personalizado?",
+          "answer": "Sí. Trabajamos con formas, colores y configuraciones a medida para su proyecto."
+        }
+      ]
+    },
+    "consultation": {
+      "title": "Obtenga una consulta gratuita",
+      "description": "Le proponemos la solución óptima y calcularemos el coste de su proyecto teniendo en cuenta todas sus preferencias",
+      "fields": {
+        "name": "Nombre",
+        "phone": "Teléfono",
+        "comment": "Comentario"
+      }
+    }
+  },
+  "productsPage": {
+    "breadcrumbHome": "Inicio",
+    "heroTitle": "Nuestros productos",
+    "heroSubtitle": "Ventanas, puertas y sistemas para confort, silencio, eficiencia energética y un aspecto moderno",
+    "tabAll": "Todos",
+    "viewAll": "Ver todos los productos",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "categories": {
+      "pvc": "Sistemas de PVC",
+      "aluminum": "Sistemas de aluminio",
+      "doors": "Puertas",
+      "systems": "Sistemas",
+      "shading": "Protección solar"
+    },
+    "specs": {
+      "depth": "Profundidad de montaje",
+      "chambers": "Cámaras",
+      "glazing": "Acristalamiento",
+      "thermal": "Aislamiento térmico",
+      "sound": "Aislamiento acústico",
+      "material": "Material",
+      "type": "Tipo",
+      "mounting": "Montaje",
+      "control": "Control",
+      "maxSize": "Tamaño máx.",
+      "lamellaAngle": "Ángulo de lamas"
+    }
+  },
+  "projectsPage": {
+    "heroTitle": "Proyectos",
+    "heroSubtitle": "Obras realizadas con sistemas modernos de ventanas, puertas y fachadas",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Proyectos",
+    "tabAll": "Todos",
+    "loadMore": "Más categorías",
+    "prev": "Página anterior",
+    "next": "Página siguiente",
+    "categories": {
+      "residential": "Viviendas",
+      "commercial": "Espacios comerciales",
+      "offices": "Oficinas",
+      "hotels": "Hoteles",
+      "facades": "Fachadas",
+      "terraces": "Terrazas"
+    },
+    "filters": {
+      "name": "Nombre del proyecto",
+      "country": "Seleccione país",
+      "city": "Indique ciudad",
+      "system": "Seleccione sistema",
+      "type": "Seleccione tipo"
+    }
+  },
+  "productDetailPage": {
+    "tabs": {
+      "general": "Información general",
+      "components": "Componentes",
+      "colors": "Colores"
+    },
+    "relatedProjectsTitle": "Nuestros proyectos",
+    "viewAllProjects": "Ver todos los proyectos"
+  },
+  "projectDetailPage": {
+    "labels": {
+      "location": "Ubicación",
+      "architects": "Arquitectos",
+      "manufacturer": "Fabricante",
+      "objectType": "Tipo de objeto",
+      "client": "Cliente",
+      "systems": "Sistemas",
+      "productAreas": "Áreas de producto"
+    },
+    "relatedTitle": "Proyectos similares",
+    "viewAll": "Ver todos los proyectos",
+    "mapTitle": "Mapa de ubicación del proyecto"
+  },
+  "blogPage": {
+    "heroTitle": "Blog",
+    "heroSubtitle": "Artículos útiles sobre ventanas, puertas y soluciones modernas de confort, eficiencia energética y diseño",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Blog",
+    "sortByTags": "Ordenar por etiquetas",
+    "loadMore": "Más etiquetas",
+    "prev": "Página anterior",
+    "next": "Página siguiente",
+    "search": "Buscar en el blog",
+    "categoriesTitle": "Categorías del blog",
+    "popularTitle": "Artículos populares",
+    "latestTitle": "Artículos recientes",
+    "categories": {
+      "ai": "IA",
+      "instructions": "Instrucciones",
+      "foreignPromotion": "Promoción internacional",
+      "cases": "Casos",
+      "internetMarketing": "Marketing online",
+      "contextualAds": "Publicidad contextual",
+      "siteSeo": "Posicionamiento web",
+      "socialMedia": "Redes sociales"
+    }
+  },
+  "blogPostPage": {
+    "readingForms": {
+      "one": "minuto",
+      "few": "minutos",
+      "many": "minutos",
+      "other": "minutos"
+    }
+  },
+  "contactPage": {
+    "heroTitle": "Contactos",
+    "heroSubtitle": "Ventanas y puertas energéticamente eficientes para confort, silencio y un espacio moderno",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Contactos",
+    "formTitle": "¿Tiene alguna pregunta o necesita ayuda?",
+    "formDescription": "Rellene el formulario a continuación y nos pondremos en contacto con usted lo antes posible.",
+    "fields": {
+      "name": "Nombre",
+      "phone": "Teléfono",
+      "comment": "Comentario"
+    },
+    "contactLabels": {
+      "phone": "Número de teléfono",
+      "email": "Correo electrónico"
+    },
+    "mapTitle": "Mapa de ubicación de Alba Ventanas"
+  },
+  "leadModal": {
+    "title": "Deje su solicitud",
+    "description": "Aclararemos las medidas, el tipo de ventanas y le indicaremos el coste estimado de la instalación. Consulta y cálculo previo — gratis.",
+    "submit": "Obtener cálculo gratuito",
+    "close": "Cerrar",
+    "fields": {
+      "name": "Nombre",
+      "phone": "Teléfono / WhatsApp",
+      "city": "Ciudad",
+      "needs": "Qué necesita: apartamento / casa / local comercial"
+    },
+    "success": {
+      "title": "¡Gracias por su solicitud!",
+      "description": "Hemos recibido su información y nos pondremos en contacto en breve para la consulta",
+      "cta": "Volver al inicio"
+    }
+  },
+  "footer": {
+    "aboutTitle": "Sobre nosotros",
+    "aboutText": "Ofrecemos soluciones modernas de acristalamiento para casas y edificios comerciales. Sistemas de PVC y aluminio que combinan estilo, confort y eficiencia energética.",
+    "social": "Síguenos",
+    "phone": "Teléfono",
+    "email": "Email"
+  }
+}
