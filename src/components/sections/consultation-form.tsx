@@ -20,7 +20,7 @@ type Props = {
 
 export function ConsultationForm({ title, description, fields, submitLabel }: Props) {
   const inputBase =
-    'w-full border-b border-[var(--color-cta)] bg-transparent py-4 pr-4 text-[15px] text-[var(--color-brand)] placeholder:text-[#aaa] focus:outline-none'
+    'h-[46px] w-full border-b border-[var(--color-cta)] bg-transparent pr-4 text-[14px] text-[var(--color-brand)] placeholder:text-[#aaa] focus:outline-none md:h-[50px] md:text-[15px]'
 
   const inlineFields: Field[] = [
     { name: 'name', label: fields.name, type: 'text', required: true },
@@ -29,16 +29,18 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
 
   return (
     <section className="bg-[var(--color-surface)]">
-      <div className="mx-auto flex max-w-[1150px] flex-col items-stretch gap-12 px-6 py-12 lg:flex-row lg:items-center lg:gap-[150px] lg:py-[50px]">
-        <div className="flex flex-1 flex-col gap-3">
-          <h2 className="text-[29px] leading-tight font-semibold text-[var(--color-brand)]">
+      <div className="mx-auto grid max-w-[1150px] grid-cols-1 items-center gap-[22px] px-4 py-10 md:grid-cols-2 md:gap-[40px] md:px-6 md:py-[50px] lg:gap-[150px]">
+        <div className="flex flex-col gap-2 md:gap-3">
+          <h2 className="text-[22px] leading-tight font-semibold text-[var(--color-brand)] md:text-[28px]">
             {title}
           </h2>
-          <p className="text-[15px] text-[var(--color-brand-soft)]">{description}</p>
+          <p className="text-[14px] text-[var(--color-brand-soft)] md:text-[15px]">
+            {description}
+          </p>
         </div>
 
-        <form className="flex flex-1 flex-col gap-2.5" noValidate>
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-[10px]">
+        <form className="flex flex-col gap-[10px]" noValidate>
+          <div className="flex flex-col gap-[10px] md:flex-row">
             {inlineFields.map((field) => (
               <label key={field.name} className="flex flex-1 flex-col">
                 <span className="sr-only">{field.label}</span>
@@ -58,15 +60,15 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
               type="text"
               name="comment"
               placeholder={fields.comment}
-              className={`${inputBase} h-[50px]`}
+              className={inputBase}
             />
           </label>
           <button
             type="submit"
-            className="mt-1 flex items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-cta)] px-6 py-4 text-[15px] font-medium tracking-[0.3px] text-white transition-colors hover:bg-[var(--color-brand)]"
+            className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
           >
             {submitLabel}
-            <ArrowUpRightIcon />
+            <ArrowUpRightIcon size={15} />
           </button>
         </form>
       </div>

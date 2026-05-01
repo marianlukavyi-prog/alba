@@ -12,27 +12,32 @@ type Props = {
 export function Faq({ title, description, items }: Props) {
   return (
     <section className="bg-white">
-      <div className="mx-auto flex max-w-[1150px] flex-col gap-9 px-6 py-[90px]">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <h2 className="text-[28px] font-semibold text-[var(--color-brand)]">{title}</h2>
-          <p className="text-[15px] text-[var(--color-brand-soft)]">{description}</p>
+      <div className="mx-auto flex max-w-[1150px] flex-col gap-[22px] px-4 py-10 md:gap-9 md:px-6 md:py-[60px] lg:py-[90px]">
+        <div className="flex flex-col items-center gap-2 text-center md:gap-3">
+          <h2 className="text-[22px] leading-tight font-semibold text-[var(--color-brand)] md:text-[28px]">
+            {title}
+          </h2>
+          <p className="text-[14px] text-[var(--color-brand-soft)] md:text-[15px]">{description}</p>
         </div>
 
-        <ul className="flex flex-col gap-2.5">
+        <ul className="flex flex-col gap-[10px]">
           {items.map((item) => (
             <li key={item.question}>
-              <details className="group rounded-[2px] open:bg-[var(--color-surface)] open:pb-[22px]">
-                <summary className="flex list-none items-center gap-3 px-[22px] py-4 [&::-webkit-details-marker]:hidden cursor-pointer">
-                  <span className="flex-1 text-[20px] font-semibold text-[var(--color-brand)]">
+              <details
+                name="faq"
+                className="group bg-white transition-colors open:bg-[var(--color-brand)] [&:not([open]):hover]:bg-[var(--color-surface)]"
+              >
+                <summary className="flex cursor-pointer list-none items-center gap-3 px-[22px] py-2 md:py-4 [&::-webkit-details-marker]:hidden">
+                  <span className="flex-1 text-[18px] leading-tight font-semibold text-[var(--color-brand)] group-open:text-[var(--color-accent)] md:text-[20px]">
                     {item.question}
                   </span>
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)] transition-colors group-hover:bg-[var(--color-brand)] group-hover:text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)] group-open:border-[var(--color-accent)] group-open:text-[var(--color-accent)]">
                     <PlusMinusIcon />
                   </span>
                 </summary>
-                <p className="px-[22px] pt-1 text-[15px] text-[var(--color-brand-soft)]">
-                  {item.answer}
-                </p>
+                <div className="px-[22px] pt-1 pb-[22px]">
+                  <p className="text-[14px] text-[#dcdcdc] md:text-[15px]">{item.answer}</p>
+                </div>
               </details>
             </li>
           ))}

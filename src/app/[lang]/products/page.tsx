@@ -61,12 +61,16 @@ export default async function ProductsPage({ params }: PageProps<'/[lang]/produc
         <Banner
           title={t.heroTitle}
           subtitle={t.heroSubtitle}
-          cta={{ label: dict.common.consult, href: localePath(lang, '/contact') }}
+          cta={{ label: dict.common.consult }}
         />
 
         <div id="products-top" className="bg-white pt-12 pb-6">
           <div className="mx-auto w-full max-w-[1150px] px-6">
-            <ProductTabs allLabel={t.tabAll} categoryLabels={t.categories} />
+            <ProductTabs
+              allLabel={t.tabAll}
+              categoryLabels={t.categories}
+              nextLabel={t.next}
+            />
           </div>
         </div>
 

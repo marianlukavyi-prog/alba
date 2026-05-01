@@ -111,8 +111,11 @@ export default async function ProjectDetailPage({
       <JsonLd data={[articleLd, breadcrumbLd]} />
       <Header lang={lang} dict={dict} position="fixed" variant="solid" />
       <main className="flex flex-1 flex-col bg-white pt-[76px]">
-        <nav aria-label="Breadcrumb" className="mx-auto w-full max-w-[1150px] px-6 pt-7">
-          <ol className="flex flex-wrap items-center gap-1.5 text-[15px] text-[var(--color-brand-soft)]">
+        <nav
+          aria-label="Breadcrumb"
+          className="mx-auto w-full max-w-[1150px] px-6 pt-7 lg:px-0"
+        >
+          <ol className="flex flex-wrap items-center gap-1.5 text-[14px] text-[var(--color-brand-soft)] md:text-[15px]">
             {[
               { label: t.breadcrumbHome, href: localePath(lang) },
               { label: t.breadcrumbCurrent, href: localePath(lang, '/projects') },
@@ -139,13 +142,35 @@ export default async function ProjectDetailPage({
           </ol>
         </nav>
 
-        <section className="mx-auto w-full max-w-[1150px] px-6 py-10 lg:px-0 lg:py-12">
-          <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-2">
-            <ProjectGallery images={project.gallery} alt={project.title} />
-            <ProjectInfo
-              project={project}
-              labels={tDetail.labels}
-              mapTitle={`${tDetail.mapTitle} — ${project.title}`}
+        <header className="mx-auto w-full max-w-[1150px] px-6 pt-7 lg:px-0">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-[22px] leading-tight font-semibold text-[var(--color-brand)] md:text-[28px]">
+              {project.title}
+            </h1>
+            {project.subtitle ? (
+              <p className="text-[14px] text-[var(--color-brand-soft)] md:text-[15px]">
+                {project.subtitle}
+              </p>
+            ) : null}
+          </div>
+        </header>
+
+        <section className="mx-auto w-full max-w-[1150px] px-6 pt-10 lg:px-0 lg:pt-12">
+          <ProjectGallery images={project.gallery} alt={project.title} />
+        </section>
+
+        <section className="mx-auto w-full max-w-[1150px] px-6 pt-10 pb-10 lg:px-0 lg:pt-12 lg:pb-12">
+          <ProjectInfo project={project} labels={tDetail.labels} />
+        </section>
+
+        <section className="w-full bg-[var(--color-surface)]">
+          <div className="relative h-[280px] w-full md:h-[360px] lg:h-[440px]">
+            <iframe
+              src={`https://www.google.com/maps?q=${encodeURIComponent(`${project.city}, ${project.country}`)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+              title={`${tDetail.mapTitle} — ${project.title}`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="size-full border-0 grayscale"
             />
           </div>
         </section>
@@ -154,15 +179,15 @@ export default async function ProjectDetailPage({
           <section className="bg-[var(--color-surface)]">
             <div className="mx-auto w-full max-w-[1150px] px-6 py-16 lg:px-0 lg:py-20">
               <header className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-[28px] font-semibold text-[var(--color-brand)]">
+                <h2 className="text-[22px] font-semibold text-[var(--color-brand)] md:text-[28px]">
                   {tDetail.relatedTitle}
                 </h2>
                 <Link
                   href={localePath(lang, '/projects')}
-                  className="inline-flex items-center gap-2.5 text-[15px] font-medium tracking-[0.3px] text-[var(--color-brand)] transition-opacity hover:opacity-80"
+                  className="inline-flex items-center gap-2.5 border-b border-[var(--color-brand)] pb-4 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-opacity hover:opacity-80 md:text-[15px] md:tracking-[0.3px]"
                 >
                   {tDetail.viewAll}
-                  <ArrowUpRightIcon />
+                  <ArrowUpRightIcon size={15} />
                 </Link>
               </header>
 

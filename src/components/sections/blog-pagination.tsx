@@ -11,9 +11,15 @@ type Props = {
 }
 
 const BUTTON_BASE =
-  'inline-flex size-10 items-center justify-center rounded-[2px] text-[15px] font-semibold transition-colors'
+  'inline-flex size-10 items-center justify-center rounded-[2px] text-[14px] font-semibold transition-colors md:text-[15px]'
 
-export function BlogPagination({ currentPage, totalPages, hrefForPage, prevLabel, nextLabel }: Props) {
+export function BlogPagination({
+  currentPage,
+  totalPages,
+  hrefForPage,
+  prevLabel,
+  nextLabel,
+}: Props) {
   const pages = buildPageList(currentPage, totalPages)
   const prevPage = Math.max(1, currentPage - 1)
   const nextPage = Math.min(totalPages, currentPage + 1)
@@ -26,7 +32,7 @@ export function BlogPagination({ currentPage, totalPages, hrefForPage, prevLabel
         href={hrefForPage(prevPage)}
         aria-label={prevLabel}
         aria-disabled={isFirst}
-        className={`${BUTTON_BASE} text-black hover:bg-[var(--color-surface)] ${
+        className={`${BUTTON_BASE} text-[var(--color-brand)] hover:bg-[var(--color-surface)] ${
           isFirst ? 'pointer-events-none opacity-40' : ''
         }`}
       >
@@ -35,7 +41,7 @@ export function BlogPagination({ currentPage, totalPages, hrefForPage, prevLabel
 
       {pages.map((p, i) =>
         p === 'ellipsis' ? (
-          <span key={`gap-${i}`} className={`${BUTTON_BASE} text-black`}>
+          <span key={`gap-${i}`} className={`${BUTTON_BASE} text-[var(--color-brand)]`}>
             …
           </span>
         ) : (
@@ -43,10 +49,10 @@ export function BlogPagination({ currentPage, totalPages, hrefForPage, prevLabel
             key={p}
             href={hrefForPage(p)}
             aria-current={p === currentPage ? 'page' : undefined}
-            className={`${BUTTON_BASE} ${
+            className={`${BUTTON_BASE} text-[var(--color-brand)] ${
               p === currentPage
-                ? 'bg-[var(--color-cta)] text-white'
-                : 'text-black hover:bg-[var(--color-surface)]'
+                ? 'bg-[var(--color-accent)]'
+                : 'hover:bg-[var(--color-surface)]'
             }`}
           >
             {p.toString().padStart(2, '0')}
@@ -58,7 +64,7 @@ export function BlogPagination({ currentPage, totalPages, hrefForPage, prevLabel
         href={hrefForPage(nextPage)}
         aria-label={nextLabel}
         aria-disabled={isLast}
-        className={`${BUTTON_BASE} bg-[#f4f4f4] text-black hover:bg-[var(--color-surface)] ${
+        className={`${BUTTON_BASE} bg-[#f4f4f4] text-[var(--color-brand)] hover:bg-[var(--color-surface)] ${
           isLast ? 'pointer-events-none opacity-40' : ''
         }`}
       >

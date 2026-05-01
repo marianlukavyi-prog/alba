@@ -26,27 +26,29 @@ export function ContactSection({
   mapTitle,
 }: Props) {
   const inputBase =
-    'w-full border-b border-white bg-transparent py-4 pr-4 text-[15px] text-white placeholder:text-[#a5aeb7] focus:outline-none'
+    'h-[46px] w-full border-b border-white bg-transparent pr-4 text-[14px] text-white placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
 
   return (
-    <section className="relative isolate overflow-hidden">
-      <iframe
-        src={MAP_EMBED_URL}
-        title={mapTitle}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        className="absolute inset-0 size-full border-0 grayscale"
-      />
+    <section className="relative">
+      <div className="relative h-[350px] w-full md:h-[500px] lg:absolute lg:inset-0 lg:h-full">
+        <iframe
+          src={MAP_EMBED_URL}
+          title={mapTitle}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="size-full border-0 grayscale"
+        />
+      </div>
 
-      <div className="pointer-events-none relative mx-auto flex min-h-screen max-w-[1150px] items-center px-6 py-16 lg:py-[100px]">
-        <div className="pointer-events-auto flex w-full max-w-[570px] flex-col gap-9 rounded-[2px] bg-[var(--color-cta)] p-8 text-white sm:p-12 lg:p-[60px]">
-          <div className="flex flex-col gap-3">
-            <h2 className="text-[28px] leading-tight font-semibold">{title}</h2>
-            <p className="text-[15px] text-[#cad1d9]">{description}</p>
+      <div className="relative mx-auto flex max-w-[1150px] px-4 pb-10 md:px-6 md:pb-[60px] lg:min-h-[700px] lg:items-center lg:px-6 lg:py-[100px]">
+        <div className="-mt-px flex w-full flex-col gap-[22px] bg-[var(--color-brand)] p-9 text-white md:gap-9 md:p-[60px] lg:max-w-[570px]">
+          <div className="flex flex-col gap-2 md:gap-3">
+            <h2 className="text-[22px] leading-tight font-semibold md:text-[28px]">{title}</h2>
+            <p className="text-[14px] text-[#dcdcdc] md:text-[15px]">{description}</p>
           </div>
 
-          <form className="flex flex-col gap-2.5" noValidate>
-            <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-2.5">
+          <form className="flex flex-col gap-[10px]" noValidate>
+            <div className="flex flex-col gap-[10px] md:flex-row">
               <label className="flex flex-1 flex-col">
                 <span className="sr-only">{fields.name}</span>
                 <input
@@ -74,22 +76,22 @@ export function ContactSection({
                 type="text"
                 name="comment"
                 placeholder={fields.comment}
-                className={`${inputBase} h-[50px]`}
+                className={inputBase}
               />
             </label>
             <button
               type="submit"
-              className="mt-1 flex items-center justify-center gap-2.5 rounded-[2px] bg-white px-6 py-4 text-[15px] font-medium tracking-[0.3px] text-black transition-colors hover:bg-[#e5e7eb]"
+              className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-black transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
             >
               {submitLabel}
-              <ArrowUpRightIcon />
+              <ArrowUpRightIcon size={15} />
             </button>
           </form>
 
-          <div className="flex flex-col gap-6 text-[15px] sm:flex-row sm:gap-[22px]">
+          <div className="flex gap-[22px]">
             <div className="flex flex-1 flex-col gap-1.5">
-              <p className="text-[14px]">{contactLabels.phone}:</p>
-              <ul className="flex flex-col gap-1">
+              <p className="text-[12px] text-[#dcdcdc] md:text-[14px]">{contactLabels.phone}:</p>
+              <ul className="flex flex-col gap-1 text-[14px] md:text-[15px]">
                 {PHONES.map((phone) => (
                   <li key={phone}>
                     <a
@@ -103,10 +105,10 @@ export function ContactSection({
               </ul>
             </div>
             <div className="flex flex-1 flex-col gap-1.5">
-              <p className="text-[14px]">{contactLabels.email}:</p>
+              <p className="text-[12px] text-[#dcdcdc] md:text-[14px]">{contactLabels.email}:</p>
               <a
                 href={`mailto:${EMAIL}`}
-                className="transition-opacity hover:opacity-80"
+                className="text-[14px] break-all transition-opacity hover:opacity-80 md:text-[15px]"
               >
                 {EMAIL}
               </a>

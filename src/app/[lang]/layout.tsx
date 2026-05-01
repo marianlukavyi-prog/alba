@@ -3,14 +3,11 @@ import { Onest } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import '../globals.css'
 import { Footer } from '@/components/layout/footer'
-import { LeadModal } from '@/components/lead-modal'
+import { LeadModalProvider } from '@/components/lead-modal/lead-modal'
 import { JsonLd } from '@/components/seo/json-ld'
 import { EMAIL, PHONES } from '@/data/contact'
-import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
+import { defaultLocale, hasLocale, locales } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
-
-const localePath = (locale: Locale, path = '') =>
-  locale === defaultLocale ? path || '/' : `/${locale}${path}`
 
 const onest = Onest({
   variable: '--font-onest',
@@ -106,9 +103,13 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
   return (
     <html lang={lang} className={`${onest.variable} h-full antialiased`}>
       <body className="bg-background text-foreground flex min-h-full flex-col font-sans">
-        {children}
-        <Footer lang={lang} dict={dict} />
-        <LeadModal homeHref={localePath(lang)} dict={dict.leadModal} />
+        <LeadModalProvider
+          labels={dict.leadModal}
+          homeHref={lang === defaultLocale ? '/' : `/${lang}`}
+        >
+          {children}
+          <Footer lang={lang} dict={dict} />
+        </LeadModalProvider>
         <JsonLd data={[organization, website]} />
       </body>
     </html>

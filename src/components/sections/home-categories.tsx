@@ -12,9 +12,9 @@ const ITEMS: Array<{
   key: CategoryKey
   image: string
   reverse?: boolean
-  background?: 'surface' | 'white'
+  background?: 'surface' | 'white' | 'brand'
 }> = [
-  { key: 'windows', image: '/figma/section-windows.webp' },
+  { key: 'windows', image: '/figma/section-windows.webp', background: 'brand' },
   { key: 'doors', image: '/figma/section-doors.webp', reverse: true, background: 'white' },
   { key: 'systems', image: '/figma/section-systems.webp', background: 'white' },
 ]

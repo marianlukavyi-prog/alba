@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
-import { ChevronDownIcon } from '@/components/icons/chevron-down'
 import { Logo } from '@/components/brand/logo'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
+import { MobileMenu } from '@/components/layout/mobile-menu'
+import { ProductsDropdown } from '@/components/layout/products-dropdown'
+import { PHONES } from '@/data/contact'
 import { defaultLocale, type Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/get-dictionary'
 
@@ -21,56 +23,83 @@ type Props = {
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
 
+const PRIMARY_PHONE = PHONES[0]
+
 export function Header({ lang, dict, position = 'fixed', variant = 'overlay' }: Props) {
   const home = localePath(lang)
+  const productsHref = localePath(lang, '/products')
+  const productSubHrefs = {
+    pvc: `${productsHref}#products-pvc`,
+    aluminum: `${productsHref}#products-aluminum`,
+    doors: `${productsHref}#products-doors`,
+    systems: `${productsHref}#products-systems`,
+    shading: `${productsHref}#products-shading`,
+  } as const
+
   const positionClass =
     position === 'fixed' ? 'fixed inset-x-0 top-0 z-50' : 'absolute inset-x-0 top-0 z-50'
   const bgClass = variant === 'solid' ? 'bg-[var(--color-cta)]' : ''
 
+  const navLinks = [
+    { label: dict.nav.about, href: localePath(lang, '/about') },
+    { label: dict.nav.contact, href: localePath(lang, '/contact') },
+    { label: dict.nav.projects, href: localePath(lang, '/projects') },
+    { label: dict.nav.process, href: localePath(lang, '/process') },
+    { label: dict.nav.blog, href: localePath(lang, '/blog') },
+  ]
+
   return (
     <header className={`${positionClass} ${bgClass}`}>
-      <div className="mx-auto flex h-[76px] max-w-[1150px] items-center justify-between px-6 py-3 text-white">
+      <div className="mx-auto flex h-[76px] max-w-[1150px] items-center justify-between gap-4 px-4 py-3 text-white sm:px-6">
         <Link href={home} aria-label="Alba Ventanas" className="shrink-0">
           <Logo size="sm" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-5 text-[15px] lg:flex">
-          <Link
-            href={localePath(lang, '/products')}
-            className="flex items-center gap-2 transition-opacity hover:opacity-80"
-          >
-            {dict.nav.products}
-            <ChevronDownIcon />
-          </Link>
-          <Link href={localePath(lang, '/about')} className="transition-opacity hover:opacity-80">
-            {dict.nav.about}
-          </Link>
-          <Link
-            href={localePath(lang, '/projects')}
-            className="transition-opacity hover:opacity-80"
-          >
-            {dict.nav.projects}
-          </Link>
-          <Link href={localePath(lang, '/process')} className="transition-opacity hover:opacity-80">
-            {dict.nav.process}
-          </Link>
-          <Link href={localePath(lang, '/blog')} className="transition-opacity hover:opacity-80">
-            {dict.nav.blog}
-          </Link>
-          <Link href={localePath(lang, '/contact')} className="transition-opacity hover:opacity-80">
-            {dict.nav.contact}
-          </Link>
+          <ProductsDropdown
+            label={dict.nav.products}
+            href={productsHref}
+            items={[
+              { label: dict.productsPage.categories.pvc, href: productSubHrefs.pvc },
+              { label: dict.productsPage.categories.aluminum, href: productSubHrefs.aluminum },
+              { label: dict.productsPage.categories.doors, href: productSubHrefs.doors },
+              { label: dict.productsPage.categories.systems, href: productSubHrefs.systems },
+              { label: dict.productsPage.categories.shading, href: productSubHrefs.shading },
+            ]}
+          />
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="font-medium transition-opacity hover:opacity-80"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-5">
-          <LanguageSwitcher lang={lang} className="hidden lg:block" />
-          <Link
-            href={localePath(lang, '/contact')}
-            className="hidden h-12 w-[272px] items-center justify-center gap-[10px] rounded-[2px] border border-white px-6 text-[15px] font-medium tracking-[0.3px] transition-colors hover:bg-white hover:text-[var(--color-brand)] lg:flex"
+        <div className="flex items-center gap-3 sm:gap-5">
+          <LanguageSwitcher lang={lang} className="hidden sm:block" />
+          <a
+            href={`tel:${PRIMARY_PHONE.replace(/\s/g, '')}`}
+            className="flex items-center gap-2.5 border-b border-white pb-3 text-[15px] font-medium tracking-[0.3px] transition-opacity hover:opacity-80"
           >
-            {dict.common.consult}
-            <ArrowUpRightIcon />
-          </Link>
+            {PRIMARY_PHONE}
+            <ArrowUpRightIcon size={15} />
+          </a>
+          <div className="lg:hidden">
+            <MobileMenu
+              lang={lang}
+              homeHref={home}
+              productsHref={productsHref}
+              productSubHrefs={productSubHrefs}
+              productsLabel={dict.nav.products}
+              productCategoryLabels={dict.productsPage.categories}
+              links={navLinks}
+              ariaLabelOpen={dict.common.openMenu}
+              ariaLabelClose={dict.common.closeMenu}
+            />
+          </div>
         </div>
       </div>
     </header>

@@ -32,20 +32,22 @@ export function ProductsSection({
   return (
     <section
       id={`products-${category}`}
-      className="mx-auto w-full max-w-[1150px] scroll-mt-24 px-6 py-10 lg:py-12"
+      className="mx-auto w-full max-w-[1150px] scroll-mt-24 px-4 py-10 md:px-6 lg:py-12"
     >
-      <header className="flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-[28px] font-semibold text-[var(--color-brand)]">{title}</h2>
+      <header className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+        <h2 className="text-[22px] leading-tight font-semibold text-[var(--color-brand)] md:text-[28px]">
+          {title}
+        </h2>
         <Link
           href={viewAllHref}
-          className="inline-flex items-center gap-2.5 border-b border-[var(--color-cta)] pb-4 text-[15px] font-medium tracking-[0.3px] text-[var(--color-brand)] transition-opacity hover:opacity-70"
+          className="inline-flex items-center gap-2.5 border-b border-[var(--color-cta)] pb-2 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-opacity hover:opacity-70 md:pb-4 md:text-[15px] md:tracking-[0.3px]"
         >
           {viewAllLabel}
-          <ArrowUpRightIcon />
+          <ArrowUpRightIcon size={15} />
         </Link>
       </header>
 
-      <div className="mt-9">
+      <div className="mt-5 md:mt-9">
         <ProductsCarousel prevLabel={prevLabel} nextLabel={nextLabel}>
           {products.map((product) => (
             <ProductCard

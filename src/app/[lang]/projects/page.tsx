@@ -72,7 +72,7 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
         <Banner
           title={t.heroTitle}
           subtitle={t.heroSubtitle}
-          cta={{ label: dict.common.consult, href: localePath(lang, '/contact') }}
+          cta={{ label: dict.common.consult }}
           breadcrumb={[
             { label: t.breadcrumbHome, href: localePath(lang) },
             { label: t.breadcrumbCurrent },
@@ -80,33 +80,25 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
         />
 
         <section className="bg-white">
-          <div className="mx-auto max-w-[1150px] px-6 pt-12 pb-10 lg:px-0">
+          <div className="mx-auto max-w-[1150px] px-6 pt-10 pb-10 lg:px-0 lg:pt-12">
             <ProjectsTabs
               allLabel={t.tabAll}
               loadMoreLabel={t.loadMore}
-              hrefForCategory={(cat) =>
-                cat
-                  ? localePath(lang, `/projects?cat=${cat}`)
-                  : localePath(lang, '/projects')
-              }
+              baseHref={localePath(lang, '/projects')}
               categoryLabels={t.categories}
             />
           </div>
         </section>
 
-        <section className="bg-[var(--color-surface)]">
-          <div className="mx-auto max-w-[1150px] px-6 py-10">
-            <ProjectsFilters
-              labels={t.filters}
-              countries={countries}
-              systems={systems}
-              types={types}
-            />
-          </div>
-        </section>
+        <ProjectsFilters
+          labels={t.filters}
+          countries={countries}
+          systems={systems}
+          types={types}
+        />
 
         <section className="bg-white pb-16 lg:pb-20">
-          <div className="mx-auto flex max-w-[1150px] flex-col gap-10 px-6 pt-10">
+          <div className="mx-auto flex max-w-[1150px] flex-col gap-10 px-6 pt-10 lg:pt-12 lg:px-0">
             <ul className="grid grid-cols-1 gap-x-2.5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {visibleProjects.map((project) => (
                 <li key={project.slug}>

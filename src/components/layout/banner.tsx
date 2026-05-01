@@ -2,13 +2,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { ChevronRightIcon } from '@/components/icons/chevron-right'
+import { LeadConsultButton } from '@/components/lead-modal/lead-consult-button'
 
 type BreadcrumbItem = { label: string; href?: string }
 
 type Props = {
   title: string
   subtitle?: string
-  cta?: { label: string; href: string }
+  /**
+   * Consultation CTA. If `href` is omitted, clicking opens the global lead modal
+   * (the standard behavior for marketing banners).
+   */
+  cta?: { label: string; href?: string }
   image?: { src: string; alt?: string }
   breadcrumb?: BreadcrumbItem[]
   /**
@@ -38,7 +43,7 @@ export function Banner({
         sizes="100vw"
         className="-z-10 object-cover"
       />
-      <div className="absolute inset-0 -z-10 bg-black/60" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-[var(--color-brand)]/50" aria-hidden="true" />
 
       {breadcrumb && breadcrumb.length > 0 ? (
         <nav
@@ -65,20 +70,28 @@ export function Banner({
         </nav>
       ) : null}
 
-      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-[52px] px-6 py-[120px] text-center text-[#e5e7eb]">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-[42px] leading-tight font-semibold text-balance">{title}</h1>
-          {subtitle ? <p className="text-[15px] text-pretty">{subtitle}</p> : null}
+      <div className="mx-auto flex max-w-[700px] flex-col items-center gap-[22px] px-4 py-[60px] text-center sm:gap-10 sm:px-6 sm:py-[80px] lg:gap-[52px] lg:py-[120px]">
+        <div className="flex flex-col gap-1.5 sm:gap-4">
+          <h1 className="text-[26px] leading-tight font-semibold text-balance text-white sm:text-[42px]">
+            {title}
+          </h1>
+          {subtitle ? (
+            <p className="text-[14px] text-pretty text-[#dcdcdc] sm:text-[15px]">{subtitle}</p>
+          ) : null}
         </div>
 
         {cta ? (
-          <Link
-            href={cta.href}
-            className="flex h-[52px] w-[300px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-cta)] px-6 text-[15px] font-medium tracking-[0.3px] text-white transition-colors hover:bg-[var(--color-brand)]"
-          >
-            {cta.label}
-            <ArrowUpRightIcon />
-          </Link>
+          cta.href ? (
+            <Link
+              href={cta.href}
+              className="flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] sm:h-[50px] sm:w-[300px] sm:text-[15px] sm:tracking-[0.3px]"
+            >
+              {cta.label}
+              <ArrowUpRightIcon size={15} />
+            </Link>
+          ) : (
+            <LeadConsultButton label={cta.label} />
+          )
         ) : null}
       </div>
     </section>

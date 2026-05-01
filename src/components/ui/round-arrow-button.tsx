@@ -10,20 +10,42 @@ type Props = {
   href?: string
   ariaLabel?: string
   className?: string
+  /**
+   * 'dark' (default) — dark blue border/icon for white/light backgrounds.
+   * 'light' — white border/icon for dark backgrounds.
+   */
+  tone?: 'dark' | 'light'
+  iconSize?: number
 }
 
-const BASE =
-  'flex size-[50px] shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)] transition-colors'
+export function RoundArrowButton({
+  href,
+  ariaLabel,
+  className,
+  tone = 'dark',
+  iconSize = 15,
+}: Props) {
+  const base = `flex size-[50px] shrink-0 items-center justify-center rounded-full border-[0.5px] transition-colors ${
+    tone === 'light'
+      ? 'border-white text-white'
+      : 'border-[var(--color-brand)] text-[var(--color-brand)]'
+  }`
+  const hover = href
+    ? tone === 'light'
+      ? 'hover:bg-white hover:text-[var(--color-brand)]'
+      : 'hover:bg-[var(--color-brand)] hover:text-white'
+    : tone === 'light'
+      ? 'group-hover:bg-white group-hover:text-[var(--color-brand)]'
+      : 'group-hover:bg-[var(--color-brand)] group-hover:text-white'
 
-export function RoundArrowButton({ href, ariaLabel, className }: Props) {
   if (href) {
     return (
       <Link
         href={href}
         aria-label={ariaLabel}
-        className={`${BASE} hover:bg-[var(--color-brand)] hover:text-white ${className ?? ''}`}
+        className={`${base} ${hover} ${className ?? ''}`}
       >
-        <ArrowUpRightIcon size={15} />
+        <ArrowUpRightIcon size={iconSize} />
       </Link>
     )
   }
@@ -31,9 +53,9 @@ export function RoundArrowButton({ href, ariaLabel, className }: Props) {
   return (
     <span
       aria-hidden="true"
-      className={`${BASE} group-hover:bg-[var(--color-brand)] group-hover:text-white ${className ?? ''}`}
+      className={`${base} ${hover} ${className ?? ''}`}
     >
-      <ArrowUpRightIcon size={15} />
+      <ArrowUpRightIcon size={iconSize} />
     </span>
   )
 }

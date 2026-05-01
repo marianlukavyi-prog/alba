@@ -63,10 +63,12 @@ export function ArticleBanner({
         </ol>
       </nav>
 
-      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-1.5 px-6 py-[120px] text-center text-[#e5e7eb]">
-        <h1 className="text-[42px] leading-tight font-semibold text-balance">{title}</h1>
+      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-1.5 px-6 py-[100px] text-center text-[#e5e7eb] md:py-[120px]">
+        <h1 className="text-[28px] leading-tight font-semibold text-balance md:text-[42px]">
+          {title}
+        </h1>
 
-        <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[14px] font-medium text-[#c7c7c7]">
+        <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] font-medium text-[#c7c7c7] md:text-[14px]">
           <li className="flex items-center gap-2">
             <CalendarDaysIcon size={15} />
             <span>{publishedLabel}</span>
@@ -82,7 +84,7 @@ export function ArticleBanner({
         </ul>
 
         {tags.length > 0 ? (
-          <ul className="flex flex-wrap items-center justify-center gap-2.5 text-[15px] font-medium text-[#c7c7c7]">
+          <ul className="flex flex-wrap items-center justify-center gap-2.5 text-[14px] font-medium text-[#c7c7c7] md:text-[15px]">
             {tags.map((tag) => (
               <li key={tag}>{tag}</li>
             ))}

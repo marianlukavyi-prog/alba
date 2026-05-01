@@ -10,27 +10,30 @@ export function ProjectGallery({ images, alt }: Props) {
   return (
     <div className="flex flex-col gap-2.5">
       {hero ? (
-        <div className="relative aspect-[570/280] w-full overflow-hidden rounded-[2px]">
+        <div className="relative aspect-[1150/420] w-full overflow-hidden rounded-[2px]">
           <Image
             src={hero}
             alt={alt}
             fill
-            sizes="(min-width: 1024px) 570px, 100vw"
+            sizes="(min-width: 1024px) 1150px, 100vw"
             className="object-cover"
             priority
           />
         </div>
       ) : null}
 
-      {(secondA || secondB) ? (
+      {secondA || secondB ? (
         <div className="grid grid-cols-2 gap-2.5">
           {[secondA, secondB].filter(Boolean).map((src, i) => (
-            <div key={i} className="relative aspect-[280/280] w-full overflow-hidden rounded-[2px]">
+            <div
+              key={i}
+              className="relative aspect-[570/300] w-full overflow-hidden rounded-[2px]"
+            >
               <Image
                 src={src as string}
                 alt={alt}
                 fill
-                sizes="(min-width: 1024px) 280px, 50vw"
+                sizes="(min-width: 1024px) 570px, 50vw"
                 className="object-cover"
               />
             </div>
@@ -38,18 +41,18 @@ export function ProjectGallery({ images, alt }: Props) {
         </div>
       ) : null}
 
-      {(thirdA || thirdB || thirdC) ? (
+      {thirdA || thirdB || thirdC ? (
         <div className="grid grid-cols-3 gap-2.5">
           {[thirdA, thirdB, thirdC].filter(Boolean).map((src, i) => (
             <div
               key={i}
-              className="relative aspect-[183/280] w-full overflow-hidden rounded-[2px]"
+              className="relative aspect-[378/280] w-full overflow-hidden rounded-[2px]"
             >
               <Image
                 src={src as string}
                 alt={alt}
                 fill
-                sizes="(min-width: 1024px) 183px, 33vw"
+                sizes="(min-width: 1024px) 378px, 33vw"
                 className="object-cover"
               />
             </div>

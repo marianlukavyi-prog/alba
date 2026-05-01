@@ -9,6 +9,7 @@
   --color-brand: #081f48;
   --color-brand-soft: #515c70;
   --color-cta: #23384d;
+  --color-accent: #facc15;
   --color-surface: #f6f6f6;
   --color-night: #000000;
   --color-on-dark: #e4e4e4;
@@ -18,8 +19,10 @@
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
   font-feature-settings: 'cv11', 'ss01';
+  overflow-x: clip;
 }

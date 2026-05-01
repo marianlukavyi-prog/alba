@@ -14,7 +14,10 @@
   "common": {
     "consult": "Obtener consultoría",
     "moreDetails": "Más detalles",
-    "viewAll": "Ver todo"
+    "viewAll": "Ver todo",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "slide": "Diapositiva"
   },
   "home": {
     "heroEyebrow": "ALBA VENTANAS",
@@ -154,7 +157,11 @@
       "country": "Seleccione país",
       "city": "Indique ciudad",
       "system": "Seleccione sistema",
-      "type": "Seleccione tipo"
+      "type": "Seleccione tipo",
+      "showFilter": "Mostrar filtro",
+      "applyFilter": "Aplicar filtro",
+      "title": "Filtro",
+      "close": "Cerrar filtro"
     }
   },
   "productDetailPage": {
@@ -210,6 +217,171 @@
       "few": "minutos",
       "many": "minutos",
       "other": "minutos"
+    }
+  },
+  "termsPage": {
+    "title": "Condiciones de uso",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Condiciones de uso",
+    "sections": [
+      {
+        "title": "Disposiciones generales",
+        "body": "Estas Condiciones de uso regulan el uso del sitio web y establecen las reglas de interacción entre el usuario y la administración del sitio. Al utilizar el sitio, usted acepta estas condiciones."
+      },
+      {
+        "title": "Uso del sitio",
+        "body": "El usuario se compromete a utilizar el sitio únicamente con fines legales y a no infringir los derechos de terceros. Se prohíbe cualquier interferencia con el funcionamiento del sitio o el intento de acceso no autorizado."
+      },
+      {
+        "title": "Información en el sitio",
+        "body": "Toda la información del sitio tiene carácter informativo y puede ser modificada sin previo aviso. Hacemos todo lo posible para mantener los datos actualizados, pero no garantizamos su total exactitud."
+      },
+      {
+        "title": "Propiedad intelectual",
+        "body": "Todos los materiales del sitio, incluidos textos, imágenes y diseño, son propiedad de la empresa o se utilizan sobre bases legales. Queda prohibida cualquier copia o uso de los materiales sin permiso."
+      },
+      {
+        "title": "Limitación de responsabilidad",
+        "body": "No nos hacemos responsables de posibles daños derivados del uso o de la imposibilidad de uso del sitio. El usuario toma decisiones de forma independiente con base en la información recibida."
+      },
+      {
+        "title": "Enlaces a recursos externos",
+        "body": "El sitio puede contener enlaces a recursos externos. No nos hacemos responsables de su contenido ni de sus políticas de privacidad."
+      },
+      {
+        "title": "Cambios en las condiciones",
+        "body": "Nos reservamos el derecho de modificar estas Condiciones de uso sin previo aviso. La versión actualizada se publicará en esta página."
+      },
+      {
+        "title": "Contacto",
+        "body": "Para cualquier pregunta sobre el uso del sitio, puede contactarnos a través del formulario de contacto o por los contactos indicados."
+      }
+    ]
+  },
+  "privacyPage": {
+    "title": "Política de privacidad",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Política de privacidad",
+    "sections": [
+      {
+        "title": "Información que recopilamos",
+        "body": "Recopilamos la información que usted facilita a través de los formularios del sitio: nombre, teléfono, correo electrónico y otros datos necesarios para procesar su solicitud. También pueden recopilarse automáticamente datos técnicos como dirección IP, tipo de dispositivo y datos de uso del sitio."
+      },
+      {
+        "title": "Uso de la información",
+        "body": "Usamos los datos recibidos para:",
+        "items": [
+          "procesar solicitudes y prestar servicios",
+          "contactarle en relación con su consulta",
+          "mejorar el sitio y el servicio",
+          "cumplir con los requisitos legales"
+        ]
+      },
+      {
+        "title": "Protección de datos",
+        "body": "Aplicamos medidas técnicas y organizativas modernas para proteger los datos personales contra el acceso no autorizado, la pérdida o la divulgación."
+      },
+      {
+        "title": "Cesión de datos a terceros",
+        "body": "No cedemos sus datos personales a terceros, salvo en los casos previstos por la legislación o cuando sea necesario para prestar el servicio (por ejemplo, socios o servicios de entrega)."
+      },
+      {
+        "title": "Sus derechos",
+        "body": "Usted tiene derecho a:",
+        "items": [
+          "acceder a sus datos personales",
+          "solicitar su rectificación o supresión",
+          "retirar el consentimiento al tratamiento",
+          "presentar una reclamación ante la autoridad competente"
+        ]
+      },
+      {
+        "title": "Cookies",
+        "body": "Nuestro sitio utiliza cookies para su correcto funcionamiento, análisis y mejora de la experiencia de usuario. Puede modificar la configuración de cookies en su navegador."
+      },
+      {
+        "title": "Cambios en la política",
+        "body": "Podemos actualizar esta política de forma periódica. La versión vigente siempre está disponible en esta página."
+      },
+      {
+        "title": "Contacto",
+        "body": "Si tiene preguntas sobre el tratamiento de datos personales, contacte con nosotros a través del formulario del sitio o los contactos indicados."
+      }
+    ]
+  },
+  "aboutPage": {
+    "heroTitle": "Sobre nosotros",
+    "heroSubtitle": "Soluciones modernas para ventanas, puertas y sistemas arquitectónicos con un enfoque en calidad y fiabilidad",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Sobre nosotros",
+    "intro": {
+      "title": "Sobre nosotros",
+      "paragraphs": [
+        "Nos especializamos en la fabricación e instalación de ventanas, puertas y sistemas de fachada, utilizando tecnologías modernas y materiales de calidad.",
+        "Acompañamos a nuestros clientes en cada etapa — desde la selección hasta la instalación, garantizando calidad y plazos. Consulte nuestros proyectos y soluciones en el catálogo."
+      ],
+      "ctaLabel": "Ver proyectos"
+    },
+    "stats": [
+      { "value": "250+", "label": "proyectos realizados" },
+      { "value": "300+", "label": "sistemas instalados" },
+      { "value": "10+", "label": "años de experiencia" },
+      { "value": "100%", "label": "clientes satisfechos" }
+    ],
+    "contact": {
+      "title": "Contáctenos",
+      "description": "Envíenos su solicitud y elegiremos la solución óptima para su proyecto",
+      "fields": {
+        "name": "Nombre",
+        "phone": "+380",
+        "comment": "Comentario"
+      },
+      "submit": "Enviar solicitud",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo electrónico"
+    }
+  },
+  "processPage": {
+    "heroTitle": "Cómo trabajamos",
+    "heroSubtitle": "Un proceso transparente desde su primera consulta hasta la instalación de la solución terminada",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Proceso",
+    "intro": {
+      "title": "Cómo trabajamos",
+      "description": "Construimos un proceso de colaboración transparente — desde la primera consulta hasta la instalación de la solución terminada. En cada paso estamos junto a usted: definimos la solicitud, recomendamos productos y materiales de nuestro catálogo, y acordamos el proyecto y los plazos."
+    },
+    "production": {
+      "title": "Fabricación",
+      "description": "Tecnologías modernas y materiales de calidad para crear sistemas de ventanas y puertas fiables.",
+      "ctaLabel": "Ver todos los proyectos"
+    },
+    "delivery": {
+      "title": "Entrega y pago",
+      "description": "Organizamos la entrega en obra dentro de los plazos acordados, cumpliendo todas las normas de transporte y almacenamiento. Cada pedido pasa por un control de calidad en todas las etapas.",
+      "bullets": [
+        "Planificación y aprobación de plazos",
+        "Logística y entrega óptimas",
+        "Seguimiento del pedido en todas las etapas"
+      ],
+      "cards": [
+        {
+          "title": "Entrega",
+          "description": "Entrega en obra dentro de los plazos acordados, con todas las normas."
+        },
+        {
+          "title": "Pago",
+          "description": "Condiciones de pago flexibles según las necesidades del cliente."
+        },
+        {
+          "title": "Almacenaje",
+          "description": "Transporte seguro y protección de todas las construcciones."
+        }
+      ]
+    },
+    "installation": {
+      "title": "Instalación",
+      "description": "Realizamos la instalación según todos los estándares y tecnologías. Garantizamos un montaje correcto y un rendimiento duradero.",
+      "social": "Síguenos"
     }
   },
   "contactPage": {

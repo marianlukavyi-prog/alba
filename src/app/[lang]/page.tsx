@@ -27,37 +27,45 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   }))
 
   const productsAnchor = (cat: string) => `${localePath(lang, '/products')}#products-${cat}`
-  const solutionsItems = [
-    {
-      key: 'aluminumWindows' as const,
-      href: productsAnchor('aluminum'),
-      image: { src: '/figma/solution-aluminum-windows.webp' },
-    },
-    {
-      key: 'sliding' as const,
-      href: productsAnchor('systems'),
-      image: { src: '/figma/solution-sliding.webp' },
-    },
-    {
-      key: 'facade' as const,
-      href: productsAnchor('systems'),
-      image: { src: '/figma/solution-facade.webp' },
-    },
-    {
-      key: 'pivot' as const,
-      href: productsAnchor('doors'),
-      image: { src: '/figma/solution-pivot.webp' },
-    },
-    {
-      key: 'shading' as const,
-      href: productsAnchor('shading'),
-      image: { src: '/figma/solution-shading.webp' },
-    },
-  ].map(({ key, href, image }) => ({
+  const solutionsItems = (
+    [
+      {
+        key: 'aluminumWindows',
+        href: productsAnchor('aluminum'),
+        image: '/figma/solution-aluminum-windows.webp',
+        tone: 'light',
+      },
+      {
+        key: 'sliding',
+        href: productsAnchor('systems'),
+        image: '/figma/solution-sliding.webp',
+        tone: 'dark',
+      },
+      {
+        key: 'facade',
+        href: productsAnchor('systems'),
+        image: '/figma/solution-facade.webp',
+        tone: 'light',
+      },
+      {
+        key: 'pivot',
+        href: productsAnchor('doors'),
+        image: '/figma/solution-pivot.webp',
+        tone: 'dark',
+      },
+      {
+        key: 'shading',
+        href: productsAnchor('shading'),
+        image: '/figma/solution-shading.webp',
+        tone: 'dark',
+      },
+    ] as const
+  ).map(({ key, href, image, tone }) => ({
     title: solutions.items[key].title,
     subtitle: solutions.items[key].subtitle,
     href,
-    image: { src: image.src, alt: solutions.items[key].title },
+    image: { src: image, alt: solutions.items[key].title },
+    tone,
   }))
 
   return (
@@ -67,7 +75,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
         <Banner
           title={dict.home.heroTitle}
           subtitle={dict.home.heroSubtitle}
-          cta={{ label: dict.common.consult, href: localePath(lang, '/contact') }}
+          cta={{ label: dict.common.consult }}
         />
 
         <HomeCategories
@@ -87,6 +95,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           title={solutions.title}
           description={solutions.description}
           items={solutionsItems}
+          slideLabel={dict.common.slide}
         />
 
         <Benefits title={benefits.title} description={benefits.description} items={benefitItems} />

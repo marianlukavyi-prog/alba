@@ -6,7 +6,7 @@ import { defaultLocale, locales, type Locale } from '@/i18n/config'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
-const STATIC_ROUTES = ['', '/products', '/projects', '/blog', '/contact'] as const
+const STATIC_ROUTES = ['', '/products', '/projects', '/blog', '/process', '/about', '/contact', '/privacy', '/terms'] as const
 
 const buildPath = (locale: Locale, route: string) =>
   locale === defaultLocale ? route || '/' : `/${locale}${route}`

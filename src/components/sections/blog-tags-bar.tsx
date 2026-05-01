@@ -1,51 +1,94 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRightIcon } from '@/components/icons/arrow-right'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { BLOG_TAGS, type BlogTag } from '@/data/blog'
 
 type Props = {
   sortLabel: string
   activeTag?: BlogTag
-  hrefForTag: (tag?: BlogTag) => string
+  /** Base href for the blog list (e.g. `/uk/blog`). Tags append `?tag=...`. */
+  baseHref: string
   loadMoreLabel: string
 }
 
 const PILL_BASE =
-  'inline-flex h-[58px] shrink-0 items-center gap-1.5 rounded-[2px] px-6 text-[15px] font-medium tracking-[0.3px] transition-colors'
+  'inline-flex h-[46px] shrink-0 items-center justify-center gap-1.5 rounded-[2px] px-6 text-[14px] font-medium tracking-[0.28px] whitespace-nowrap text-[var(--color-brand)] transition-colors md:h-[58px] md:text-[15px] md:tracking-[0.3px]'
 
-export function BlogTagsBar({ sortLabel, activeTag, hrefForTag, loadMoreLabel }: Props) {
+export function BlogTagsBar({ sortLabel, activeTag, baseHref, loadMoreLabel }: Props) {
+  const tagHref = (tag?: BlogTag) =>
+    tag ? `${baseHref}?tag=${encodeURIComponent(tag)}` : baseHref
+  const ref = useRef<HTMLUListElement>(null)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const update = () => {
+      setCanScrollNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+    }
+    update()
+    el.addEventListener('scroll', update, { passive: true })
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => {
+      el.removeEventListener('scroll', update)
+      ro.disconnect()
+    }
+  }, [])
+
+  const next = () => {
+    const el = ref.current
+    if (!el) return
+    el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' })
+  }
+
   return (
-    <nav aria-label="Blog tags" className="flex items-center gap-2.5 overflow-x-auto">
-      <Link
-        href={hrefForTag(undefined)}
-        className={`${PILL_BASE} bg-[var(--color-cta)] text-white hover:bg-[var(--color-brand)]`}
+    <nav aria-label="Blog tags" className="flex items-center gap-2.5">
+      <ul
+        ref={ref}
+        className="flex flex-1 items-center gap-2.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {sortLabel}
-        <ArrowUpRightIcon />
-      </Link>
-      {BLOG_TAGS.map((tag) => {
-        const isActive = activeTag === tag
-        return (
+        <li>
           <Link
-            key={tag}
-            href={hrefForTag(tag)}
-            className={`${PILL_BASE} text-[var(--color-brand)] ${
-              isActive
-                ? 'bg-[#f4f4f4] border border-[#f4f4f4]'
-                : 'border border-[#f4f4f4] hover:bg-[var(--color-surface)] hover:border-[var(--color-surface)]'
-            }`}
+            href={tagHref(undefined)}
+            className={`${PILL_BASE} bg-[var(--color-accent)] hover:bg-[#e6b801]`}
           >
-            {tag}
-            <ArrowUpRightIcon />
+            {sortLabel}
+            <ArrowUpRightIcon size={15} />
           </Link>
-        )
-      })}
-      <button
-        type="button"
-        aria-label={loadMoreLabel}
-        className="inline-flex size-[50px] shrink-0 items-center justify-center rounded-full border-[0.5px] border-black text-black transition-colors hover:bg-black hover:text-white"
-      >
-        <ArrowUpRightIcon size={15} />
-      </button>
+        </li>
+        {BLOG_TAGS.map((tag) => {
+          const isActive = activeTag === tag
+          return (
+            <li key={tag}>
+              <Link
+                href={tagHref(tag)}
+                className={`${PILL_BASE} border border-[#f4f4f4] bg-white ${
+                  isActive
+                    ? 'bg-[var(--color-surface)]'
+                    : 'hover:border-[var(--color-surface)] hover:bg-[var(--color-surface)]'
+                }`}
+              >
+                {tag}
+                <ArrowUpRightIcon size={15} />
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+      {canScrollNext ? (
+        <button
+          type="button"
+          aria-label={loadMoreLabel}
+          onClick={next}
+          className="flex size-[46px] shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)] transition-colors hover:bg-[var(--color-brand)] hover:text-white md:size-[50px]"
+        >
+          <ArrowRightIcon size={15} />
+        </button>
+      ) : null}
     </nav>
   )
 }

@@ -14,7 +14,10 @@
   "common": {
     "consult": "Get consultation",
     "moreDetails": "More details",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "slide": "Slide"
   },
   "home": {
     "heroEyebrow": "ALBA VENTANAS",
@@ -154,7 +157,11 @@
       "country": "Select country",
       "city": "Enter city",
       "system": "Select system",
-      "type": "Select type"
+      "type": "Select type",
+      "showFilter": "Show filter",
+      "applyFilter": "Apply filter",
+      "title": "Filter",
+      "close": "Close filter"
     }
   },
   "productDetailPage": {
@@ -210,6 +217,171 @@
       "few": "minutes",
       "many": "minutes",
       "other": "minutes"
+    }
+  },
+  "termsPage": {
+    "title": "Terms of use",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Terms of use",
+    "sections": [
+      {
+        "title": "General provisions",
+        "body": "These Terms of Use govern the use of the website and define the rules of interaction between the user and the site administration. By using the site, you agree to these terms."
+      },
+      {
+        "title": "Use of the site",
+        "body": "The user agrees to use the site only for lawful purposes and not to infringe the rights of third parties. Any interference with the operation of the site or attempts to gain unauthorised access are prohibited."
+      },
+      {
+        "title": "Information on the site",
+        "body": "All information on the site is for reference only and may be changed without prior notice. We make every effort to keep the data up to date but do not guarantee complete accuracy."
+      },
+      {
+        "title": "Intellectual property",
+        "body": "All materials on the site — including text, images and design — are the property of the company or are used on lawful grounds. Any copying or use of materials without permission is prohibited."
+      },
+      {
+        "title": "Limitation of liability",
+        "body": "We are not liable for any losses arising from the use, or the inability to use, the site. The user makes decisions independently based on the information received."
+      },
+      {
+        "title": "Links to third-party resources",
+        "body": "The site may contain links to third-party resources. We are not responsible for their content or privacy practices."
+      },
+      {
+        "title": "Changes to the terms",
+        "body": "We reserve the right to change these Terms of Use without prior notice. The updated version will be published on this page."
+      },
+      {
+        "title": "Contact",
+        "body": "For any questions about the use of the site, please contact us via the feedback form or via the contacts listed on the site."
+      }
+    ]
+  },
+  "privacyPage": {
+    "title": "Privacy policy",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Privacy policy",
+    "sections": [
+      {
+        "title": "Information we collect",
+        "body": "We collect the information you provide through forms on the site — including name, phone number, email and other data needed to process your request. Technical data such as IP address, device type and site usage may also be collected automatically."
+      },
+      {
+        "title": "How we use information",
+        "body": "We use the data for:",
+        "items": [
+          "processing requests and providing services",
+          "contacting you regarding your enquiry",
+          "improving the site and service",
+          "meeting legal requirements"
+        ]
+      },
+      {
+        "title": "Data protection",
+        "body": "We apply modern technical and organisational measures to protect personal data from unauthorised access, loss or disclosure."
+      },
+      {
+        "title": "Sharing data with third parties",
+        "body": "We do not share your personal data with third parties except where required by law, or when necessary to deliver our services (e.g. partners or delivery providers)."
+      },
+      {
+        "title": "Your rights",
+        "body": "You have the right to:",
+        "items": [
+          "access your personal data",
+          "request correction or deletion",
+          "withdraw consent to processing",
+          "lodge a complaint with the relevant authority"
+        ]
+      },
+      {
+        "title": "Cookies",
+        "body": "Our site uses cookies for correct operation, analytics and to improve the user experience. You can change cookie settings in your browser."
+      },
+      {
+        "title": "Changes to the policy",
+        "body": "We may update this policy from time to time. The current version is always available on this page."
+      },
+      {
+        "title": "Contact",
+        "body": "If you have any questions about how we process personal data, contact us via the form on the site or the contacts listed."
+      }
+    ]
+  },
+  "aboutPage": {
+    "heroTitle": "About us",
+    "heroSubtitle": "Modern solutions for windows, doors and architectural systems with a focus on quality and reliability",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "About us",
+    "intro": {
+      "title": "About us",
+      "paragraphs": [
+        "We specialise in the manufacture and installation of window, door and façade systems, using modern technology and high-quality materials.",
+        "We support our clients at every stage — from selection to installation, ensuring quality and meeting deadlines. Browse our projects and solutions in the catalogue."
+      ],
+      "ctaLabel": "View projects"
+    },
+    "stats": [
+      { "value": "250+", "label": "completed projects" },
+      { "value": "300+", "label": "systems installed" },
+      { "value": "10+", "label": "years of experience" },
+      { "value": "100%", "label": "satisfied clients" }
+    ],
+    "contact": {
+      "title": "Get in touch",
+      "description": "Send us your request and we will find the optimal solution for your project",
+      "fields": {
+        "name": "Name",
+        "phone": "+380",
+        "comment": "Comment"
+      },
+      "submit": "Send request",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email"
+    }
+  },
+  "processPage": {
+    "heroTitle": "How we work",
+    "heroSubtitle": "A transparent process from your first inquiry to the installation of the finished solution",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Process",
+    "intro": {
+      "title": "How we work",
+      "description": "We build a transparent collaboration process — from your first inquiry to the installation of the finished solution. At every step we stand by you: we scope the request, recommend products and materials from our catalogue, and agree the project and timelines."
+    },
+    "production": {
+      "title": "Manufacturing",
+      "description": "Modern technologies and high-quality materials to build reliable window and door systems.",
+      "ctaLabel": "View all projects"
+    },
+    "delivery": {
+      "title": "Delivery and payment",
+      "description": "We organise delivery to your site within the agreed schedule, observing all rules for transport and storage. Every order goes through quality control to guarantee performance at every stage.",
+      "bullets": [
+        "Schedule planning and approvals",
+        "Optimal logistics and delivery",
+        "Order tracking at every stage"
+      ],
+      "cards": [
+        {
+          "title": "Delivery",
+          "description": "Delivery to your site within the agreed schedule, fully compliant."
+        },
+        {
+          "title": "Payment",
+          "description": "Flexible payment terms tailored to the client's needs."
+        },
+        {
+          "title": "Storage",
+          "description": "Safe transport and protection of all constructions."
+        }
+      ]
+    },
+    "installation": {
+      "title": "Installation",
+      "description": "We install in line with all standards and technologies. We guarantee correct setup and long-lasting performance.",
+      "social": "Follow us"
     }
   },
   "contactPage": {

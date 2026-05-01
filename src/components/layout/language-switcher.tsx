@@ -25,9 +25,10 @@ const buildHref = (target: Locale, basePath: string) => {
 type Props = {
   lang: Locale
   className?: string
+  tone?: 'light' | 'dark'
 }
 
-export function LanguageSwitcher({ lang, className }: Props) {
+export function LanguageSwitcher({ lang, className, tone = 'light' }: Props) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const ref = useRef<HTMLDivElement>(null)
@@ -73,7 +74,11 @@ export function LanguageSwitcher({ lang, className }: Props) {
         <ul
           role="listbox"
           aria-label="Languages"
-          className="absolute top-full right-0 z-50 mt-2 min-w-[180px] overflow-hidden rounded-[2px] border border-white/15 bg-[var(--color-brand)] py-1 shadow-lg"
+          className={`absolute top-full right-0 z-50 mt-2 min-w-[180px] overflow-hidden rounded-[2px] py-1 shadow-lg ${
+            tone === 'dark'
+              ? 'border border-black/10 bg-white text-[var(--color-brand)]'
+              : 'border border-white/15 bg-[var(--color-brand)] text-white'
+          }`}
         >
           {locales.map((target) => {
             const active = target === lang
@@ -86,11 +91,21 @@ export function LanguageSwitcher({ lang, className }: Props) {
                   onClick={() => setOpen(false)}
                   aria-current={active ? 'true' : undefined}
                   className={`flex items-center justify-between gap-3 px-4 py-2 text-[14px] transition-colors ${
-                    active ? 'bg-white/10 font-medium' : 'hover:bg-white/5'
+                    tone === 'dark'
+                      ? active
+                        ? 'bg-black/5 font-medium'
+                        : 'hover:bg-black/5'
+                      : active
+                        ? 'bg-white/10 font-medium'
+                        : 'hover:bg-white/5'
                   }`}
                 >
                   <span>{localeNames[target]}</span>
-                  <span className="text-[12px] tracking-wider text-white/60 uppercase">
+                  <span
+                    className={`text-[12px] tracking-wider uppercase ${
+                      tone === 'dark' ? 'text-[var(--color-brand-soft)]' : 'text-white/60'
+                    }`}
+                  >
                     {target}
                   </span>
                 </Link>

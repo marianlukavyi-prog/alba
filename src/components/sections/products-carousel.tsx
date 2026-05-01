@@ -58,8 +58,8 @@ export function ProductsCarousel({
     <div className="relative">
       <ul
         ref={scrollerRef}
-        className={`grid snap-x snap-mandatory auto-cols-[100%] grid-flow-col gap-2.5 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-          visibleDesktop === 3 ? 'lg:auto-cols-[calc(33.333%-7px)]' : 'lg:auto-cols-[calc(50%-5px)]'
+        className={`grid snap-x snap-mandatory auto-cols-[calc(50%-5px)] grid-flow-col gap-2.5 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+          visibleDesktop === 3 ? 'lg:auto-cols-[calc(33.333%-7px)]' : ''
         }`}
       >
         {items.map((child, i) => (
@@ -106,7 +106,7 @@ export function ProductsCarousel({
                 onClick={() => scrollToIndex(i)}
                 className={`rounded-full transition-all ${
                   i === active
-                    ? 'size-[14px] bg-[var(--color-cta)]'
+                    ? 'size-[14px] bg-[var(--color-brand)]'
                     : 'size-3 bg-[#f4f4f4] hover:bg-[#d4d4d4]'
                 }`}
               />
