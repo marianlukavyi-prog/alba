@@ -8,11 +8,12 @@ import { useLeadModal } from '@/components/lead-modal/lead-modal'
 type Props = {
   fields: { name: string; phone: string; comment: string }
   submitLabel: string
+  errorMessages: { required: string; send_failed: string }
   /** 'dark' = white text on brand bg, 'light' = brand text on light bg */
   variant?: 'dark' | 'light'
 }
 
-export function LeadInlineForm({ fields, submitLabel, variant = 'dark' }: Props) {
+export function LeadInlineForm({ fields, submitLabel, errorMessages, variant = 'dark' }: Props) {
   const { showSuccess } = useLeadModal()
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, startSubmit] = useTransition()
@@ -47,7 +48,7 @@ export function LeadInlineForm({ fields, submitLabel, variant = 'dark' }: Props)
             formEl.reset()
             showSuccess()
           } else {
-            setError(result.error)
+            setError(errorMessages[result.code])
           }
         })
       }}

@@ -20,6 +20,7 @@ type Props = {
     email: string
   }
   mapTitle: string
+  errorMessages: { required: string; send_failed: string }
 }
 
 export function ContactSection({
@@ -29,6 +30,7 @@ export function ContactSection({
   submitLabel,
   contactLabels,
   mapTitle,
+  errorMessages,
 }: Props) {
   const inputBase =
     'h-[46px] w-full border-b border-white bg-transparent pr-4 text-[14px] text-white placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
@@ -75,7 +77,7 @@ export function ContactSection({
                   formEl.reset()
                   showSuccess()
                 } else {
-                  setError(result.error)
+                  setError(errorMessages[result.code])
                 }
               })
             }}

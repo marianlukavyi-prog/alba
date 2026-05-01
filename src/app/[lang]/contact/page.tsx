@@ -93,6 +93,10 @@ export default async function ContactPage({ params }: PageProps<'/[lang]/contact
           submitLabel={dict.common.consult}
           contactLabels={t.contactLabels}
           mapTitle={t.mapTitle}
+          errorMessages={{
+            required: dict.leadModal.errorRequired,
+            send_failed: dict.leadModal.errorGeneric,
+          }}
         />
       </main>
     </>

@@ -5,8 +5,8 @@ import { notFound } from 'next/navigation'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
-import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/icons/socials'
 import { RoundArrowButton } from '@/components/ui/round-arrow-button'
+import { SOCIALS } from '@/data/socials'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -293,29 +293,25 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
               </div>
               <div className="flex flex-col gap-4">
                 <div className="h-px w-full bg-[var(--color-accent)]" />
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <span className="sr-only">{t.installation.social}</span>
-                  <a
-                    href="#"
-                    aria-label="Instagram"
-                    className="text-[var(--color-brand)] transition-opacity hover:opacity-80"
-                  >
-                    <InstagramIcon size={22} />
-                  </a>
-                  <a
-                    href="#"
-                    aria-label="TikTok"
-                    className="text-[var(--color-brand)] transition-opacity hover:opacity-80"
-                  >
-                    <TikTokIcon size={22} />
-                  </a>
-                  <a
-                    href="#"
-                    aria-label="WhatsApp"
-                    className="text-[var(--color-brand)] transition-opacity hover:opacity-80"
-                  >
-                    <WhatsAppIcon size={22} />
-                  </a>
+                  {SOCIALS.map((s) => (
+                    <a
+                      key={s.name}
+                      href={s.href}
+                      aria-label={s.name}
+                      className="flex size-[42px] items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                      style={s.bg ? { backgroundColor: s.bg } : undefined}
+                    >
+                      <Image
+                        src={s.icon}
+                        alt=""
+                        width={s.bg ? 20 : 42}
+                        height={s.bg ? 20 : 42}
+                        className="object-contain"
+                      />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

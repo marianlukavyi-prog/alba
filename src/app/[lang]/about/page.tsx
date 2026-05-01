@@ -162,6 +162,10 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
               <LeadInlineForm
                 fields={t.contact.fields}
                 submitLabel={t.contact.submit}
+                errorMessages={{
+                  required: dict.leadModal.errorRequired,
+                  send_failed: dict.leadModal.errorGeneric,
+                }}
                 variant="dark"
               />
 

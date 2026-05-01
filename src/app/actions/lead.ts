@@ -7,7 +7,8 @@ export type LeadFormData = {
   needs?: string
 }
 
-export type LeadActionResult = { ok: true } | { ok: false; error: string }
+export type LeadErrorCode = 'required' | 'send_failed'
+export type LeadActionResult = { ok: true } | { ok: false; code: LeadErrorCode }
 
 const escapeHtml = (s: string) =>
   s
@@ -16,16 +17,17 @@ const escapeHtml = (s: string) =>
     .replace(/>/g, '&gt;')
 
 export async function submitLead(data: LeadFormData): Promise<LeadActionResult> {
-  const token = process.env.TELEGRAM_BOT_TOKEN
-  const chatId = process.env.TELEGRAM_CHAT_ID
-  if (!token || !chatId) {
-    return { ok: false, error: 'Telegram is not configured' }
-  }
-
   const name = data.name?.trim() ?? ''
   const phone = data.phone?.trim() ?? ''
   if (!name || !phone) {
-    return { ok: false, error: 'Name and phone are required' }
+    return { ok: false, code: 'required' }
+  }
+
+  const token = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+  if (!token || !chatId) {
+    console.error('Telegram is not configured: missing TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID')
+    return { ok: false, code: 'send_failed' }
   }
 
   const lines: string[] = ['<b>🔔 Нова заявка з сайту Alba Ventanas</b>', '']
@@ -49,11 +51,11 @@ export async function submitLead(data: LeadFormData): Promise<LeadActionResult> 
     if (!res.ok) {
       const body = await res.text()
       console.error('Telegram sendMessage failed', res.status, body)
-      return { ok: false, error: 'Telegram API error' }
+      return { ok: false, code: 'send_failed' }
     }
     return { ok: true }
   } catch (err) {
     console.error('Telegram sendMessage exception', err)
-    return { ok: false, error: 'Network error' }
+    return { ok: false, code: 'send_failed' }
   }
 }

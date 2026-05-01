@@ -31,6 +31,8 @@ type LeadLabels = {
     description: string
     cta: string
   }
+  errorRequired: string
+  errorGeneric: string
 }
 
 type LeadModalContextValue = {
@@ -207,7 +209,9 @@ export function LeadModalProvider({
                       setSubmitted(true)
                       formEl.reset()
                     } else {
-                      setErrorMessage(result.error)
+                      setErrorMessage(
+                        result.code === 'required' ? labels.errorRequired : labels.errorGeneric,
+                      )
                     }
                   })
                 }}

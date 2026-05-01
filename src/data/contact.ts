@@ -1,4 +1,4 @@
-export const PHONES = ['+34 775 031 988', '+34 972 644 219'] as const
+export const PHONES = ['+34 675 031 972', '+34 672 644 200'] as const
 export const EMAIL = 'albaventanas@gmail.com'
 
 export const ADDRESS = 'Carrer Gabriela Mistral, Picanya, Valencia, Spain'

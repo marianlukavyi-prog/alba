@@ -21,9 +21,10 @@ type Props = {
     comment: string
   }
   submitLabel: string
+  errorMessages: { required: string; send_failed: string }
 }
 
-export function ConsultationForm({ title, description, fields, submitLabel }: Props) {
+export function ConsultationForm({ title, description, fields, submitLabel, errorMessages }: Props) {
   const inputBase =
     'h-[46px] w-full border-b border-[var(--color-cta)] bg-transparent pr-4 text-[14px] text-[var(--color-brand)] placeholder:text-[#aaa] focus:outline-none md:h-[50px] md:text-[15px]'
 
@@ -67,7 +68,7 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
                 formEl.reset()
                 showSuccess()
               } else {
-                setError(result.error)
+                setError(errorMessages[result.code])
               }
             })
           }}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Logo } from '@/components/brand/logo'
 import { ChevronDownIcon } from '@/components/icons/chevron-down'
 import { EMAIL, PHONES } from '@/data/contact'
+import { SOCIALS } from '@/data/socials'
 import { defaultLocale, type Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/get-dictionary'
 
@@ -10,13 +11,6 @@ type Props = {
   lang: Locale
   dict: Dictionary
 }
-
-const SOCIALS: Array<{ name: string; icon: string; bg?: string; href: string }> = [
-  { name: 'Instagram', icon: '/figma/socials/instagram.svg', href: '#' },
-  { name: 'TikTok', icon: '/figma/socials/tiktok.svg', href: '#' },
-  { name: 'Facebook', icon: '/figma/socials/facebook.svg', href: '#' },
-  { name: 'YouTube', icon: '/figma/socials/youtube-play.svg', bg: '#ff0100', href: '#' },
-]
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -161,6 +155,24 @@ export function Footer({ lang, dict }: Props) {
               {EMAIL}
             </a>
           </div>
+          <ul className="flex flex-col gap-1 text-[15px] whitespace-nowrap text-[var(--color-on-dark)]">
+            <li>
+              <Link
+                href={localePath(lang, '/privacy')}
+                className="transition-opacity hover:opacity-80"
+              >
+                {dict.footer.privacy}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={localePath(lang, '/terms')}
+                className="transition-opacity hover:opacity-80"
+              >
+                {dict.footer.terms}
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

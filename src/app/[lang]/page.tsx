@@ -93,6 +93,10 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           description={dict.home.consultation.description}
           fields={dict.home.consultation.fields}
           submitLabel={dict.common.consult}
+          errorMessages={{
+            required: dict.leadModal.errorRequired,
+            send_failed: dict.leadModal.errorGeneric,
+          }}
         />
 
         <SolutionsGrid

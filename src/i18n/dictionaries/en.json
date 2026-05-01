@@ -424,14 +424,18 @@
       "title": "Thank you for your request!",
       "description": "We received your information and will get in touch shortly for a consultation",
       "cta": "Back to home"
-    }
+    },
+    "errorGeneric": "Couldn’t send the request. Please try again or call us.",
+    "errorRequired": "Please fill in your name and phone."
   },
   "footer": {
     "aboutTitle": "About",
     "aboutText": "We deliver modern glazing solutions for homes and commercial buildings. PVC and aluminium systems that pair style, comfort, and energy efficiency.",
     "social": "Follow us",
     "phone": "Phone",
-    "email": "Email"
+    "email": "Email",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use"
   },
   "cookieBanner": {
     "title": "Cookie usage",

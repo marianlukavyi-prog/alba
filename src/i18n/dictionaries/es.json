@@ -424,14 +424,18 @@
       "title": "¡Gracias por su solicitud!",
       "description": "Hemos recibido su información y nos pondremos en contacto en breve para la consulta",
       "cta": "Volver al inicio"
-    }
+    },
+    "errorGeneric": "No se pudo enviar la solicitud. Inténtalo de nuevo o llámanos.",
+    "errorRequired": "Por favor, indica tu nombre y teléfono."
   },
   "footer": {
     "aboutTitle": "Sobre nosotros",
     "aboutText": "Ofrecemos soluciones modernas de acristalamiento para casas y edificios comerciales. Sistemas de PVC y aluminio que combinan estilo, confort y eficiencia energética.",
     "social": "Síguenos",
     "phone": "Teléfono",
-    "email": "Email"
+    "email": "Email",
+    "privacy": "Política de privacidad",
+    "terms": "Condiciones de uso"
   },
   "cookieBanner": {
     "title": "Uso de cookies",
