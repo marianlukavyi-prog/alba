@@ -27,6 +27,7 @@ export function ProductDetailView({
   const [activeImage, setActiveImage] = useState(0)
   const [activeTab, setActiveTab] = useState<Tab>('general')
   const tabsRef = useRef<HTMLUListElement>(null)
+  const thumbsRef = useRef<HTMLUListElement>(null)
   const [canScrollNext, setCanScrollNext] = useState(false)
 
   useEffect(() => {
@@ -44,6 +45,13 @@ export function ProductDetailView({
       ro.disconnect()
     }
   }, [])
+
+  useEffect(() => {
+    const strip = thumbsRef.current
+    if (!strip) return
+    const active = strip.querySelector<HTMLLIElement>(`li[data-thumb-index="${activeImage}"]`)
+    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' })
+  }, [activeImage])
 
   const goPrev = () => setActiveImage((i) => Math.max(0, i - 1))
   const goNext = () => setActiveImage((i) => Math.min(images.length - 1, i + 1))
@@ -79,9 +87,16 @@ export function ProductDetailView({
             <ChevronLeftIcon />
           </button>
 
-          <ul className="grid flex-1 grid-cols-4 gap-2.5">
-            {images.slice(0, 4).map((img, i) => (
-              <li key={img + i}>
+          <ul
+            ref={thumbsRef}
+            className="flex flex-1 gap-2.5 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {images.map((img, i) => (
+              <li
+                key={img + i}
+                data-thumb-index={i}
+                className="aspect-square shrink-0 basis-[calc((100%-22.5px)/4)]"
+              >
                 <button
                   type="button"
                   onClick={() => setActiveImage(i)}
@@ -250,16 +265,32 @@ function ComponentsTab({
   )
 }
 
-function ColorsTab({ colors }: { colors: Array<{ name: string; hex: string }> }) {
+function ColorsTab({
+  colors,
+}: {
+  colors: Array<{ name: string; hex?: string; image?: string }>
+}) {
   return (
     <ul className="grid grid-cols-2 gap-x-2.5 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
       {colors.map((c, i) => (
         <li key={`${c.name}-${i}`} className="flex flex-col gap-2">
-          <div
-            className="aspect-[113/95] w-full rounded-[2px]"
-            style={{ backgroundColor: c.hex }}
-            aria-hidden="true"
-          />
+          {c.image ? (
+            <div className="relative aspect-[113/95] w-full overflow-hidden rounded-[2px] bg-[var(--color-surface)]">
+              <Image
+                src={c.image}
+                alt={c.name}
+                fill
+                sizes="(min-width: 1024px) 130px, 50vw"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div
+              className="aspect-[113/95] w-full rounded-[2px]"
+              style={{ backgroundColor: c.hex }}
+              aria-hidden="true"
+            />
+          )}
           <span className="text-[14px] text-[var(--color-brand-soft)]">{c.name}</span>
         </li>
       ))}

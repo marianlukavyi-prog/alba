@@ -9,8 +9,20 @@ type Props = {
   viewAllHref: string
 }
 
+const HOUSE_MODERN = '/figma/projects/project-house-modern.png'
+const PIVOT_DOOR = '/figma/projects/project-pivot-door.png'
+const HOUSE_OVERHANG = '/figma/projects/project-house-overhang.png'
+
+const BENTO_IMAGES = [
+  HOUSE_MODERN,
+  PIVOT_DOOR,
+  HOUSE_OVERHANG,
+  HOUSE_OVERHANG,
+  HOUSE_MODERN,
+  PIVOT_DOOR,
+] as const
+
 export function ProjectsBento({ title, viewAllLabel, viewAllHref }: Props) {
-  // Pick 6 projects for the bento layout.
   const items = PROJECTS.slice(0, 6)
   const [a, b, c, d, e, f] = items
 
@@ -30,22 +42,46 @@ export function ProjectsBento({ title, viewAllLabel, viewAllHref }: Props) {
 
         <div className="mt-9 grid grid-cols-1 gap-2.5 sm:grid-cols-12">
           {a ? (
-            <BentoTile project={a} className="aspect-[572/300] sm:col-span-6" />
+            <BentoTile
+              project={a}
+              image={BENTO_IMAGES[0]}
+              className="aspect-[572/300] sm:col-span-6"
+            />
           ) : null}
           {b ? (
-            <BentoTile project={b} className="aspect-[278/300] sm:col-span-3" />
+            <BentoTile
+              project={b}
+              image={BENTO_IMAGES[1]}
+              className="aspect-[278/300] sm:col-span-3"
+            />
           ) : null}
           {c ? (
-            <BentoTile project={c} className="aspect-[280/300] sm:col-span-3" />
+            <BentoTile
+              project={c}
+              image={BENTO_IMAGES[2]}
+              className="aspect-[280/300] sm:col-span-3"
+            />
           ) : null}
           {d ? (
-            <BentoTile project={d} className="aspect-[281/300] sm:col-span-3" />
+            <BentoTile
+              project={d}
+              image={BENTO_IMAGES[3]}
+              className="aspect-[281/300] sm:col-span-3"
+            />
           ) : null}
           {e ? (
-            <BentoTile project={e} className="aspect-[568/300] sm:col-span-6" />
+            <BentoTile
+              project={e}
+              image={BENTO_IMAGES[4]}
+              className="aspect-[568/300] sm:col-span-6"
+            />
           ) : null}
           {f ? (
-            <BentoTile project={f} className="aspect-[281/300] sm:col-span-3" />
+            <BentoTile
+              project={f}
+              image={BENTO_IMAGES[5]}
+              className="aspect-[281/300] sm:col-span-3"
+            />
           ) : null}
         </div>
       </div>
@@ -55,9 +91,11 @@ export function ProjectsBento({ title, viewAllLabel, viewAllHref }: Props) {
 
 function BentoTile({
   project,
+  image,
   className,
 }: {
-  project: { slug: string; title: string; image: string }
+  project: { slug: string; title: string }
+  image: string
   className: string
 }) {
   return (
@@ -67,7 +105,7 @@ function BentoTile({
       className={`group relative block overflow-hidden rounded-[2px] ${className}`}
     >
       <Image
-        src={project.image}
+        src={image}
         alt={project.title}
         fill
         sizes="(min-width: 1024px) 570px, 100vw"
