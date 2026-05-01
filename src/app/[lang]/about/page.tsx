@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
+import { LeadInlineForm } from '@/components/lead-modal/lead-inline-form'
 import { Logo } from '@/components/brand/logo'
 import { RoundArrowButton } from '@/components/ui/round-arrow-button'
 import { EMAIL, PHONES } from '@/data/contact'
@@ -54,12 +54,9 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
   const dict = await getDictionary(lang)
   const t = dict.aboutPage
 
-  const inputBase =
-    'h-[46px] w-full border-b border-white bg-transparent pr-4 text-[14px] text-white placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
-
   return (
     <>
-      <Header lang={lang} dict={dict} position="absolute" />
+      <Header lang={lang} dict={dict} position="fixed" />
       <main className="flex flex-1 flex-col">
         <Banner
           title={t.heroTitle}
@@ -162,46 +159,11 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
                 <p className="text-[14px] text-[#dcdcdc] md:text-[15px]">{t.contact.description}</p>
               </div>
 
-              <form className="flex flex-col gap-[10px]" noValidate>
-                <div className="flex flex-col gap-[10px] md:flex-row">
-                  <label className="flex flex-1 flex-col">
-                    <span className="sr-only">{t.contact.fields.name}</span>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder={t.contact.fields.name}
-                      required
-                      className={inputBase}
-                    />
-                  </label>
-                  <label className="flex flex-1 flex-col">
-                    <span className="sr-only">{t.contact.fields.phone}</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder={t.contact.fields.phone}
-                      required
-                      className={inputBase}
-                    />
-                  </label>
-                </div>
-                <label className="flex flex-col">
-                  <span className="sr-only">{t.contact.fields.comment}</span>
-                  <input
-                    type="text"
-                    name="comment"
-                    placeholder={t.contact.fields.comment}
-                    className={inputBase}
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-black transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
-                >
-                  {t.contact.submit}
-                  <ArrowUpRightIcon size={15} />
-                </button>
-              </form>
+              <LeadInlineForm
+                fields={t.contact.fields}
+                submitLabel={t.contact.submit}
+                variant="dark"
+              />
 
               <div className="flex flex-col gap-[22px] md:flex-row">
                 <div className="flex flex-1 flex-col gap-1.5">

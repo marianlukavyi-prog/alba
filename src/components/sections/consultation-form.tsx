@@ -1,4 +1,9 @@
+'use client'
+
+import { useState, useTransition } from 'react'
+import { submitLead } from '@/app/actions/lead'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
+import { useLeadModal } from '@/components/lead-modal/lead-modal'
 
 type Field = {
   name: string
@@ -27,6 +32,10 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
     { name: 'phone', label: fields.phone, type: 'tel', required: true },
   ]
 
+  const { showSuccess } = useLeadModal()
+  const [error, setError] = useState<string | null>(null)
+  const [isSubmitting, startSubmit] = useTransition()
+
   return (
     <section className="bg-[var(--color-surface)]">
       <div className="mx-auto grid max-w-[1150px] grid-cols-1 items-center gap-[22px] px-4 py-10 md:grid-cols-2 md:gap-[40px] md:px-6 md:py-[50px] lg:gap-[150px]">
@@ -39,7 +48,30 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
           </p>
         </div>
 
-        <form className="flex flex-col gap-[10px]" noValidate>
+        <form
+          className="flex flex-col gap-[10px]"
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault()
+            if (isSubmitting) return
+            const formEl = e.currentTarget
+            const fd = new FormData(formEl)
+            setError(null)
+            startSubmit(async () => {
+              const result = await submitLead({
+                name: String(fd.get('name') ?? ''),
+                phone: String(fd.get('phone') ?? ''),
+                needs: String(fd.get('comment') ?? ''),
+              })
+              if (result.ok) {
+                formEl.reset()
+                showSuccess()
+              } else {
+                setError(result.error)
+              }
+            })
+          }}
+        >
           <div className="flex flex-col gap-[10px] md:flex-row">
             {inlineFields.map((field) => (
               <label key={field.name} className="flex flex-1 flex-col">
@@ -63,9 +95,15 @@ export function ConsultationForm({ title, description, fields, submitLabel }: Pr
               className={inputBase}
             />
           </label>
+          {error ? (
+            <p role="alert" className="text-[13px] text-red-600">
+              {error}
+            </p>
+          ) : null}
           <button
             type="submit"
-            className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
+            disabled={isSubmitting}
+            className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] disabled:cursor-not-allowed disabled:opacity-60 md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
           >
             {submitLabel}
             <ArrowUpRightIcon size={15} />

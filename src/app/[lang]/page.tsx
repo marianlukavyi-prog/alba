@@ -81,7 +81,11 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
         <HomeCategories
           categories={categories}
           moreDetailsLabel={dict.common.moreDetails}
-          hrefForCategory={(key) => localePath(lang, `/products/${key}`)}
+          hrefs={{
+            windows: localePath(lang, '/products/pvc'),
+            doors: localePath(lang, '/products/doors'),
+            systems: localePath(lang, '/products/systems'),
+          }}
         />
 
         <ConsultationForm

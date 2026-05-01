@@ -30,7 +30,7 @@ export function FeatureSplit({
   const descColor = isBrand ? 'text-[#dcdcdc]' : 'text-[var(--color-brand-soft)]'
 
   return (
-    <section className={sectionBg}>
+    <section className={`${sectionBg} transition-colors duration-300`}>
       <div
         className={`mx-auto flex flex-col-reverse md:h-[220px] md:flex-row md:items-center lg:h-auto lg:min-h-[314px] lg:max-w-[1150px] ${
           reverse ? 'md:flex-row' : 'md:flex-row-reverse'

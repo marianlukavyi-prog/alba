@@ -135,7 +135,7 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
   return (
     <>
       <JsonLd data={[article, breadcrumbLd]} />
-      <Header lang={lang} dict={dict} position="absolute" />
+      <Header lang={lang} dict={dict} position="fixed" />
       <main className="flex flex-1 flex-col">
         <ArticleBanner
           title={post.title[lang]}

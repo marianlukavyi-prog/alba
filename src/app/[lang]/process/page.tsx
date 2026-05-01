@@ -49,13 +49,13 @@ export async function generateMetadata({
 }
 
 const PRODUCTION_IMAGES = [
-  '/figma/section-windows.webp',
-  '/figma/section-doors.webp',
-  '/figma/solution-aluminum-windows.webp',
-  '/figma/solution-facade.webp',
-  '/figma/solution-pivot.webp',
-  '/figma/solution-sliding.webp',
-  '/figma/solution-shading.webp',
+  '/figma/process/bento-1.png',
+  '/figma/process/bento-2.png',
+  '/figma/process/bento-3.png',
+  '/figma/process/bento-4.png',
+  '/figma/process/bento-5.png',
+  '/figma/process/bento-6.png',
+  '/figma/process/bento-7.png',
 ]
 
 // padding-left/right used to align inner content edge with the
@@ -72,7 +72,7 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
 
   return (
     <>
-      <Header lang={lang} dict={dict} position="absolute" />
+      <Header lang={lang} dict={dict} position="fixed" />
       <main className="flex flex-1 flex-col">
         <Banner
           title={t.heroTitle}
@@ -117,10 +117,10 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
           </div>
         </section>
 
-        {/* 2. Виробництво — bento grid, white bg */}
+        {/* 2. Виробництво — bento grid, white bg, per Figma 299-5529 */}
         <section className="bg-white py-10 md:py-[60px] lg:py-20">
-          <div className="mx-auto grid max-w-[1150px] grid-cols-1 gap-2.5 px-4 md:grid-cols-3 md:px-6 lg:px-0">
-            <div className="flex flex-col justify-between gap-4 bg-[var(--color-surface)] p-[22px] md:p-[30px]">
+          <div className="mx-auto grid max-w-[1150px] grid-cols-1 gap-2.5 px-4 md:grid-cols-12 md:px-6 lg:px-0">
+            <div className="flex aspect-[377/300] flex-col justify-between gap-4 bg-[var(--color-surface)] p-[22px] md:col-span-4 md:p-[30px]">
               <div className="flex flex-col gap-3">
                 <h2 className="text-[22px] font-semibold text-[var(--color-brand)] md:text-[28px]">
                   {t.production.title}
@@ -137,66 +137,69 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
                 <ArrowUpRightIcon size={15} />
               </Link>
             </div>
-            <div className="relative aspect-[363/220] overflow-hidden rounded-[2px]">
+            {/* Row 1: text(4) | bento-1 (5) | bento-2 (3) */}
+            <div className="relative aspect-[473/300] overflow-hidden rounded-[2px] md:col-span-5">
               <Image
                 src={PRODUCTION_IMAGES[0]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 473px, (min-width: 768px) 41vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[363/220] overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[280/300] overflow-hidden rounded-[2px] md:col-span-3">
               <Image
                 src={PRODUCTION_IMAGES[1]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 280px, (min-width: 768px) 24vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[363/240] overflow-hidden rounded-[2px]">
+            {/* Row 2: bento-3 (5) | bento-4 (3) | bento-5 (4) */}
+            <div className="relative aspect-[473/300] overflow-hidden rounded-[2px] md:col-span-5">
               <Image
                 src={PRODUCTION_IMAGES[2]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 473px, (min-width: 768px) 41vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[363/240] overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[280/300] overflow-hidden rounded-[2px] md:col-span-3">
               <Image
                 src={PRODUCTION_IMAGES[3]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 280px, (min-width: 768px) 24vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[363/240] overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[377/300] overflow-hidden rounded-[2px] md:col-span-4">
               <Image
                 src={PRODUCTION_IMAGES[4]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 377px, (min-width: 768px) 33vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[363/240] overflow-hidden rounded-[2px]">
+            {/* Row 3: bento-6 (6) | bento-7 (6) */}
+            <div className="relative aspect-[570/300] overflow-hidden rounded-[2px] md:col-span-6">
               <Image
                 src={PRODUCTION_IMAGES[5]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 570px, (min-width: 768px) 50vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[746/240] overflow-hidden rounded-[2px] md:col-span-2">
+            <div className="relative aspect-[570/300] overflow-hidden rounded-[2px] md:col-span-6">
               <Image
                 src={PRODUCTION_IMAGES[6]}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 66vw, 100vw"
+                sizes="(min-width: 1024px) 570px, (min-width: 768px) 50vw, 100vw"
                 className="object-cover"
               />
             </div>

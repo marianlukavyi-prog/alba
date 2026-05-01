@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Logo } from '@/components/brand/logo'
 import { ChevronDownIcon } from '@/components/icons/chevron-down'
@@ -10,7 +11,12 @@ type Props = {
   dict: Dictionary
 }
 
-const SOCIALS = ['instagram', 'facebook', 'tiktok', 'youtube', 'telegram'] as const
+const SOCIALS: Array<{ name: string; icon: string; bg?: string; href: string }> = [
+  { name: 'Instagram', icon: '/figma/socials/instagram.svg', href: '#' },
+  { name: 'TikTok', icon: '/figma/socials/tiktok.svg', href: '#' },
+  { name: 'Facebook', icon: '/figma/socials/facebook.svg', href: '#' },
+  { name: 'YouTube', icon: '/figma/socials/youtube-play.svg', bg: '#ff0100', href: '#' },
+]
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
@@ -18,19 +24,38 @@ const localePath = (locale: Locale, path = '') =>
 export function Footer({ lang, dict }: Props) {
   return (
     <footer className="bg-[var(--color-night)] text-white">
-      <div className="mx-auto flex max-w-[1150px] flex-col gap-12 px-6 py-[90px] lg:flex-row lg:gap-[100px]">
-        <div className="flex flex-1 flex-col gap-12 border-[#666] lg:flex-row lg:items-center lg:gap-[60px] lg:border-r lg:pr-[100px]">
+      <div className="mx-auto flex max-w-[1150px] flex-col gap-12 px-6 py-[90px] lg:flex-row lg:gap-10">
+        <div className="lg:gap-[6 flex flex-1 flex-col gap-6 border-[#666] lg:flex-row lg:items-center lg:border-r lg:pr-10">
           <div className="flex flex-col items-start justify-between gap-12 lg:h-[194px] lg:gap-0">
             <Logo size="lg" />
             <div className="flex w-[258px] flex-col gap-3">
-              <ul className="flex items-center gap-3" aria-label={dict.footer.social}>
-                {SOCIALS.map((name) => (
-                  <li key={name}>
+              <ul className="flex items-center gap-2" aria-label={dict.footer.social}>
+                {SOCIALS.map((s) => (
+                  <li key={s.name}>
                     <a
-                      href="#"
-                      aria-label={name}
-                      className="flex size-[42px] items-center justify-center rounded-full border border-white/30 transition-colors hover:border-white"
-                    />
+                      href={s.href}
+                      aria-label={s.name}
+                      className="flex size-[42px] items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                      style={s.bg ? { backgroundColor: s.bg } : undefined}
+                    >
+                      {s.bg ? (
+                        <Image
+                          src={s.icon}
+                          alt=""
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <Image
+                          src={s.icon}
+                          alt=""
+                          width={42}
+                          height={42}
+                          className="object-contain"
+                        />
+                      )}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -42,13 +67,31 @@ export function Footer({ lang, dict }: Props) {
             <nav aria-label="Footer">
               <ul className="flex flex-wrap items-center gap-5 text-[15px] font-medium">
                 <li>
-                  <button
-                    type="button"
+                  <Link
+                    href={localePath(lang, '/products/pvc')}
                     className="flex items-center gap-2 transition-opacity hover:opacity-80"
                   >
-                    {dict.nav.products}
+                    {dict.home.categories.windows.title}
                     <ChevronDownIcon />
-                  </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={localePath(lang, '/products/doors')}
+                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                  >
+                    {dict.home.categories.doors.title}
+                    <ChevronDownIcon />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={localePath(lang, '/products/systems')}
+                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                  >
+                    {dict.home.categories.systems.title}
+                    <ChevronDownIcon />
+                  </Link>
                 </li>
                 <li>
                   <Link
@@ -60,10 +103,10 @@ export function Footer({ lang, dict }: Props) {
                 </li>
                 <li>
                   <Link
-                    href={localePath(lang, '/blog')}
+                    href={localePath(lang, '/process')}
                     className="transition-opacity hover:opacity-80"
                   >
-                    {dict.nav.blog}
+                    {dict.nav.process}
                   </Link>
                 </li>
                 <li>
@@ -72,6 +115,14 @@ export function Footer({ lang, dict }: Props) {
                     className="transition-opacity hover:opacity-80"
                   >
                     {dict.nav.contact}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={localePath(lang, '/blog')}
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    {dict.nav.blog}
                   </Link>
                 </li>
               </ul>

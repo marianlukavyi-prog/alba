@@ -26,3 +26,12 @@ body {
   font-feature-settings: 'cv11', 'ss01';
   overflow-x: clip;
 }
+
+button:not(:disabled),
+a,
+[role='button']:not([aria-disabled='true']),
+summary,
+label[for],
+select {
+  cursor: pointer;
+}

@@ -121,6 +121,13 @@
       "systems": "Systems",
       "shading": "Solar shading"
     },
+    "categoryDescriptions": {
+      "pvc": "Energy-efficient PVC windows for comfort, quiet, and a modern home",
+      "aluminum": "Aluminium systems with slim profiles and oversized glazing for architecture at any scale",
+      "doors": "Entrance and pivot doors — modern solutions for security, comfort, and aesthetics",
+      "systems": "Sliding and façade systems for a seamless link between interior and outdoor space",
+      "shading": "External roller shutters, screen systems, and automated sun-shading by Aluprof"
+    },
     "specs": {
       "depth": "Mounting depth",
       "chambers": "Chambers",
@@ -425,5 +432,12 @@
     "social": "Follow us",
     "phone": "Phone",
     "email": "Email"
+  },
+  "cookieBanner": {
+    "title": "Cookie usage",
+    "description": "We use cookies to improve site performance. You can accept all or customise your preferences.",
+    "accept": "Accept all",
+    "settings": "Settings",
+    "close": "Close"
   }
 }

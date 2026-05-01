@@ -1,4 +1,9 @@
+'use client'
+
+import { useState, useTransition } from 'react'
+import { submitLead } from '@/app/actions/lead'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
+import { useLeadModal } from '@/components/lead-modal/lead-modal'
 import { EMAIL, MAP_EMBED_URL, PHONES } from '@/data/contact'
 
 type Props = {
@@ -28,6 +33,10 @@ export function ContactSection({
   const inputBase =
     'h-[46px] w-full border-b border-white bg-transparent pr-4 text-[14px] text-white placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
 
+  const { showSuccess } = useLeadModal()
+  const [error, setError] = useState<string | null>(null)
+  const [isSubmitting, startSubmit] = useTransition()
+
   return (
     <section className="relative">
       <div className="relative h-[350px] w-full md:h-[500px] lg:absolute lg:inset-0 lg:h-full">
@@ -47,7 +56,30 @@ export function ContactSection({
             <p className="text-[14px] text-[#dcdcdc] md:text-[15px]">{description}</p>
           </div>
 
-          <form className="flex flex-col gap-[10px]" noValidate>
+          <form
+            className="flex flex-col gap-[10px]"
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (isSubmitting) return
+              const formEl = e.currentTarget
+              const fd = new FormData(formEl)
+              setError(null)
+              startSubmit(async () => {
+                const result = await submitLead({
+                  name: String(fd.get('name') ?? ''),
+                  phone: String(fd.get('phone') ?? ''),
+                  needs: String(fd.get('comment') ?? ''),
+                })
+                if (result.ok) {
+                  formEl.reset()
+                  showSuccess()
+                } else {
+                  setError(result.error)
+                }
+              })
+            }}
+          >
             <div className="flex flex-col gap-[10px] md:flex-row">
               <label className="flex flex-1 flex-col">
                 <span className="sr-only">{fields.name}</span>
@@ -79,9 +111,15 @@ export function ContactSection({
                 className={inputBase}
               />
             </label>
+            {error ? (
+              <p role="alert" className="text-[13px] text-red-300">
+                {error}
+              </p>
+            ) : null}
             <button
               type="submit"
-              className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-black transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
+              disabled={isSubmitting}
+              className="mt-1 flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-black transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] disabled:cursor-not-allowed disabled:opacity-60 md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
             >
               {submitLabel}
               <ArrowUpRightIcon size={15} />

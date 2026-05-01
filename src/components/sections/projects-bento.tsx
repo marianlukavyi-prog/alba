@@ -28,7 +28,7 @@ export function ProjectsBento({ title, viewAllLabel, viewAllHref }: Props) {
 
   return (
     <section className="bg-[var(--color-surface)]">
-      <div className="mx-auto w-full max-w-[1150px] px-6 py-16 lg:px-0 lg:py-[90px]">
+      <div className="mx-auto w-full max-w-[1150px] px-6 py-10 lg:px-0 lg:py-12">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <h2 className="text-[28px] font-semibold text-[var(--color-brand)]">{title}</h2>
           <Link

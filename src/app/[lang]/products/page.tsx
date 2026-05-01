@@ -56,7 +56,7 @@ export default async function ProductsPage({ params }: PageProps<'/[lang]/produc
 
   return (
     <>
-      <Header lang={lang} dict={dict} position="absolute" />
+      <Header lang={lang} dict={dict} position="fixed" />
       <main className="flex flex-1 flex-col">
         <Banner
           title={t.heroTitle}

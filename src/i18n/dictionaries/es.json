@@ -121,6 +121,13 @@
       "systems": "Sistemas",
       "shading": "Protección solar"
     },
+    "categoryDescriptions": {
+      "pvc": "Ventanas de PVC energéticamente eficientes para mayor confort, silencio y un espacio moderno",
+      "aluminum": "Sistemas de aluminio con perfiles esbeltos y grandes acristalamientos para cualquier proyecto",
+      "doors": "Puertas de entrada y pivotantes — soluciones modernas para seguridad, confort y estética",
+      "systems": "Sistemas correderos y de fachada para una conexión continua entre interior y exterior",
+      "shading": "Persianas exteriores, sistemas screen y protección solar automatizada de Aluprof"
+    },
     "specs": {
       "depth": "Profundidad de montaje",
       "chambers": "Cámaras",
@@ -425,5 +432,12 @@
     "social": "Síguenos",
     "phone": "Teléfono",
     "email": "Email"
+  },
+  "cookieBanner": {
+    "title": "Uso de cookies",
+    "description": "Utilizamos cookies para mejorar el rendimiento del sitio. Puedes aceptar todas o personalizar tus preferencias.",
+    "accept": "Aceptar todo",
+    "settings": "Configuración",
+    "close": "Cerrar"
   }
 }

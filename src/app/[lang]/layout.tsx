@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Onest } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import '../globals.css'
+import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
 import { Footer } from '@/components/layout/footer'
 import { LeadModalProvider } from '@/components/lead-modal/lead-modal'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -110,6 +111,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
           {children}
           <Footer lang={lang} dict={dict} />
         </LeadModalProvider>
+        <CookieBanner labels={dict.cookieBanner} />
         <JsonLd data={[organization, website]} />
       </body>
     </html>

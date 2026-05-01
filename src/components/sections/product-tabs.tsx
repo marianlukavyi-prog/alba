@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRightIcon } from '@/components/icons/arrow-right'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
@@ -14,10 +13,17 @@ type Props = {
 
 const TAB_BASE =
   'inline-flex h-[58px] shrink-0 items-center justify-center gap-1.5 rounded-[2px] px-6 text-[15px] font-medium tracking-[0.3px] whitespace-nowrap text-[var(--color-brand)] transition-colors'
+const ACTIVE = 'bg-[var(--color-accent)] hover:bg-[#e6b801]'
+const INACTIVE = 'border border-[#f4f4f4] bg-white hover:border-[var(--color-surface)] hover:bg-[var(--color-surface)]'
+
+const HEADER_OFFSET = 120
+
+type ActiveTab = 'all' | ProductCategory
 
 export function ProductTabs({ allLabel, categoryLabels, nextLabel = 'Next' }: Props) {
   const ref = useRef<HTMLUListElement>(null)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const [active, setActive] = useState<ActiveTab>('all')
 
   useEffect(() => {
     const el = ref.current
@@ -35,10 +41,40 @@ export function ProductTabs({ allLabel, categoryLabels, nextLabel = 'Next' }: Pr
     }
   }, [])
 
+  useEffect(() => {
+    const sections = PRODUCT_CATEGORIES.map((cat) => {
+      const node = document.getElementById(`products-${cat}`)
+      return node ? { cat, node } : null
+    }).filter(Boolean) as Array<{ cat: ProductCategory; node: HTMLElement }>
+    if (sections.length === 0) return
+
+    const onScroll = () => {
+      const scrollY = window.scrollY + HEADER_OFFSET
+      let current: ActiveTab = 'all'
+      for (const { cat, node } of sections) {
+        if (node.offsetTop <= scrollY) current = cat
+      }
+      setActive(current)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const next = () => {
     const el = ref.current
     if (!el) return
     el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' })
+  }
+
+  const handleClick = (target: ActiveTab) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    setActive(target)
+    const id = target === 'all' ? 'products-top' : `products-${target}`
+    const node = document.getElementById(id)
+    if (!node) return
+    const top = node.getBoundingClientRect().top + window.scrollY - 84
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (
@@ -48,23 +84,27 @@ export function ProductTabs({ allLabel, categoryLabels, nextLabel = 'Next' }: Pr
         className="flex flex-1 items-center gap-2.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <li>
-          <Link
+          <a
             href="#products-top"
-            className={`${TAB_BASE} bg-[var(--color-accent)] hover:bg-[#e6b801]`}
+            onClick={handleClick('all')}
+            className={`${TAB_BASE} ${active === 'all' ? ACTIVE : INACTIVE}`}
+            aria-current={active === 'all'}
           >
             {allLabel}
             <ArrowUpRightIcon size={15} />
-          </Link>
+          </a>
         </li>
         {PRODUCT_CATEGORIES.map((cat) => (
           <li key={cat}>
-            <Link
+            <a
               href={`#products-${cat}`}
-              className={`${TAB_BASE} border border-[#f4f4f4] bg-white hover:border-[var(--color-surface)] hover:bg-[var(--color-surface)]`}
+              onClick={handleClick(cat)}
+              className={`${TAB_BASE} ${active === cat ? ACTIVE : INACTIVE}`}
+              aria-current={active === cat}
             >
               {categoryLabels[cat]}
               <ArrowUpRightIcon size={15} />
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

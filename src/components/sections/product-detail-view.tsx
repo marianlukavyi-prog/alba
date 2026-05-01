@@ -140,26 +140,6 @@ export function ProductDetailView({
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 rounded-[2px] bg-[var(--color-surface)] p-[22px] text-[14px] md:p-[30px] md:text-[15px]">
-          {product.detail.highlights.map((row, i) => (
-            <div
-              key={`${row.label}-${i}`}
-              className={`flex items-center justify-between gap-3 ${
-                i < product.detail.highlights.length - 1
-                  ? 'border-b border-[#dfdfdf] pb-4'
-                  : ''
-              }`}
-            >
-              <span className="font-normal text-[var(--color-brand-soft)]">
-                {row.label}
-              </span>
-              <span className="text-right font-semibold text-[var(--color-brand)]">
-                {row.value}
-              </span>
-            </div>
-          ))}
-        </div>
-
         <div className="flex flex-col gap-6">
           <nav aria-label="Product tabs" className="flex items-center gap-2.5">
             <ul

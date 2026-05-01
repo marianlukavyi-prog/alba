@@ -8,10 +8,12 @@ import {
   useEffect,
   useMemo,
   useState,
+  useTransition,
   type ReactNode,
 } from 'react'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { XIcon } from '@/components/icons/x'
+import { submitLead } from '@/app/actions/lead'
 
 type LeadLabels = {
   title: string
@@ -33,6 +35,7 @@ type LeadLabels = {
 
 type LeadModalContextValue = {
   open: () => void
+  showSuccess: () => void
 }
 
 const LeadModalContext = createContext<LeadModalContextValue | null>(null)
@@ -61,6 +64,8 @@ export function LeadModalProvider({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isSubmitting, startSubmit] = useTransition()
 
   const markAutoFired = useCallback(() => {
     try {
@@ -72,6 +77,14 @@ export function LeadModalProvider({
 
   const open = useCallback(() => {
     setSubmitted(false)
+    setErrorMessage(null)
+    setIsOpen(true)
+    markAutoFired()
+  }, [markAutoFired])
+
+  const showSuccess = useCallback(() => {
+    setSubmitted(true)
+    setErrorMessage(null)
     setIsOpen(true)
     markAutoFired()
   }, [markAutoFired])
@@ -79,7 +92,10 @@ export function LeadModalProvider({
   const close = useCallback(() => {
     setIsOpen(false)
     // Reset submitted state after close animation
-    setTimeout(() => setSubmitted(false), 200)
+    setTimeout(() => {
+      setSubmitted(false)
+      setErrorMessage(null)
+    }, 200)
   }, [])
 
   useEffect(() => {
@@ -111,7 +127,7 @@ export function LeadModalProvider({
     return () => window.clearTimeout(timer)
   }, [autoOpenDelayMs, markAutoFired])
 
-  const ctx = useMemo(() => ({ open }), [open])
+  const ctx = useMemo(() => ({ open, showSuccess }), [open, showSuccess])
 
   const inputBase =
     'h-[46px] w-full border-b border-[var(--color-brand)] bg-transparent pr-2 text-[14px] text-[var(--color-brand)] placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
@@ -136,7 +152,7 @@ export function LeadModalProvider({
             type="button"
             aria-label={labels.close}
             onClick={close}
-            className="absolute -top-px right-0 flex size-10 items-center justify-center bg-[var(--color-accent)] text-[var(--color-brand)] transition-opacity hover:opacity-90"
+            className="absolute top-0 right-0 flex size-10 items-center justify-center bg-[var(--color-accent)] text-[var(--color-brand)] transition-opacity hover:opacity-90"
           >
             <XIcon size={15} />
           </button>
@@ -176,7 +192,24 @@ export function LeadModalProvider({
                 noValidate
                 onSubmit={(e) => {
                   e.preventDefault()
-                  setSubmitted(true)
+                  if (isSubmitting) return
+                  const formEl = e.currentTarget
+                  const fd = new FormData(formEl)
+                  setErrorMessage(null)
+                  startSubmit(async () => {
+                    const result = await submitLead({
+                      name: String(fd.get('name') ?? ''),
+                      phone: String(fd.get('phone') ?? ''),
+                      city: String(fd.get('city') ?? ''),
+                      needs: String(fd.get('needs') ?? ''),
+                    })
+                    if (result.ok) {
+                      setSubmitted(true)
+                      formEl.reset()
+                    } else {
+                      setErrorMessage(result.error)
+                    }
+                  })
                 }}
               >
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -220,9 +253,19 @@ export function LeadModalProvider({
                   />
                 </label>
 
+                {errorMessage ? (
+                  <p
+                    role="alert"
+                    className="text-[14px] text-red-600"
+                  >
+                    {errorMessage}
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
-                  className="mt-1 flex h-[46px] items-center justify-center gap-2.5 rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
+                  disabled={isSubmitting}
+                  className="mt-1 flex h-[46px] items-center justify-center gap-2.5 rounded-[2px] bg-[var(--color-accent)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[#e6b801] active:bg-[#d2a400] disabled:cursor-not-allowed disabled:opacity-60 md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
                 >
                   {labels.submit}
                   <ArrowUpRightIcon size={15} />

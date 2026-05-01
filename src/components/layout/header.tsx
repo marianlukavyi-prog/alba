@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { Logo } from '@/components/brand/logo'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
@@ -29,16 +32,26 @@ export function Header({ lang, dict, position = 'fixed', variant = 'overlay' }: 
   const home = localePath(lang)
   const productsHref = localePath(lang, '/products')
   const productSubHrefs = {
-    pvc: `${productsHref}#products-pvc`,
-    aluminum: `${productsHref}#products-aluminum`,
-    doors: `${productsHref}#products-doors`,
-    systems: `${productsHref}#products-systems`,
-    shading: `${productsHref}#products-shading`,
+    pvc: `${productsHref}/pvc`,
+    aluminum: `${productsHref}/aluminum`,
+    doors: `${productsHref}/doors`,
+    systems: `${productsHref}/systems`,
+    shading: `${productsHref}/shading`,
   } as const
+
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    if (position !== 'fixed') return
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [position])
 
   const positionClass =
     position === 'fixed' ? 'fixed inset-x-0 top-0 z-50' : 'absolute inset-x-0 top-0 z-50'
-  const bgClass = variant === 'solid' ? 'bg-[var(--color-cta)]' : ''
+  const isSolid = variant === 'solid' || (position === 'fixed' && scrolled)
+  const bgClass = isSolid ? 'bg-[var(--color-cta)] shadow-[0_2px_12px_rgba(0,0,0,0.18)]' : ''
 
   const navLinks = [
     { label: dict.nav.about, href: localePath(lang, '/about') },
@@ -49,7 +62,7 @@ export function Header({ lang, dict, position = 'fixed', variant = 'overlay' }: 
   ]
 
   return (
-    <header className={`${positionClass} ${bgClass}`}>
+    <header className={`${positionClass} ${bgClass} transition-colors duration-200`}>
       <div className="mx-auto flex h-[76px] max-w-[1150px] items-center justify-between gap-4 px-4 py-3 text-white sm:px-6">
         <Link href={home} aria-label="Alba Ventanas" className="shrink-0">
           <Logo size="sm" />
@@ -82,7 +95,7 @@ export function Header({ lang, dict, position = 'fixed', variant = 'overlay' }: 
           <LanguageSwitcher lang={lang} className="hidden sm:block" />
           <a
             href={`tel:${PRIMARY_PHONE.replace(/\s/g, '')}`}
-            className="flex items-center gap-2.5 border-b border-white pb-3 text-[15px] font-medium tracking-[0.3px] transition-opacity hover:opacity-80"
+            className="flex items-center gap-2.5 border-b border-white pb-3 text-[13px] font-medium tracking-[0.3px] whitespace-nowrap transition-opacity hover:opacity-80 sm:text-[15px]"
           >
             {PRIMARY_PHONE}
             <ArrowUpRightIcon size={15} />
