@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { RoundArrowButton } from '@/components/ui/round-arrow-button'
 
 type Props = {
@@ -31,7 +32,9 @@ export function FeatureSplit({
 
   return (
     <section className={`${sectionBg} transition-colors duration-300`}>
-      <div
+      <Link
+        href={href}
+        aria-label={ctaLabel}
         className={`mx-auto flex flex-col-reverse md:h-[220px] md:flex-row md:items-center lg:h-auto lg:min-h-[314px] lg:max-w-[1150px] ${
           reverse ? 'md:flex-row' : 'md:flex-row-reverse'
         }`}
@@ -58,13 +61,11 @@ export function FeatureSplit({
             <p className={`text-[14px] lg:text-[15px] ${descColor}`}>{description}</p>
           </div>
           <RoundArrowButton
-            href={href}
-            ariaLabel={ctaLabel}
             tone={isBrand ? 'light' : 'dark'}
-            className="!size-[46px] lg:!size-[50px]"
+            className="hidden md:flex md:!size-[46px] lg:!size-[50px]"
           />
         </div>
-      </div>
+      </Link>
     </section>
   )
 }

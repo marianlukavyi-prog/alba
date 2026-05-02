@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { XIcon } from '@/components/icons/x'
 
@@ -7,28 +8,41 @@ type Labels = {
   title: string
   description: string
   accept: string
+  reject: string
   settings: string
   close: string
 }
 
 const STORAGE_KEY = 'alba-cookie-consent'
 
-export function CookieBanner({ labels }: { labels: Labels }) {
+export type ConsentValue = 'all' | 'essential' | 'dismissed'
+
+export function readConsent(): ConsentValue | null {
+  try {
+    const v = localStorage.getItem(STORAGE_KEY)
+    if (v === 'all' || v === 'essential' || v === 'dismissed') return v
+    return null
+  } catch {
+    return null
+  }
+}
+
+export function CookieBanner({
+  labels,
+  policyHref,
+}: {
+  labels: Labels
+  policyHref: string
+}) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    let saved: string | null = null
-    try {
-      saved = localStorage.getItem(STORAGE_KEY)
-    } catch {
-      /* ignore */
-    }
-    if (saved) return
+    if (readConsent()) return
     const t = window.setTimeout(() => setVisible(true), 800)
     return () => window.clearTimeout(t)
   }, [])
 
-  const persist = (value: 'all' | 'custom' | 'dismissed') => {
+  const persist = (value: ConsentValue) => {
     try {
       localStorage.setItem(STORAGE_KEY, value)
     } catch {
@@ -73,11 +87,17 @@ export function CookieBanner({ labels }: { labels: Labels }) {
           </button>
           <button
             type="button"
-            onClick={() => persist('custom')}
-            className="flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] border border-[var(--color-brand)] px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[var(--color-surface)] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
+            onClick={() => persist('essential')}
+            className="flex h-[46px] items-center justify-center gap-[10px] rounded-[2px] border border-[var(--color-brand)] bg-white px-6 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] transition-colors hover:bg-[var(--color-surface)] md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
+          >
+            {labels.reject}
+          </button>
+          <Link
+            href={policyHref}
+            className="flex h-[46px] items-center justify-center px-2 text-[14px] font-medium tracking-[0.28px] text-[var(--color-brand)] underline transition-opacity hover:opacity-70 md:h-[50px] md:text-[15px] md:tracking-[0.3px]"
           >
             {labels.settings}
-          </button>
+          </Link>
         </div>
       </div>
     </div>

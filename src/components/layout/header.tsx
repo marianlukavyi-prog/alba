@@ -1,9 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
-import { Logo } from '@/components/brand/logo'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
 import { MobileMenu } from '@/components/layout/mobile-menu'
 import { ProductsDropdown } from '@/components/layout/products-dropdown'
@@ -65,7 +65,7 @@ export function Header({ lang, dict, position = 'fixed', variant = 'overlay' }: 
     <header className={`${positionClass} ${bgClass} transition-colors duration-200`}>
       <div className="mx-auto flex h-[76px] max-w-[1150px] items-center justify-between gap-4 px-4 py-3 text-white sm:px-6">
         <Link href={home} aria-label="Alba Ventanas" className="shrink-0">
-          <Logo size="sm" />
+          <Image src="/logo.svg" alt="Alba Ventanas" width={131} height={40} priority />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-5 text-[15px] lg:flex">

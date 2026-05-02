@@ -65,7 +65,7 @@ export function ProductDetailView({
     <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-2">
       {/* Gallery */}
       <div className="flex flex-col gap-2.5">
-        <div className="relative aspect-[570/598] w-full overflow-hidden rounded-[2px] bg-white">
+        <div className="relative aspect-[570/420] w-full overflow-hidden rounded-[2px] bg-white">
           <Image
             src={images[activeImage] ?? images[0]}
             alt={product.name}
@@ -100,9 +100,7 @@ export function ProductDetailView({
                 <button
                   type="button"
                   onClick={() => setActiveImage(i)}
-                  className={`relative aspect-square w-full overflow-hidden rounded-[2px] bg-[var(--color-surface)] transition-shadow ${
-                    i === activeImage ? 'ring-2 ring-[var(--color-cta)]' : ''
-                  }`}
+                  className="relative aspect-square w-full overflow-hidden rounded-[2px] bg-[var(--color-surface)] transition-opacity hover:opacity-80"
                   aria-current={i === activeImage}
                 >
                   <Image

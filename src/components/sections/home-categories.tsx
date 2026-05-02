@@ -27,8 +27,7 @@ export function HomeCategories({ categories, moreDetailsLabel, hrefs }: Props) {
   return (
     <>
       {ITEMS.map(({ key, image, reverse }, idx) => {
-        const activeKey = hovered ?? ITEMS[0].key
-        const background: 'brand' | 'white' = activeKey === key ? 'brand' : 'white'
+        const background: 'brand' | 'white' = hovered === key ? 'brand' : 'white'
         return (
           <div
             key={key}

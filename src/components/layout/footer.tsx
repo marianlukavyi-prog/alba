@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Logo } from '@/components/brand/logo'
 import { ChevronDownIcon } from '@/components/icons/chevron-down'
 import { EMAIL, PHONES } from '@/data/contact'
 import { SOCIALS } from '@/data/socials'
@@ -18,40 +17,35 @@ const localePath = (locale: Locale, path = '') =>
 export function Footer({ lang, dict }: Props) {
   return (
     <footer className="bg-[var(--color-night)] text-white">
-      <div className="mx-auto flex max-w-[1150px] flex-col gap-12 px-6 py-[90px] lg:flex-row lg:gap-10">
+      <div className="mx-auto flex max-w-[1250px] flex-col gap-8 px-6 py-12 lg:flex-row lg:gap-10 lg:py-[90px]">
         <div className="lg:gap-[6 flex flex-1 flex-col gap-6 border-[#666] lg:flex-row lg:items-center lg:border-r lg:pr-10">
           <div className="flex flex-col items-start justify-between gap-12 lg:h-[194px] lg:gap-0">
-            <Logo size="lg" />
+            <Image src="/logo.svg" alt="Alba Ventanas" width={196} height={60} />
             <div className="flex w-[258px] flex-col gap-3">
               <ul className="flex items-center gap-2" aria-label={dict.footer.social}>
-                {SOCIALS.map((s) => (
-                  <li key={s.name}>
-                    <a
-                      href={s.href}
-                      aria-label={s.name}
-                      className="flex size-[42px] items-center justify-center rounded-full transition-opacity hover:opacity-80"
-                      style={s.bg ? { backgroundColor: s.bg } : undefined}
-                    >
-                      {s.bg ? (
+                {SOCIALS.map((s) => {
+                  const isExternal = s.href.startsWith('http')
+                  return (
+                    <li key={s.name}>
+                      <a
+                        href={s.href}
+                        aria-label={s.name}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener' : undefined}
+                        className="flex size-8 items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                        style={s.bg ? { backgroundColor: s.bg } : undefined}
+                      >
                         <Image
                           src={s.icon}
                           alt=""
-                          width={20}
-                          height={20}
+                          width={s.bg ? 14 : 32}
+                          height={s.bg ? 14 : 32}
                           className="object-contain"
                         />
-                      ) : (
-                        <Image
-                          src={s.icon}
-                          alt=""
-                          width={42}
-                          height={42}
-                          className="object-contain"
-                        />
-                      )}
-                    </a>
-                  </li>
-                ))}
+                      </a>
+                    </li>
+                  )
+                })}
               </ul>
               <p className="text-[15px] font-semibold">{dict.footer.social}</p>
             </div>

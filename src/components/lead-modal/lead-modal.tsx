@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from 'react'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
+import { ConsentCheckbox } from '@/components/forms/consent-checkbox'
 import { XIcon } from '@/components/icons/x'
 import { submitLead } from '@/app/actions/lead'
 
@@ -33,6 +34,9 @@ type LeadLabels = {
   }
   errorRequired: string
   errorGeneric: string
+  errorConsent: string
+  consentLabel: string
+  consentLinkLabel: string
 }
 
 type LeadModalContextValue = {
@@ -51,7 +55,8 @@ export function useLeadModal(): LeadModalContextValue {
 type Props = {
   labels: LeadLabels
   homeHref: string
-  /** Auto-open after this many ms (once per browser session). Default 10s. */
+  policyHref: string
+  /** Auto-open after this many ms (once per browser session). Default 30s. */
   autoOpenDelayMs?: number
   children: ReactNode
 }
@@ -61,7 +66,8 @@ const SESSION_FLAG = 'lead-modal-auto-fired'
 export function LeadModalProvider({
   labels,
   homeHref,
-  autoOpenDelayMs = 10_000,
+  policyHref,
+  autoOpenDelayMs = 30_000,
   children,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false)
@@ -204,13 +210,18 @@ export function LeadModalProvider({
                       phone: String(fd.get('phone') ?? ''),
                       city: String(fd.get('city') ?? ''),
                       needs: String(fd.get('needs') ?? ''),
+                      consent: fd.get('consent') === 'on',
                     })
                     if (result.ok) {
                       setSubmitted(true)
                       formEl.reset()
                     } else {
                       setErrorMessage(
-                        result.code === 'required' ? labels.errorRequired : labels.errorGeneric,
+                        result.code === 'required'
+                          ? labels.errorRequired
+                          : result.code === 'consent'
+                            ? labels.errorConsent
+                            : labels.errorGeneric,
                       )
                     }
                   })
@@ -256,6 +267,13 @@ export function LeadModalProvider({
                     className={inputBase}
                   />
                 </label>
+
+                <ConsentCheckbox
+                  label={labels.consentLabel}
+                  linkLabel={labels.consentLinkLabel}
+                  policyHref={policyHref}
+                  variant="light"
+                />
 
                 {errorMessage ? (
                   <p

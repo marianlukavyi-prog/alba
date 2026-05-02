@@ -128,6 +128,20 @@
       "systems": "Sliding and façade systems for a seamless link between interior and outdoor space",
       "shading": "External roller shutters, screen systems, and automated sun-shading by Aluprof"
     },
+    "subcategories": {
+      "windows": "Windows",
+      "wood-aluminum": "Wood-aluminium windows",
+      "entrance": "Entrance doors",
+      "sliding": "Sliding systems",
+      "swing-doors": "Swing doors",
+      "auto-sliding": "Automatic sliding doors",
+      "pivot": "Pivot doors",
+      "facade": "Curtain wall",
+      "folding": "Folding systems",
+      "sliding-folding": "Sliding & folding systems",
+      "screen": "Screen systems",
+      "rollers": "Roller shutters"
+    },
     "specs": {
       "depth": "Mounting depth",
       "chambers": "Chambers",
@@ -173,7 +187,7 @@
   },
   "productDetailPage": {
     "tabs": {
-      "general": "General information",
+      "general": "General specifications",
       "components": "Components",
       "colors": "Colors"
     },
@@ -426,7 +440,10 @@
       "cta": "Back to home"
     },
     "errorGeneric": "Couldn’t send the request. Please try again or call us.",
-    "errorRequired": "Please fill in your name and phone."
+    "errorRequired": "Please fill in your name and phone.",
+    "errorConsent": "Please agree to the processing of personal data.",
+    "consentLabel": "I agree to the processing of my personal data in accordance with the ",
+    "consentLinkLabel": "Privacy Policy"
   },
   "footer": {
     "aboutTitle": "About",
@@ -438,10 +455,11 @@
     "terms": "Terms of use"
   },
   "cookieBanner": {
-    "title": "Cookie usage",
-    "description": "We use cookies to improve site performance. You can accept all or customise your preferences.",
+    "title": "We use cookies",
+    "description": "We use strictly necessary cookies (language, your consent choice) and, with your consent, analytics. You can accept all, reject non-essential, or review our policy.",
     "accept": "Accept all",
-    "settings": "Settings",
+    "reject": "Reject non-essential",
+    "settings": "Cookie policy",
     "close": "Close"
   }
 }

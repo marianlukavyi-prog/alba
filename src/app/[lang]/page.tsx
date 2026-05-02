@@ -96,6 +96,12 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           errorMessages={{
             required: dict.leadModal.errorRequired,
             send_failed: dict.leadModal.errorGeneric,
+            consent: dict.leadModal.errorConsent,
+          }}
+          consent={{
+            label: dict.leadModal.consentLabel,
+            linkLabel: dict.leadModal.consentLinkLabel,
+            policyHref: localePath(lang, '/privacy'),
           }}
         />
 

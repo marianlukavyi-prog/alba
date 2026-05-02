@@ -128,6 +128,20 @@
       "systems": "Sistemas correderos y de fachada para una conexión continua entre interior y exterior",
       "shading": "Persianas exteriores, sistemas screen y protección solar automatizada de Aluprof"
     },
+    "subcategories": {
+      "windows": "Ventanas",
+      "wood-aluminum": "Ventanas madera-aluminio",
+      "entrance": "Puertas de entrada",
+      "sliding": "Sistemas correderos",
+      "swing-doors": "Puertas batientes",
+      "auto-sliding": "Puertas correderas automáticas",
+      "pivot": "Puertas pivot",
+      "facade": "Muro cortina",
+      "folding": "Sistemas plegables",
+      "sliding-folding": "Sistemas correderos y plegables",
+      "screen": "Sistemas screen",
+      "rollers": "Persianas"
+    },
     "specs": {
       "depth": "Profundidad de montaje",
       "chambers": "Cámaras",
@@ -173,7 +187,7 @@
   },
   "productDetailPage": {
     "tabs": {
-      "general": "Información general",
+      "general": "Características generales",
       "components": "Componentes",
       "colors": "Colores"
     },
@@ -426,7 +440,10 @@
       "cta": "Volver al inicio"
     },
     "errorGeneric": "No se pudo enviar la solicitud. Inténtalo de nuevo o llámanos.",
-    "errorRequired": "Por favor, indica tu nombre y teléfono."
+    "errorRequired": "Por favor, indica tu nombre y teléfono.",
+    "errorConsent": "Por favor, acepta el tratamiento de los datos personales.",
+    "consentLabel": "Acepto el tratamiento de mis datos personales conforme a la ",
+    "consentLinkLabel": "Política de privacidad"
   },
   "footer": {
     "aboutTitle": "Sobre nosotros",
@@ -438,10 +455,11 @@
     "terms": "Condiciones de uso"
   },
   "cookieBanner": {
-    "title": "Uso de cookies",
-    "description": "Utilizamos cookies para mejorar el rendimiento del sitio. Puedes aceptar todas o personalizar tus preferencias.",
+    "title": "Usamos cookies",
+    "description": "Utilizamos cookies estrictamente necesarias (idioma, tu elección de consentimiento) y, con tu consentimiento, cookies analíticas. Puedes aceptar todo, rechazar las no esenciales o consultar la política.",
     "accept": "Aceptar todo",
-    "settings": "Configuración",
+    "reject": "Rechazar no esenciales",
+    "settings": "Política de cookies",
     "close": "Cerrar"
   }
 }

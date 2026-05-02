@@ -2,16 +2,35 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
-import { ProductCard } from '@/components/sections/product-card'
-import { PRODUCT_CATEGORIES, PRODUCTS, type ProductCategory } from '@/data/products'
+import { CategorySubFilter } from '@/components/sections/category-sub-filter'
+import {
+  PRODUCT_CATEGORIES,
+  PRODUCT_SUBCATEGORIES,
+  PRODUCTS,
+  type ProductCategory,
+  type ProductSubcategory,
+} from '@/data/products'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
+
+const PAGE_SIZE = 10
 
 const localePath = (locale: Locale, path = '') =>
   locale === defaultLocale ? path || '/' : `/${locale}${path}`
 
 const isValidCategory = (cat: string): cat is ProductCategory =>
   (PRODUCT_CATEGORIES as readonly string[]).includes(cat)
+
+const isValidSubcategory = (sub: string): sub is ProductSubcategory =>
+  (PRODUCT_SUBCATEGORIES as readonly string[]).includes(sub)
+
+const parsePage = (raw: string | undefined) => {
+  const n = Number(raw)
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1
+}
+
+const parseSub = (raw: string | undefined): ProductSubcategory | null =>
+  raw && isValidSubcategory(raw) ? raw : null
 
 export function generateStaticParams() {
   return locales.flatMap((lang) =>
@@ -60,15 +79,20 @@ export async function generateMetadata({
 
 export default async function ProductCategoryPage({
   params,
+  searchParams,
 }: PageProps<'/[lang]/products/[category]'>) {
   const { lang, category } = await params
   if (!hasLocale(lang) || !isValidCategory(category)) notFound()
+  const sp = (await searchParams) as { page?: string; sub?: string }
   const dict = await getDictionary(lang)
   const t = dict.productsPage
 
+  const page = parsePage(sp.page)
+  const activeSub = parseSub(sp.sub)
   const products = PRODUCTS.filter((p) => p.category === category)
   const title = t.categories[category]
   const description = t.categoryDescriptions[category]
+  const basePath = localePath(lang, `/products/${category}`)
 
   return (
     <>
@@ -89,18 +113,20 @@ export default async function ProductCategoryPage({
           {products.length === 0 ? (
             <p className="text-[15px] text-[var(--color-brand-soft)]">{title}</p>
           ) : (
-            <ul className="grid grid-cols-1 gap-2.5 md:grid-cols-2">
-              {products.map((product) => (
-                <li key={product.slug}>
-                  <ProductCard
-                    product={product}
-                    href={localePath(lang, `/products/${product.category}/${product.slug}`)}
-                    ctaLabel={`${dict.common.moreDetails} — ${product.name}`}
-                    specLabels={t.specs}
-                  />
-                </li>
-              ))}
-            </ul>
+            <CategorySubFilter
+              products={products}
+              basePath={basePath}
+              productHrefFor={(p) => localePath(lang, `/products/${p.category}/${p.slug}`)}
+              ctaLabelFor={(p) => `${dict.common.moreDetails} — ${p.name}`}
+              specLabels={t.specs}
+              allLabel={t.tabAll}
+              subcategoryLabels={t.subcategories}
+              activeSub={activeSub}
+              page={page}
+              pageSize={PAGE_SIZE}
+              prevLabel={t.prev}
+              nextLabel={t.next}
+            />
           )}
         </section>
       </main>

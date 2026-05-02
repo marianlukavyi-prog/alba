@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
 import { LeadInlineForm } from '@/components/lead-modal/lead-inline-form'
-import { Logo } from '@/components/brand/logo'
 import { RoundArrowButton } from '@/components/ui/round-arrow-button'
 import { EMAIL, PHONES } from '@/data/contact'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
@@ -110,7 +109,7 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
                 />
               </div>
               <div className="absolute top-1/2 left-1/2 flex size-[40%] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white text-[var(--color-brand)]">
-                <Logo size="lg" tone="dark" />
+                <Image src="/logo-dark.svg" alt="Alba Ventanas" width={196} height={60} />
               </div>
             </div>
           </div>
@@ -165,6 +164,12 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
                 errorMessages={{
                   required: dict.leadModal.errorRequired,
                   send_failed: dict.leadModal.errorGeneric,
+                  consent: dict.leadModal.errorConsent,
+                }}
+                consent={{
+                  label: dict.leadModal.consentLabel,
+                  linkLabel: dict.leadModal.consentLinkLabel,
+                  policyHref: localePath(lang, '/privacy'),
                 }}
                 variant="dark"
               />

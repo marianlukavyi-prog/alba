@@ -2,18 +2,26 @@
 
 import { useState, useTransition } from 'react'
 import { submitLead } from '@/app/actions/lead'
+import { ConsentCheckbox } from '@/components/forms/consent-checkbox'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { useLeadModal } from '@/components/lead-modal/lead-modal'
 
 type Props = {
   fields: { name: string; phone: string; comment: string }
   submitLabel: string
-  errorMessages: { required: string; send_failed: string }
+  errorMessages: { required: string; send_failed: string; consent: string }
+  consent: { label: string; linkLabel: string; policyHref: string }
   /** 'dark' = white text on brand bg, 'light' = brand text on light bg */
   variant?: 'dark' | 'light'
 }
 
-export function LeadInlineForm({ fields, submitLabel, errorMessages, variant = 'dark' }: Props) {
+export function LeadInlineForm({
+  fields,
+  submitLabel,
+  errorMessages,
+  consent,
+  variant = 'dark',
+}: Props) {
   const { showSuccess } = useLeadModal()
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, startSubmit] = useTransition()
@@ -43,6 +51,7 @@ export function LeadInlineForm({ fields, submitLabel, errorMessages, variant = '
             name: String(fd.get('name') ?? ''),
             phone: String(fd.get('phone') ?? ''),
             needs: String(fd.get('comment') ?? ''),
+            consent: fd.get('consent') === 'on',
           })
           if (result.ok) {
             formEl.reset()
@@ -84,6 +93,12 @@ export function LeadInlineForm({ fields, submitLabel, errorMessages, variant = '
           className={inputBase}
         />
       </label>
+      <ConsentCheckbox
+        label={consent.label}
+        linkLabel={consent.linkLabel}
+        policyHref={consent.policyHref}
+        variant={variant}
+      />
       {error ? (
         <p role="alert" className={`text-[13px] ${errorText}`}>
           {error}

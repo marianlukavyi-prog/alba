@@ -120,7 +120,7 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
         {/* 2. Виробництво — bento grid, white bg, per Figma 299-5529 */}
         <section className="bg-white py-10 md:py-[60px] lg:py-20">
           <div className="mx-auto grid max-w-[1150px] grid-cols-1 gap-2.5 px-4 md:grid-cols-12 md:px-6 lg:px-0">
-            <div className="flex aspect-[377/300] flex-col justify-between gap-4 bg-[var(--color-surface)] p-[22px] md:col-span-4 md:p-[30px]">
+            <div className="flex flex-col gap-6 bg-[var(--color-surface)] p-[22px] md:col-span-4 md:aspect-[377/300] md:justify-between md:gap-4 md:p-[30px]">
               <div className="flex flex-col gap-3">
                 <h2 className="text-[22px] font-semibold text-[var(--color-brand)] md:text-[28px]">
                   {t.production.title}
@@ -295,23 +295,28 @@ export default async function ProcessPage({ params }: PageProps<'/[lang]/process
                 <div className="h-px w-full bg-[var(--color-accent)]" />
                 <div className="flex items-center gap-2">
                   <span className="sr-only">{t.installation.social}</span>
-                  {SOCIALS.map((s) => (
-                    <a
-                      key={s.name}
-                      href={s.href}
-                      aria-label={s.name}
-                      className="flex size-[42px] items-center justify-center rounded-full transition-opacity hover:opacity-80"
-                      style={s.bg ? { backgroundColor: s.bg } : undefined}
-                    >
-                      <Image
-                        src={s.icon}
-                        alt=""
-                        width={s.bg ? 20 : 42}
-                        height={s.bg ? 20 : 42}
-                        className="object-contain"
-                      />
-                    </a>
-                  ))}
+                  {SOCIALS.map((s) => {
+                    const isExternal = s.href.startsWith('http')
+                    return (
+                      <a
+                        key={s.name}
+                        href={s.href}
+                        aria-label={s.name}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener' : undefined}
+                        className="flex size-8 items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                        style={s.bg ? { backgroundColor: s.bg } : undefined}
+                      >
+                        <Image
+                          src={s.icon}
+                          alt=""
+                          width={s.bg ? 14 : 32}
+                          height={s.bg ? 14 : 32}
+                          className="object-contain"
+                        />
+                      </a>
+                    )
+                  })}
                 </div>
               </div>
             </div>

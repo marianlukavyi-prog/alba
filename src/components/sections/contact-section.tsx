@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { submitLead } from '@/app/actions/lead'
+import { ConsentCheckbox } from '@/components/forms/consent-checkbox'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { useLeadModal } from '@/components/lead-modal/lead-modal'
 import { EMAIL, MAP_EMBED_URL, PHONES } from '@/data/contact'
@@ -20,7 +21,8 @@ type Props = {
     email: string
   }
   mapTitle: string
-  errorMessages: { required: string; send_failed: string }
+  errorMessages: { required: string; send_failed: string; consent: string }
+  consent: { label: string; linkLabel: string; policyHref: string }
 }
 
 export function ContactSection({
@@ -31,6 +33,7 @@ export function ContactSection({
   contactLabels,
   mapTitle,
   errorMessages,
+  consent,
 }: Props) {
   const inputBase =
     'h-[46px] w-full border-b border-white bg-transparent pr-4 text-[14px] text-white placeholder:text-[#a5aeb7] focus:outline-none md:h-[50px] md:text-[15px]'
@@ -72,6 +75,7 @@ export function ContactSection({
                   name: String(fd.get('name') ?? ''),
                   phone: String(fd.get('phone') ?? ''),
                   needs: String(fd.get('comment') ?? ''),
+                  consent: fd.get('consent') === 'on',
                 })
                 if (result.ok) {
                   formEl.reset()
@@ -113,6 +117,12 @@ export function ContactSection({
                 className={inputBase}
               />
             </label>
+            <ConsentCheckbox
+              label={consent.label}
+              linkLabel={consent.linkLabel}
+              policyHref={consent.policyHref}
+              variant="dark"
+            />
             {error ? (
               <p role="alert" className="text-[13px] text-red-300">
                 {error}

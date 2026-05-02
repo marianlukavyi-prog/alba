@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { submitLead } from '@/app/actions/lead'
+import { ConsentCheckbox } from '@/components/forms/consent-checkbox'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
 import { useLeadModal } from '@/components/lead-modal/lead-modal'
 
@@ -21,10 +22,18 @@ type Props = {
     comment: string
   }
   submitLabel: string
-  errorMessages: { required: string; send_failed: string }
+  errorMessages: { required: string; send_failed: string; consent: string }
+  consent: { label: string; linkLabel: string; policyHref: string }
 }
 
-export function ConsultationForm({ title, description, fields, submitLabel, errorMessages }: Props) {
+export function ConsultationForm({
+  title,
+  description,
+  fields,
+  submitLabel,
+  errorMessages,
+  consent,
+}: Props) {
   const inputBase =
     'h-[46px] w-full border-b border-[var(--color-cta)] bg-transparent pr-4 text-[14px] text-[var(--color-brand)] placeholder:text-[#aaa] focus:outline-none md:h-[50px] md:text-[15px]'
 
@@ -63,6 +72,7 @@ export function ConsultationForm({ title, description, fields, submitLabel, erro
                 name: String(fd.get('name') ?? ''),
                 phone: String(fd.get('phone') ?? ''),
                 needs: String(fd.get('comment') ?? ''),
+                consent: fd.get('consent') === 'on',
               })
               if (result.ok) {
                 formEl.reset()
@@ -96,6 +106,12 @@ export function ConsultationForm({ title, description, fields, submitLabel, erro
               className={inputBase}
             />
           </label>
+          <ConsentCheckbox
+            label={consent.label}
+            linkLabel={consent.linkLabel}
+            policyHref={consent.policyHref}
+            variant="light"
+          />
           {error ? (
             <p role="alert" className="text-[13px] text-red-600">
               {error}

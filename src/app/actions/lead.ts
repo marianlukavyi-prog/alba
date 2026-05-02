@@ -5,9 +5,10 @@ export type LeadFormData = {
   phone: string
   city?: string
   needs?: string
+  consent: boolean
 }
 
-export type LeadErrorCode = 'required' | 'send_failed'
+export type LeadErrorCode = 'required' | 'consent' | 'send_failed'
 export type LeadActionResult = { ok: true } | { ok: false; code: LeadErrorCode }
 
 const escapeHtml = (s: string) =>
@@ -21,6 +22,9 @@ export async function submitLead(data: LeadFormData): Promise<LeadActionResult> 
   const phone = data.phone?.trim() ?? ''
   if (!name || !phone) {
     return { ok: false, code: 'required' }
+  }
+  if (!data.consent) {
+    return { ok: false, code: 'consent' }
   }
 
   const token = process.env.TELEGRAM_BOT_TOKEN

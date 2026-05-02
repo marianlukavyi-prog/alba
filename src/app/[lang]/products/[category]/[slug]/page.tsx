@@ -69,11 +69,35 @@ export default async function ProductDetailPage({
   const t = dict.productsPage
   const tDetail = dict.productDetailPage
 
-  const breadcrumb = [
+  const breadcrumb: { label: string; href?: string }[] = [
     { label: t.breadcrumbHome, href: localePath(lang) },
-    { label: t.categories[product.category], href: localePath(lang, `/products/${category}`) },
-    { label: product.name },
   ]
+
+  const familyKey = product.family ?? product.category
+  breadcrumb.push({
+    label: t.categories[familyKey],
+    href: localePath(lang, `/products/${familyKey}`),
+  })
+
+  const specializedDoorSubs = new Set(['swing-doors', 'auto-sliding'])
+  const useSubLevel =
+    familyKey === product.category ||
+    product.category === 'systems' ||
+    (product.category === 'doors' && specializedDoorSubs.has(product.subcategory))
+
+  if (useSubLevel) {
+    breadcrumb.push({
+      label: t.subcategories[product.subcategory],
+      href: localePath(lang, `/products/${category}?sub=${product.subcategory}`),
+    })
+  } else {
+    breadcrumb.push({
+      label: t.categories[product.category],
+      href: localePath(lang, `/products/${category}`),
+    })
+  }
+
+  breadcrumb.push({ label: product.name })
 
   const productUrl = `${SITE_URL}${localePath(lang, `/products/${category}/${slug}`)}`
   const productLd = {

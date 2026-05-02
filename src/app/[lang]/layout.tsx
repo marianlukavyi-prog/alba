@@ -107,11 +107,15 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
         <LeadModalProvider
           labels={dict.leadModal}
           homeHref={lang === defaultLocale ? '/' : `/${lang}`}
+          policyHref={lang === defaultLocale ? '/privacy' : `/${lang}/privacy`}
         >
           {children}
           <Footer lang={lang} dict={dict} />
         </LeadModalProvider>
-        <CookieBanner labels={dict.cookieBanner} />
+        <CookieBanner
+          labels={dict.cookieBanner}
+          policyHref={lang === defaultLocale ? '/privacy' : `/${lang}/privacy`}
+        />
         <JsonLd data={[organization, website]} />
       </body>
     </html>
