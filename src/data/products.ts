@@ -14,6 +14,9 @@ export const PRODUCT_SUBCATEGORIES = [
   'sliding-folding',
   'screen',
   'rollers',
+  'roller-screen',
+  'venetian-blinds',
+  'pergolas',
 ] as const
 export type ProductSubcategory = (typeof PRODUCT_SUBCATEGORIES)[number]
 
@@ -33,7 +36,12 @@ export type SpecKey =
 export type Spec = { key: SpecKey; value: string }
 
 export type ProductColor = { name: string; hex?: string; image?: string }
-export type ProductComponent = { title: string; description: string; image?: string }
+export type ProductComponent = {
+  title: string
+  description: string
+  image?: string
+  images?: string[]
+}
 export type ProductHighlight = { label: string; value: string }
 
 export type ProductDetail = {
@@ -158,6 +166,18 @@ const COLORS_SKT_SKB: ProductColor[] = COLORS_SK_SP.filter(
   (c) =>
     !c.name.startsWith('41 ') && !c.name.startsWith('42 ') && !c.name.startsWith('44 '),
 )
+
+const COLORS_PERGOLA: ProductColor[] = [
+  { name: 'R 319 — Anthracite grey, pearl', image: `${ALUPROF_COLORS}/x44-ciemny-szary-perlowy-mat_0.jpg` },
+  { name: 'RAL 7016 — Anthracite grey', image: `${ALUPROF_COLORS}/06-ral-7016-szary-antracyt_0.jpg` },
+  { name: 'RAL 7024 — Graphite grey', image: `${ALUPROF_COLORS}/ral_7024_0.jpg` },
+  { name: 'RAL 7035 — Light grey', image: `${ALUPROF_COLORS}/09-ral-7035-jasny-szary_0.jpg` },
+  { name: 'RAL 8019 — Dark brown', image: `${ALUPROF_COLORS}/ral_8019_0.png` },
+  { name: 'RAL 9005 — Black', image: `${ALUPROF_COLORS}/04-ral-9005-czarny_0.jpg` },
+  { name: 'RAL 9006 — Silver', image: `${ALUPROF_COLORS}/ral_9006_0.jpg` },
+  { name: 'RAL 9007 — Grey aluminum', image: `${ALUPROF_COLORS}/ral_9007_0.jpg` },
+  { name: 'RAL 9016 — Ultra white', image: `${ALUPROF_COLORS}/05-ral-9016-ultra-bialy_m_0.jpg` },
+]
 
 export const PRODUCTS: Product[] = [
   {
@@ -1877,18 +1897,22 @@ export const PRODUCTS: Product[] = [
       components: [
         {
           title: 'Короби',
-          description: 'SRS90, SRS90/2, SRS90E, SRS90E/2, SRS90E/3, SRS/SKT, SRS/SKB.',
-          image: '/figma/products/aluprof/components/skyroll-zip-box.webp',
+          description: 'SRS90, SRS90/2, SRS90E, SRS90ES, SRS90E/2, SRS90ES/2, SRS90E/3, SRS90E/120/160, SRS90_SP, SRS90_SP/2, SRS90_SP/120/160, SRS90E_SP/120, SRS/SKT, SRS/SKB.',
+          images: Array.from({ length: 15 }, (_, i) => `/figma/products/aluprof/components/skyroll-zip-box-${i + 1}.webp`),
         },
         {
           title: 'Направляючі',
           description: 'SRS, SRS/SKT, SRS/SKB — дворазові з системою ZIP.',
-          image: '/figma/products/aluprof/components/skyroll-zip-guide.webp',
+          images: [
+            '/figma/products/aluprof/components/skyroll-zip-guide-1.webp',
+            '/figma/products/aluprof/components/skyroll-zip-guide-2.webp',
+            '/figma/products/aluprof/components/skyroll-zip-guide-3.webp',
+          ],
         },
         {
           title: 'Кінцеві планки',
           description: 'Кінцеві елементи з алюмінію.',
-          image: '/figma/products/aluprof/components/skyroll-zip-endslat.webp',
+          images: ['/figma/products/aluprof/components/skyroll-zip-endslat-1.webp'],
         },
       ],
       colors: COLORS_RAL,
@@ -1921,22 +1945,88 @@ export const PRODUCTS: Product[] = [
       components: [
         {
           title: 'Короби',
-          description: 'SRS90, SRS90/2, SRS90E, SRS90E/2, SRS90_SP, SRS90E_SP.',
-          image: '/figma/products/aluprof/components/skyroll-eco-box.webp',
+          description: 'SRS90, SRS90/2, SRS90E, SRS90E/2, SRS90_SP, SRS90_SP/2, SRS90E_SP.',
+          images: [
+            '/figma/products/aluprof/components/skyroll-eco-box-1.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-2.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-3.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-4.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-5.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-6.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-10.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-11.webp',
+            '/figma/products/aluprof/components/skyroll-zip-box-13.webp',
+          ],
         },
         {
           title: 'Направляючі',
           description: 'SRS — інтегровані з тканиною та з механізмом ALU-CLICK.',
-          image: '/figma/products/aluprof/components/skyroll-eco-guide.webp',
+          images: ['/figma/products/aluprof/components/skyroll-eco-guide-1.webp'],
         },
         {
           title: 'Кінцеві планки',
           description: 'Адаптовані з москітної системи MKT.',
-          image: '/figma/products/aluprof/components/skyroll-eco-endslat.webp',
+          images: ['/figma/products/aluprof/components/skyroll-eco-endslat-1.webp'],
         },
       ],
       colors: COLORS_RAL,
       gallery: [`${ALUPROF_GALLERY}/skyroll_eco_a_0.jpg`, `${ALUPROF_GALLERY}/skyroll_eco_a_2.jpg`],
+    },
+  },
+  {
+    slug: 'aluprof-skytwin',
+    name: 'Aluprof SkyTwin',
+    category: 'shading',
+    subcategory: 'roller-screen',
+    specs: [
+      { key: 'type', value: 'ролето-скрин у одному коробі' },
+      { key: 'material', value: 'алюміній' },
+      { key: 'mounting', value: 'врізний (новобудови)' },
+      { key: 'thermal', value: 'до −35% тепловтрат' },
+      { key: 'control', value: 'моторне керування' },
+    ],
+    image: { src: `${ALUPROF_GALLERY}/roleto_screen_SkyTwin.jpg` },
+    detail: {
+      subtitle:
+        'Інноваційне рішення «два в одному» — ролета і скрин в єдиному коробі 180×260 мм',
+      highlights: [
+        { label: 'Розмір короба', value: '180 × 260 мм' },
+        { label: 'Економія тепла', value: 'до 35% (Kraków University)' },
+        { label: 'Тканини', value: 'Copaco / Serge Ferrari' },
+      ],
+      description:
+        'Інновація системи SkyTwin полягає в інтеграції зовнішньої ролети та скрина в одному продукті — це революційне технологічне рішення на ринку.\n\nПродукт розроблено з урахуванням енергоефективної конструкції, тому його дизайн повністю адаптовано для врізного монтажу. Система ідеально підходить для нових будівель або для існуючих після внесення необхідних змін у перемичку. Кронштейни доступні в кількох розмірах для оздоблення будь-якими матеріалами.\n\nГоловний елемент рішення — алюмінієвий короб 180×260 мм із гнутого алюмінієвого листа, в якому розміщені два круглі вали. Технологія SkyTwin передбачає версії скрина SkyRoll ZIP і SkyRoll Classic. ZIP-технологія забезпечує максимальну герметизацію та захист від комах.\n\nПолотно ролети виготовляється з алюмінієвих профілів із поліуретановою піною, ПВХ-профілів PT37 або екструдованих PE41. Aluprof пропонує колекцію спеціалізованих скрин-тканин від Copaco та Serge Ferrari — стійкі до використання, деформацій, розривів та погодних умов.\n\nЗакриваючи водночас ролету і скрин, можна зменшити тепловтрати через вікно до 35% (за дослідженням Краківського технологічного університету разом з Aluprof).',
+      components: [
+        {
+          title: 'Короби',
+          description: 'Алюмінієвий короб 180×260 мм із двома круглими валами.',
+          images: ['/figma/products/aluprof/components/skytwin-box-1.webp'],
+        },
+        {
+          title: 'Направляючі',
+          description: 'Спеціально розроблені для системи SkyTwin.',
+          images: ['/figma/products/aluprof/components/skytwin-guide-1.webp'],
+        },
+        {
+          title: 'Профілі ролет',
+          description: 'Алюмінієві з ПУ-піною, ПВХ-профілі PT37 або екструдовані PE41.',
+          images: ['/figma/products/aluprof/components/skytwin-shutter-1.webp'],
+        },
+        {
+          title: 'Кінцеві планки',
+          description: 'Кінцеві елементи з герметизацією.',
+          images: [
+            '/figma/products/aluprof/components/skytwin-endslat-1.webp',
+            '/figma/products/aluprof/components/skytwin-endslat-2.webp',
+          ],
+        },
+      ],
+      colors: COLORS_SK_SP,
+      gallery: [
+        `${ALUPROF_GALLERY}/roleto_screen_SkyTwin.jpg`,
+        `${ALUPROF_GALLERY}/Skrzynka_SkyTwin_ZIP.webp`,
+        `${ALUPROF_GALLERY}/Prowadnice_SkyTwin.webp`,
+      ],
     },
   },
   {
@@ -1966,17 +2056,38 @@ export const PRODUCTS: Product[] = [
         {
           title: 'Короби',
           description: 'Ролетні короби з різними формами — півовальні, з кутом 45°.',
-          image: '/figma/products/aluprof/components/sk-box.webp',
+          images: [
+            '/figma/products/aluprof/components/sk-box-1.webp',
+            '/figma/products/aluprof/components/sk-box-2.webp',
+            '/figma/products/aluprof/components/sk-box-3.webp',
+          ],
         },
         {
           title: 'Направляючі',
           description: 'Алюмінієві напрямні рейки.',
-          image: '/figma/products/aluprof/components/sk-guide.webp',
+          images: [
+            '/figma/products/aluprof/components/sk-guide-1.webp',
+            '/figma/products/aluprof/components/sk-guide-2.webp',
+            '/figma/products/aluprof/components/sk-guide-3.webp',
+          ],
+        },
+        {
+          title: 'Профілі ролет',
+          description: 'Алюмінієві та ПВХ-профілі для ролетного полотна.',
+          images: [
+            '/figma/products/aluprof/components/sk-shutter-1.webp',
+            '/figma/products/aluprof/components/sk-shutter-2.webp',
+            '/figma/products/aluprof/components/sk-shutter-3.webp',
+          ],
         },
         {
           title: 'Кінцеві планки',
           description: 'Кінцеві елементи з герметизацією.',
-          image: '/figma/products/aluprof/components/sk-endslat.webp',
+          images: [
+            '/figma/products/aluprof/components/sk-endslat-1.webp',
+            '/figma/products/aluprof/components/sk-endslat-2.webp',
+            '/figma/products/aluprof/components/sk-endslat-3.webp',
+          ],
         },
       ],
       colors: COLORS_SK_SP,
@@ -2023,17 +2134,34 @@ export const PRODUCTS: Product[] = [
         {
           title: 'Короби',
           description: 'Прикриті короби з основою під оздоблення фасаду.',
-          image: '/figma/products/aluprof/components/sp-box.webp',
+          images: [
+            '/figma/products/aluprof/components/sp-box-1.webp',
+            '/figma/products/aluprof/components/sp-box-2.webp',
+          ],
         },
         {
           title: 'Направляючі',
           description: 'Алюмінієві напрямні з кольоровим підбором під вікно.',
-          image: '/figma/products/aluprof/components/sp-guide.webp',
+          images: [
+            '/figma/products/aluprof/components/sp-guide-1.webp',
+            '/figma/products/aluprof/components/sp-guide-2.webp',
+          ],
+        },
+        {
+          title: 'Профілі ролет',
+          description: 'Заповнені піною пластикові або екструдовані профілі.',
+          images: [
+            '/figma/products/aluprof/components/sp-shutter-1.webp',
+            '/figma/products/aluprof/components/sp-shutter-2.webp',
+          ],
         },
         {
           title: 'Кінцеві планки',
           description: 'Кінцеві елементи з герметизацією.',
-          image: '/figma/products/aluprof/components/sp-endslat.webp',
+          images: [
+            '/figma/products/aluprof/components/sp-endslat-1.webp',
+            '/figma/products/aluprof/components/sp-endslat-2.webp',
+          ],
         },
       ],
       colors: COLORS_SK_SP,
@@ -2073,20 +2201,39 @@ export const PRODUCTS: Product[] = [
       components: [
         {
           title: 'Короби',
-          description: 'ПВХ-короби з внутрішньою ізоляцією EPS/Neopor.',
-          image: '/figma/products/aluprof/components/skt-box.webp',
+          description: 'ПВХ-короби з внутрішньою ізоляцією EPS/Neopor — стандартний, NOVA, RENO та MONOBLOCK.',
+          images: [
+            '/figma/products/aluprof/components/skt-box-1.webp',
+            '/figma/products/aluprof/components/skt-box-2.webp',
+            '/figma/products/aluprof/components/skt-box-3.webp',
+            '/figma/products/aluprof/components/skt-box-4.webp',
+          ],
         },
         {
           title: 'Направляючі',
-          description: 'Алюмінієві напрямні — стандартні та вузькі.',
-          image: '/figma/products/aluprof/components/skt-guide.webp',
+          description: 'Алюмінієві напрямні — стандартні та вузькі для maxi/mini-профілів.',
+          images: [
+            '/figma/products/aluprof/components/skt-guide-1.webp',
+            '/figma/products/aluprof/components/skt-guide-2.webp',
+            '/figma/products/aluprof/components/skt-guide-3.webp',
+            '/figma/products/aluprof/components/skt-guide-4.webp',
+          ],
+        },
+        {
+          title: 'Профілі ролет',
+          description: 'Алюмінієві або ПВХ-профілі для ролетного полотна.',
+          images: ['/figma/products/aluprof/components/skt-shutter-1.webp'],
         },
         {
           title: 'Кінцеві планки',
           description: 'Кінцеві елементи з герметизацією.',
-          image: '/figma/products/aluprof/components/skt-endslat.webp',
+          images: ['/figma/products/aluprof/components/skt-endslat-1.webp'],
         },
-        { title: 'Адаптивні профілі для коробів', description: '' },
+        {
+          title: 'Адаптивні профілі для коробів',
+          description: 'Профілі для прямого монтажу на віконну раму.',
+          images: ['/figma/products/aluprof/components/skt-adapter-1.webp'],
+        },
       ],
       colors: COLORS_SKT_SKB,
       gallery: [
@@ -2155,6 +2302,41 @@ export const PRODUCTS: Product[] = [
         `${ALUPROF_GALLERY}/roleta_skb_styroterm_f_0.jpg`,
         `${ALUPROF_GALLERY}/roleta_skb_styroterm_ra_0.jpg`,
         `${ALUPROF_GALLERY}/roleta_skb_styroterm_k_0.jpg`,
+      ],
+    },
+  },
+  {
+    slug: 'aluprof-mb-opensky-120',
+    name: 'Aluprof MB-OpenSky 120',
+    category: 'shading',
+    subcategory: 'pergolas',
+    specs: [
+      { key: 'type', value: 'пергола з рухомими ламелями' },
+      { key: 'material', value: 'екструдований алюміній' },
+      { key: 'lamellaAngle', value: '0–135°' },
+      { key: 'maxSize', value: '6 × 4 × 3 м (вільностояча)' },
+      { key: 'control', value: 'електричне (пульт / Smart Home)' },
+    ],
+    image: { src: `${ALUPROF_GALLERY}/pergola_opensky_120.jpg` },
+    detail: {
+      subtitle:
+        'Алюмінієва пергола з рухомими ламелями (0–135°), прихованим електроприводом і дренажною системою',
+      highlights: [
+        { label: 'Кут нахилу ламелей', value: '0–135°' },
+        { label: 'Снігове / вітрове навантаження', value: '72 кг/м² / ~110 км/год' },
+        { label: 'Освітлення', value: 'опційне LED' },
+      ],
+      description:
+        'MB-OPENSKY 120 — унікальний продукт, що ідеально вписується в тренди сучасного будівництва й вирізняється високою міцністю та якістю деталей.\n\nІнноваційна технологія монтажу профілів забезпечила стабільність всієї системи, а також естетично завершені з’єднання без видимих зазорів. Покриття перголи MB-OpenSky 120 — модуль із рухомих ламелей з механізмом плавної зміни кута нахилу від 0° до 135°. Доступні дві форми ламелей: SLIM (тип Z) і STANDARD (тип FLAT).\n\nТрансмісія з системою автоматичного налаштування забезпечує швидкий монтаж і легке налаштування кожної ламелі. Конструкція стійка до погодних умов. Двосхила дренажна система ефективно відводить дощову воду з даху всередині колон. Випробування показали, що для конструкцій максимального розміру допустиме снігове навантаження — 72 кг/м², одночасне вітрове — близько 110 км/год. Доступна вільностояча версія максимального розміру 6 × 4 × 3 м.\n\nПергола обладнана повністю електричним механізмом керування, повністю прихованим у конструкції. Керування — пульт, вимикач, мобільний застосунок або сценарій у системі розумного будинку. Опційно — датчики вітру, дощу і сонця, бічні жалюзі або панелі (інтегруються в загальне керування).\n\nОсобливості: міцна конструкція з екструдованого алюмінію • естетично приховані шарнірні консолі • два типи ламелей SLIM/STANDARD • прихований мотор • LED-підсвітка • можливість бічних розсувних склопанелей або скринів • ревізія крокв для встановлення інфрачервоних обігрівачів • 12 RAL-кольорів стандартної палітри.',
+      components: [],
+      colors: COLORS_PERGOLA,
+      gallery: [
+        `${ALUPROF_GALLERY}/pergola_opensky_120.jpg`,
+        `${ALUPROF_GALLERY}/opensky_120.jpg`,
+        `${ALUPROF_GALLERY}/opensky_120_3.png`,
+        `${ALUPROF_GALLERY}/Pergola120_przyscienna_news3.png`,
+        `${ALUPROF_GALLERY}/Pergola120_przyscienna_news2.png`,
+        `${ALUPROF_GALLERY}/Pergola120_przyscienna_news.png`,
       ],
     },
   },

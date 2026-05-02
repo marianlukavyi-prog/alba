@@ -140,7 +140,10 @@
       "folding": "Sistemas plegables",
       "sliding-folding": "Sistemas correderos y plegables",
       "screen": "Sistemas screen",
-      "rollers": "Persianas"
+      "rollers": "Persianas",
+      "roller-screen": "Persiana-screen",
+      "venetian-blinds": "Venecianas",
+      "pergolas": "Pérgolas"
     },
     "specs": {
       "depth": "Profundidad de montaje",

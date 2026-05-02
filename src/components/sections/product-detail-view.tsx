@@ -207,38 +207,48 @@ function GeneralTab({ text }: { text: string }) {
 function ComponentsTab({
   items,
 }: {
-  items: Array<{ title: string; description: string; image?: string }>
+  items: Array<{ title: string; description: string; image?: string; images?: string[] }>
 }) {
   return (
     <ul className="flex flex-col gap-2.5">
-      {items.map((item, i) => (
-        <li key={item.title + i}>
-          <details className="group rounded-[2px] open:bg-[var(--color-surface)] open:pb-[22px]">
-            <summary className="flex list-none items-center gap-3 px-[22px] py-4 [&::-webkit-details-marker]:hidden cursor-pointer">
-              <span className="flex-1 text-[15px] font-medium text-[var(--color-brand)]">
-                {item.title}
-              </span>
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)]">
-                <PlusMinusIcon />
-              </span>
-            </summary>
-            <div className="flex flex-col gap-3 px-[22px] pt-2 text-[15px] text-[var(--color-brand-soft)]">
-              {item.description ? <p>{item.description}</p> : null}
-              {item.image ? (
-                <div className="relative h-[110px] w-[100px] overflow-hidden rounded-[2px] bg-white">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="100px"
-                    className="object-contain"
-                  />
-                </div>
-              ) : null}
-            </div>
-          </details>
-        </li>
-      ))}
+      {items.map((item, i) => {
+        const allImages = item.images ?? (item.image ? [item.image] : [])
+        return (
+          <li key={item.title + i}>
+            <details className="group rounded-[2px] open:bg-[var(--color-surface)] open:pb-[22px]">
+              <summary className="flex list-none items-center gap-3 px-[22px] py-4 [&::-webkit-details-marker]:hidden cursor-pointer">
+                <span className="flex-1 text-[15px] font-medium text-[var(--color-brand)]">
+                  {item.title}
+                </span>
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-[0.5px] border-[var(--color-brand)] text-[var(--color-brand)]">
+                  <PlusMinusIcon />
+                </span>
+              </summary>
+              <div className="flex flex-col gap-3 px-[22px] pt-2 text-[15px] text-[var(--color-brand-soft)]">
+                {item.description ? <p>{item.description}</p> : null}
+                {allImages.length > 0 ? (
+                  <div className="flex flex-wrap gap-2.5">
+                    {allImages.map((src, idx) => (
+                      <div
+                        key={`${src}-${idx}`}
+                        className="relative h-[110px] w-[100px] overflow-hidden rounded-[2px] bg-white"
+                      >
+                        <Image
+                          src={src}
+                          alt={item.title}
+                          fill
+                          sizes="100px"
+                          className="object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </details>
+          </li>
+        )
+      })}
     </ul>
   )
 }

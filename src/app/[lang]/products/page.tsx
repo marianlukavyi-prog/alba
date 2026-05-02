@@ -76,7 +76,11 @@ export default async function ProductsPage({ params }: PageProps<'/[lang]/produc
 
         <div className="bg-white pb-16">
           {PRODUCT_CATEGORIES.map((cat) => {
-            const products = PRODUCTS.filter((p) => p.category === cat)
+            const products = PRODUCTS.filter((p) =>
+              cat === 'pvc' || cat === 'aluminum'
+                ? p.family === cat || p.category === cat
+                : p.category === cat,
+            )
             if (products.length === 0) return null
             return (
               <ProductsSection

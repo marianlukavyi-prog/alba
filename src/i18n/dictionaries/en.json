@@ -140,7 +140,10 @@
       "folding": "Folding systems",
       "sliding-folding": "Sliding & folding systems",
       "screen": "Screen systems",
-      "rollers": "Roller shutters"
+      "rollers": "Roller shutters",
+      "roller-screen": "Roller–screen",
+      "venetian-blinds": "Venetian blinds",
+      "pergolas": "Pergolas"
     },
     "specs": {
       "depth": "Mounting depth",

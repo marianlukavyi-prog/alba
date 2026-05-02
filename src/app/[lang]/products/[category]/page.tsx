@@ -89,7 +89,11 @@ export default async function ProductCategoryPage({
 
   const page = parsePage(sp.page)
   const activeSub = parseSub(sp.sub)
-  const products = PRODUCTS.filter((p) => p.category === category)
+  const products = PRODUCTS.filter((p) =>
+    category === 'pvc' || category === 'aluminum'
+      ? p.family === category || p.category === category
+      : p.category === category,
+  )
   const title = t.categories[category]
   const description = t.categoryDescriptions[category]
   const basePath = localePath(lang, `/products/${category}`)
