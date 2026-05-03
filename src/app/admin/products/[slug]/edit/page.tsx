@@ -35,16 +35,16 @@ export default async function AdminEditProductPage({
             href="/admin/products"
             className="text-[14px] text-[var(--color-brand-soft)] hover:text-[var(--color-brand)]"
           >
-            ← Back
+            ← Назад
           </Link>
           <h1 className="text-[24px] font-semibold text-[var(--color-brand)]">
-            Edit: {product.name}
+            Редагування: {product.name}
           </h1>
           <p className="text-[12px] text-[var(--color-brand-soft)]">{product.slug}</p>
         </div>
         <DeleteButton slug={slug} onDelete={onDelete} />
       </div>
-      <ProductForm initial={product} onSubmit={submit} submitLabel="Save" />
+      <ProductForm initial={product} onSubmit={submit} submitLabel="Зберегти" />
     </div>
   )
 }

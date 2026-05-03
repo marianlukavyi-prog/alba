@@ -4452,5 +4452,32 @@
         "/figma/products/aluprof/gallery/Pergola120_przyscienna_news.png"
       ]
     }
+  },
+  {
+    "slug": "test-test",
+    "name": "test",
+    "category": "pvc",
+    "subcategory": "windows",
+    "family": "pvc",
+    "specs": [],
+    "image": {
+      "src": "/figma/products/test-test/test-test-image-1777812176202.webp"
+    },
+    "detail": {
+      "subtitle": "dsa",
+      "description": "sdadasd",
+      "highlights": [
+        {
+          "label": "dasd",
+          "value": "dasdasd"
+        }
+      ],
+      "components": [],
+      "colors": "SKT_SKB",
+      "gallery": [
+        "/figma/products/test-test/test-test-gallery-0-1777812176050.webp",
+        "/figma/products/test-test/test-test-gallery-1-1777812176184.webp"
+      ]
+    }
   }
 ]

@@ -14,15 +14,15 @@ export function DeleteButton({ slug, onDelete }: Props) {
   const [isPending, startTransition] = useTransition()
 
   const handleClick = () => {
-    if (!confirm(`Delete "${slug}"? This will modify products.json.`)) return
+    if (!confirm(`Видалити «${slug}»? Це змінить файл products.json.`)) return
     startTransition(async () => {
       const res = await onDelete()
       if (res.ok) {
-        showToast(`Deleted "${slug}"`, 'success')
+        showToast(`Видалено: «${slug}»`, 'success')
         router.push('/admin/products')
         router.refresh()
       } else {
-        showToast(`Delete failed: ${res.error}`, 'error')
+        showToast(`Помилка видалення: ${res.error}`, 'error')
       }
     })
   }
@@ -34,7 +34,7 @@ export function DeleteButton({ slug, onDelete }: Props) {
       disabled={isPending}
       className="rounded-full border border-red-300 bg-white px-4 py-2 text-[14px] text-red-600 hover:bg-red-50 disabled:opacity-50"
     >
-      {isPending ? 'Deleting…' : 'Delete'}
+      {isPending ? 'Видалення…' : 'Видалити'}
     </button>
   )
 }

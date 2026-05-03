@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { ProductsTable } from '@/components/admin/products-table'
 import { PRODUCTS } from '@/data/products'
 
 export const dynamic = 'force-dynamic'
@@ -15,77 +15,34 @@ export default function AdminProductsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-[24px] font-semibold text-[var(--color-brand)]">Products</h1>
-          <p className="text-[14px] text-[var(--color-brand-soft)]">{PRODUCTS.length} total</p>
+          <h1 className="text-[24px] font-semibold text-[var(--color-brand)]">Товари</h1>
+          <p className="text-[14px] text-[var(--color-brand-soft)]">Всього: {PRODUCTS.length}</p>
         </div>
         <Link
           href="/admin/products/new"
-          className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-[14px] font-medium text-[var(--color-brand)] hover:bg-[#e6b801]"
+          className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-[14px] font-semibold text-[var(--color-brand)] shadow-sm transition-colors hover:bg-[#e6b801]"
         >
-          + Add product
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Додати товар
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-[4px] border border-[#e3e3e3] bg-white">
-        <table className="w-full text-[14px]">
-          <thead className="border-b border-[#e3e3e3] bg-[#fafafa] text-left text-[12px] uppercase tracking-wide text-[var(--color-brand-soft)]">
-            <tr>
-              <th className="px-4 py-3">Image</th>
-              <th className="px-4 py-3">Name / Slug</th>
-              <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Subcategory</th>
-              <th className="px-4 py-3">Family</th>
-              <th className="px-4 py-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((p) => (
-              <tr
-                key={p.slug}
-                className="border-b border-[#f0f0f0] last:border-0 hover:bg-[#fafafa]"
-              >
-                <td className="px-4 py-3">
-                  <div className="relative h-12 w-16 overflow-hidden rounded-[2px] bg-[var(--color-surface)]">
-                    <Image
-                      src={p.image.src}
-                      alt={p.name}
-                      fill
-                      sizes="64px"
-                      className="object-contain"
-                    />
-                  </div>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="font-medium text-[var(--color-brand)]">{p.name}</div>
-                  <div className="text-[12px] text-[var(--color-brand-soft)]">{p.slug}</div>
-                </td>
-                <td className="px-4 py-3 text-[var(--color-brand-soft)]">{p.category}</td>
-                <td className="px-4 py-3 text-[var(--color-brand-soft)]">{p.subcategory}</td>
-                <td className="px-4 py-3 text-[var(--color-brand-soft)]">{p.family ?? '—'}</td>
-                <td className="px-4 py-3 text-right">
-                  <div className="inline-flex gap-3">
-                    <Link
-                      href={`/admin/products/${p.slug}/edit`}
-                      className="text-[var(--color-brand)] hover:underline"
-                    >
-                      Edit
-                    </Link>
-                    <Link
-                      href={`/uk/products/${p.category}/${p.slug}`}
-                      target="_blank"
-                      className="text-[var(--color-brand-soft)] hover:underline"
-                    >
-                      View
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ProductsTable products={sorted} />
     </div>
   )
 }

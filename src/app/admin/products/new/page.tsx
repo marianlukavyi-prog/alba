@@ -12,11 +12,11 @@ export default function AdminNewProductPage() {
           href="/admin/products"
           className="text-[14px] text-[var(--color-brand-soft)] hover:text-[var(--color-brand)]"
         >
-          ← Back
+          ← Назад
         </Link>
-        <h1 className="text-[24px] font-semibold text-[var(--color-brand)]">New product</h1>
+        <h1 className="text-[24px] font-semibold text-[var(--color-brand)]">Новий товар</h1>
       </div>
-      <ProductForm onSubmit={createProduct} submitLabel="Create" />
+      <ProductForm onSubmit={createProduct} submitLabel="Створити" />
     </div>
   )
 }

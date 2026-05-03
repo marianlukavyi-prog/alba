@@ -32,10 +32,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
               <nav className="flex gap-4 text-[14px] text-[var(--color-brand-soft)]">
                 <Link href="/admin/products" className="hover:text-[var(--color-brand)]">
-                  Products
+                  Товари
                 </Link>
                 <Link href="/" className="hover:text-[var(--color-brand)]">
-                  ← View site
+                  ← На сайт
                 </Link>
               </nav>
             </div>
