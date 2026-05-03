@@ -7,7 +7,21 @@ import { BlogCard } from '@/components/sections/blog-card'
 import { BlogPagination } from '@/components/sections/blog-pagination'
 import { BlogSidebar } from '@/components/sections/blog-sidebar'
 import { BlogTagsBar } from '@/components/sections/blog-tags-bar'
-import { BLOG_POSTS, LATEST_POSTS, POPULAR_POSTS } from '@/data/blog'
+import { sanityFetch } from '@/sanity/client'
+import {
+  LATEST_POSTS_QUERY,
+  POPULAR_POSTS_QUERY,
+  POSTS_BY_TAG_QUERY,
+  POSTS_LIST_QUERY,
+  POSTS_SEARCH_QUERY,
+  TAGS_QUERY,
+} from '@/sanity/queries'
+import type {
+  SanityLatestPost,
+  SanityPopularPost,
+  SanityPostCard,
+  SanityTag,
+} from '@/sanity/types'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -51,16 +65,61 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPage({ params }: PageProps<'/[lang]/blog'>) {
+export default async function BlogPage({
+  params,
+  searchParams,
+}: PageProps<'/[lang]/blog'>) {
   const { lang } = await params
   if (!hasLocale(lang)) notFound()
+  const sp = await searchParams
+  const tagParam = typeof sp?.tag === 'string' ? sp.tag : undefined
+  const queryParam = typeof sp?.q === 'string' ? sp.q.trim() : ''
   const dict = await getDictionary(lang)
   const t = dict.blogPage
 
-  const totalPages = Math.max(1, Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE))
+  let postsFetch: Promise<SanityPostCard[]>
+  if (queryParam) {
+    postsFetch = sanityFetch<SanityPostCard[]>({
+      query: POSTS_SEARCH_QUERY,
+      params: { lang, q: `${queryParam}*` } as Record<string, string>,
+      tags: ['posts'],
+    })
+  } else if (tagParam) {
+    postsFetch = sanityFetch<SanityPostCard[]>({
+      query: POSTS_BY_TAG_QUERY,
+      params: { lang, tag: tagParam } as Record<string, string>,
+      tags: ['posts'],
+    })
+  } else {
+    postsFetch = sanityFetch<SanityPostCard[]>({
+      query: POSTS_LIST_QUERY,
+      params: { lang },
+      tags: ['posts'],
+    })
+  }
+
+  const [posts, popularPosts, latestPosts, tags] = await Promise.all([
+    postsFetch,
+    sanityFetch<SanityPopularPost[]>({
+      query: POPULAR_POSTS_QUERY,
+      params: { lang },
+      tags: ['posts'],
+    }),
+    sanityFetch<SanityLatestPost[]>({
+      query: LATEST_POSTS_QUERY,
+      params: { lang },
+      tags: ['posts'],
+    }),
+    sanityFetch<SanityTag[]>({
+      query: TAGS_QUERY,
+      tags: ['tags'],
+    }),
+  ])
+
+  const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE))
   const currentPage = 1
   const start = (currentPage - 1) * POSTS_PER_PAGE
-  const visiblePosts = BLOG_POSTS.slice(start, start + POSTS_PER_PAGE)
+  const visiblePosts = posts.slice(start, start + POSTS_PER_PAGE)
 
   return (
     <>
@@ -80,12 +139,14 @@ export default async function BlogPage({ params }: PageProps<'/[lang]/blog'>) {
           <div className="mx-auto grid max-w-[1150px] grid-cols-1 gap-[22px] px-4 md:gap-10 md:px-6 lg:grid-cols-[minmax(0,1fr)_223px] lg:gap-[60px]">
             <div className="flex flex-col gap-[22px] md:gap-10">
               <form
+                action={localePath(lang, '/blog')}
+                method="get"
                 className="flex items-center justify-between gap-3 border-b border-[var(--color-brand)] pb-4 lg:hidden"
-                noValidate
               >
                 <input
                   type="search"
                   name="q"
+                  defaultValue={queryParam}
                   placeholder={t.search}
                   aria-label={t.search}
                   className="flex-1 bg-transparent text-[14px] text-[var(--color-brand)] placeholder:text-[#aaa] focus:outline-none md:text-[15px]"
@@ -101,47 +162,57 @@ export default async function BlogPage({ params }: PageProps<'/[lang]/blog'>) {
 
               <BlogTagsBar
                 sortLabel={t.sortByTags}
+                activeTag={tagParam}
                 baseHref={localePath(lang, '/blog')}
                 loadMoreLabel={t.loadMore}
+                tags={tags}
               />
 
-              <ul className="grid grid-cols-1 gap-[10px] sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-                {visiblePosts.map((post) => (
-                  <li key={post.slug}>
-                    <BlogCard
-                      post={post}
-                      locale={lang}
-                      href={localePath(lang, `/blog/${post.slug}`)}
-                      detailsLabel={dict.common.moreDetails}
-                    />
-                  </li>
-                ))}
-              </ul>
+              {visiblePosts.length === 0 ? (
+                <p className="text-[15px] text-[var(--color-brand-soft)]">
+                  {queryParam
+                    ? `${t.search}: «${queryParam}» — 0`
+                    : tagParam
+                      ? `${t.sortByTags}: 0`
+                      : dict.blogPage.heroSubtitle}
+                </p>
+              ) : (
+                <ul className="grid grid-cols-1 gap-[10px] sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+                  {visiblePosts.map((post) => (
+                    <li key={post._id}>
+                      <BlogCard
+                        post={post}
+                        href={localePath(lang, `/blog/${post.slug}`)}
+                        detailsLabel={dict.common.moreDetails}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-              <BlogPagination
-                currentPage={currentPage}
-                totalPages={Math.max(totalPages, 10)}
-                prevLabel={t.prev}
-                nextLabel={t.next}
-                hrefForPage={(p) =>
-                  p === 1 ? localePath(lang, '/blog') : localePath(lang, `/blog?page=${p}`)
-                }
-              />
+              {totalPages > 1 ? (
+                <BlogPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  prevLabel={t.prev}
+                  nextLabel={t.next}
+                  hrefForPage={(p) =>
+                    p === 1 ? localePath(lang, '/blog') : localePath(lang, `/blog?page=${p}`)
+                  }
+                />
+              ) : null}
             </div>
 
             <div className="hidden lg:block">
               <BlogSidebar
-                locale={lang}
                 searchLabel={t.search}
                 searchPlaceholder={t.search}
-                categoriesTitle={t.categoriesTitle}
+                searchAction={localePath(lang, '/blog')}
+                searchInitialValue={queryParam}
                 popularTitle={t.popularTitle}
                 latestTitle={t.latestTitle}
-                categoryLabels={t.categories}
-                activeCategory="foreignPromotion"
-                popularPosts={POPULAR_POSTS}
-                latestPosts={LATEST_POSTS}
-                hrefForCategory={(cat) => localePath(lang, `/blog?cat=${cat}`)}
+                popularPosts={popularPosts}
+                latestPosts={latestPosts}
                 hrefForPost={(slug) => localePath(lang, `/blog/${slug}`)}
               />
             </div>

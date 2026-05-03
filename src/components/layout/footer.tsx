@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { CookiePreferencesButton } from '@/components/cookie-banner/cookie-preferences-button'
 import { ChevronDownIcon } from '@/components/icons/chevron-down'
 import { EMAIL, PHONES } from '@/data/contact'
 import { SOCIALS } from '@/data/socials'
@@ -160,13 +161,40 @@ export function Footer({ lang, dict }: Props) {
             </li>
             <li>
               <Link
+                href={localePath(lang, '/cookies')}
+                className="transition-opacity hover:opacity-80"
+              >
+                {dict.footer.legal.cookiesLink}
+              </Link>
+            </li>
+            <li>
+              <Link
                 href={localePath(lang, '/terms')}
                 className="transition-opacity hover:opacity-80"
               >
                 {dict.footer.terms}
               </Link>
             </li>
+            <li>
+              <CookiePreferencesButton
+                label={dict.footer.legal.preferencesLink}
+                className="text-left transition-opacity hover:opacity-80"
+              />
+            </li>
           </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-[#2a3550]">
+        <div className="mx-auto flex max-w-[1250px] flex-col gap-1.5 px-6 py-5 text-[12px] leading-[1.6] text-[#9aa3b8] md:flex-row md:flex-wrap md:items-center md:gap-x-3 md:gap-y-1.5 md:py-4 md:text-[13px]">
+          <span className="font-medium text-[var(--color-on-dark)]">
+            {dict.footer.legal.title}:
+          </span>
+          {dict.footer.legal.lines.map((line, i) => (
+            <span key={i} className="md:before:mx-1 md:before:content-['·'] md:first-of-type:before:hidden">
+              {line}
+            </span>
+          ))}
         </div>
       </div>
     </footer>

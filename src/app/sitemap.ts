@@ -1,12 +1,13 @@
 import type { MetadataRoute } from 'next'
-import { BLOG_POSTS } from '@/data/blog'
 import { PRODUCTS } from '@/data/products'
 import { PROJECTS } from '@/data/projects'
+import { sanityFetch } from '@/sanity/client'
+import { ALL_POST_PARAMS_QUERY } from '@/sanity/queries'
 import { defaultLocale, locales, type Locale } from '@/i18n/config'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albaventanas.com'
 
-const STATIC_ROUTES = ['', '/products', '/projects', '/blog', '/process', '/about', '/contact', '/privacy', '/terms'] as const
+const STATIC_ROUTES = ['', '/products', '/projects', '/blog', '/process', '/about', '/contact', '/privacy', '/cookies', '/terms'] as const
 
 const buildPath = (locale: Locale, route: string) =>
   locale === defaultLocale ? route || '/' : `/${locale}${route}`
@@ -26,7 +27,7 @@ const entry = (
     alternates: { languages: buildAlternates(route) },
   }))
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries = STATIC_ROUTES.flatMap((route) =>
     entry(route, {
       priority: route === '' ? 1 : 0.8,
@@ -48,11 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   )
 
-  const blogEntries = BLOG_POSTS.flatMap((post) =>
-    entry(`/blog/${post.slug}`, {
+  const allBlogParams = await sanityFetch<{ slug: string; lang: string }[]>({
+    query: ALL_POST_PARAMS_QUERY,
+    tags: ['posts'],
+  })
+  const uniqueBlogSlugs = Array.from(new Set(allBlogParams.map((p) => p.slug)))
+  const blogEntries = uniqueBlogSlugs.flatMap((slug) =>
+    entry(`/blog/${slug}`, {
       priority: 0.6,
       changeFrequency: 'monthly',
-      lastModified: new Date(post.publishedAt),
     }),
   )
 

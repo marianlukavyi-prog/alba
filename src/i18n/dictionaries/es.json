@@ -41,11 +41,26 @@
       "title": "Soluciones listas para la arquitectura moderna",
       "description": "Conoce los sistemas y configuraciones más populares",
       "items": {
-        "aluminumWindows": { "title": "Ventanas de aluminio", "subtitle": "Schüco / Reynaers" },
-        "sliding": { "title": "Sistemas correderos", "subtitle": "Soluciones panorámicas" },
-        "facade": { "title": "Acristalamiento de fachada", "subtitle": "Para negocios" },
-        "pivot": { "title": "Puertas pivotantes", "subtitle": "Diseño moderno" },
-        "shading": { "title": "Protección solar", "subtitle": "Persianas / pérgolas" }
+        "aluminumWindows": {
+          "title": "Ventanas de aluminio",
+          "subtitle": "Schüco / Reynaers"
+        },
+        "sliding": {
+          "title": "Sistemas correderos",
+          "subtitle": "Soluciones panorámicas"
+        },
+        "facade": {
+          "title": "Acristalamiento de fachada",
+          "subtitle": "Para negocios"
+        },
+        "pivot": {
+          "title": "Puertas pivotantes",
+          "subtitle": "Diseño moderno"
+        },
+        "shading": {
+          "title": "Protección solar",
+          "subtitle": "Persianas / pérgolas"
+        }
       }
     },
     "benefits": {
@@ -221,19 +236,8 @@
     "prev": "Página anterior",
     "next": "Página siguiente",
     "search": "Buscar en el blog",
-    "categoriesTitle": "Categorías del blog",
     "popularTitle": "Artículos populares",
-    "latestTitle": "Artículos recientes",
-    "categories": {
-      "ai": "IA",
-      "instructions": "Instrucciones",
-      "foreignPromotion": "Promoción internacional",
-      "cases": "Casos",
-      "internetMarketing": "Marketing online",
-      "contextualAds": "Publicidad contextual",
-      "siteSeo": "Posicionamiento web",
-      "socialMedia": "Redes sociales"
-    }
+    "latestTitle": "Artículos recientes"
   },
   "blogPostPage": {
     "readingForms": {
@@ -244,41 +248,47 @@
     }
   },
   "termsPage": {
-    "title": "Condiciones de uso",
+    "title": "Aviso legal y condiciones de uso",
     "breadcrumbHome": "Inicio",
-    "breadcrumbCurrent": "Condiciones de uso",
+    "breadcrumbCurrent": "Aviso legal",
+    "lastUpdatedLabel": "Última actualización",
+    "lastUpdatedDate": "3 de mayo de 2026",
     "sections": [
       {
-        "title": "Disposiciones generales",
-        "body": "Estas Condiciones de uso regulan el uso del sitio web y establecen las reglas de interacción entre el usuario y la administración del sitio. Al utilizar el sitio, usted acepta estas condiciones."
+        "title": "Titular del sitio web",
+        "body": "En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa que el titular de este sitio web es Alba Ventanas SL, con NIF B75999268, domicilio social en Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España y correo electrónico de contacto albaventanas@gmail.com."
+      },
+      {
+        "title": "Objeto",
+        "body": "Las presentes condiciones regulan el acceso, navegación y uso del sitio web, así como las responsabilidades derivadas de su utilización. El acceso al sitio implica la aceptación de estas condiciones."
       },
       {
         "title": "Uso del sitio",
-        "body": "El usuario se compromete a utilizar el sitio únicamente con fines legales y a no infringir los derechos de terceros. Se prohíbe cualquier interferencia con el funcionamiento del sitio o el intento de acceso no autorizado."
+        "body": "El usuario se compromete a hacer un uso adecuado y lícito del sitio, absteniéndose de cualquier actividad que pueda dañar el sitio o vulnerar derechos de terceros. Queda prohibido cualquier intento de acceso no autorizado, ingeniería inversa o introducción de software malicioso."
       },
       {
-        "title": "Información en el sitio",
-        "body": "Toda la información del sitio tiene carácter informativo y puede ser modificada sin previo aviso. Hacemos todo lo posible para mantener los datos actualizados, pero no garantizamos su total exactitud."
+        "title": "Información publicada",
+        "body": "La información sobre productos (sistemas Schüco, Reynaers, Aluprof, etc.), precios y disponibilidad tiene carácter orientativo. El presupuesto definitivo se confirma siempre por escrito tras visita técnica o medición. Realizamos esfuerzos razonables para mantener la información actualizada, pero no garantizamos su exactitud completa."
       },
       {
-        "title": "Propiedad intelectual",
-        "body": "Todos los materiales del sitio, incluidos textos, imágenes y diseño, son propiedad de la empresa o se utilizan sobre bases legales. Queda prohibida cualquier copia o uso de los materiales sin permiso."
+        "title": "Propiedad intelectual e industrial",
+        "body": "Todos los contenidos del sitio (textos, imágenes, gráficos, logotipos, diseño) son propiedad del titular o de los fabricantes representados (Schüco, Reynaers, Aluprof y otros), utilizados con autorización. Queda prohibida su reproducción, distribución o transformación sin autorización expresa."
+      },
+      {
+        "title": "Enlaces externos",
+        "body": "El sitio puede incluir enlaces a páginas externas (fabricantes, redes sociales, herramientas de mensajería). No nos hacemos responsables del contenido o las políticas de privacidad de dichos sitios."
       },
       {
         "title": "Limitación de responsabilidad",
-        "body": "No nos hacemos responsables de posibles daños derivados del uso o de la imposibilidad de uso del sitio. El usuario toma decisiones de forma independiente con base en la información recibida."
+        "body": "No nos hacemos responsables de daños derivados de fallos técnicos, interrupciones del servicio, virus informáticos o uso indebido del sitio por parte del usuario, salvo en los casos en que la ley lo exija."
       },
       {
-        "title": "Enlaces a recursos externos",
-        "body": "El sitio puede contener enlaces a recursos externos. No nos hacemos responsables de su contenido ni de sus políticas de privacidad."
+        "title": "Legislación y jurisdicción",
+        "body": "Estas condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales del domicilio del titular, salvo cuando la legislación de protección al consumidor disponga otro fuero."
       },
       {
-        "title": "Cambios en las condiciones",
-        "body": "Nos reservamos el derecho de modificar estas Condiciones de uso sin previo aviso. La versión actualizada se publicará en esta página."
-      },
-      {
-        "title": "Contacto",
-        "body": "Para cualquier pregunta sobre el uso del sitio, puede contactarnos a través del formulario de contacto o por los contactos indicados."
+        "title": "Modificaciones",
+        "body": "Nos reservamos el derecho a modificar estas condiciones en cualquier momento. La versión vigente se publica en esta página con la fecha correspondiente."
       }
     ]
   },
@@ -286,50 +296,69 @@
     "title": "Política de privacidad",
     "breadcrumbHome": "Inicio",
     "breadcrumbCurrent": "Política de privacidad",
+    "lastUpdatedLabel": "Última actualización",
+    "lastUpdatedDate": "3 de mayo de 2026",
     "sections": [
       {
-        "title": "Información que recopilamos",
-        "body": "Recopilamos la información que usted facilita a través de los formularios del sitio: nombre, teléfono, correo electrónico y otros datos necesarios para procesar su solicitud. También pueden recopilarse automáticamente datos técnicos como dirección IP, tipo de dispositivo y datos de uso del sitio."
+        "title": "Responsable del tratamiento",
+        "body": "El responsable del tratamiento de los datos personales es Alba Ventanas SL, con NIF B75999268, domicilio social en Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España y dirección de contacto albaventanas@gmail.com."
       },
       {
-        "title": "Uso de la información",
-        "body": "Usamos los datos recibidos para:",
+        "title": "Datos que recopilamos",
+        "body": "Recopilamos los datos que usted facilita voluntariamente a través de los formularios del sitio: nombre, teléfono, correo electrónico y mensaje. También se recopilan automáticamente datos técnicos básicos (idioma, estado de consentimiento de cookies, estado del modal de contacto) almacenados localmente en su navegador para el correcto funcionamiento del sitio. No utilizamos cookies analíticas, de marketing o de terceros."
+      },
+      {
+        "title": "Finalidad del tratamiento",
+        "body": "Los datos se tratan con las siguientes finalidades:",
         "items": [
-          "procesar solicitudes y prestar servicios",
-          "contactarle en relación con su consulta",
-          "mejorar el sitio y el servicio",
-          "cumplir con los requisitos legales"
+          "gestionar su solicitud de información o presupuesto",
+          "contactarle por teléfono, correo electrónico o aplicaciones de mensajería para responder a su consulta",
+          "cumplir con las obligaciones legales y contables aplicables"
         ]
       },
       {
-        "title": "Protección de datos",
-        "body": "Aplicamos medidas técnicas y organizativas modernas para proteger los datos personales contra el acceso no autorizado, la pérdida o la divulgación."
+        "title": "Base jurídica",
+        "body": "La base jurídica del tratamiento es su consentimiento expreso, otorgado al aceptar la casilla correspondiente antes de enviar cualquier formulario (art. 6.1.a RGPD), así como la ejecución de medidas precontractuales adoptadas a petición del interesado (art. 6.1.b RGPD)."
       },
       {
-        "title": "Cesión de datos a terceros",
-        "body": "No cedemos sus datos personales a terceros, salvo en los casos previstos por la legislación o cuando sea necesario para prestar el servicio (por ejemplo, socios o servicios de entrega)."
+        "title": "Destinatarios de los datos",
+        "body": "Los datos enviados a través de los formularios se transmiten, además de a Alba Ventanas SL, al siguiente destinatario:",
+        "items": [
+          "Telegram FZ-LLC (Dubái, EAU) — recibimos las notificaciones de las solicitudes a través de un bot de Telegram para responder con la mayor rapidez posible. Telegram actúa como encargado de tratamiento. Más información en https://telegram.org/privacy",
+          "Tawk.to LLC (EE. UU.) — proveedor del chat en vivo. Si aceptas todas las cookies, se activa el widget de chat para hablar con un operador. Tawk.to actúa como encargado de tratamiento. Más información: https://www.tawk.to/data-protection/GDPR/"
+        ]
+      },
+      {
+        "title": "Plazo de conservación",
+        "body": "Los datos se conservan durante el tiempo necesario para atender su solicitud y, posteriormente, durante los plazos legalmente exigibles (en general, hasta 5 años para datos vinculados a relaciones comerciales, conforme a la legislación fiscal española). Una vez transcurridos esos plazos, los datos se eliminan o se anonimizan."
       },
       {
         "title": "Sus derechos",
-        "body": "Usted tiene derecho a:",
+        "body": "Como titular de los datos, usted tiene derecho a:",
         "items": [
           "acceder a sus datos personales",
           "solicitar su rectificación o supresión",
-          "retirar el consentimiento al tratamiento",
-          "presentar una reclamación ante la autoridad competente"
+          "limitar u oponerse al tratamiento",
+          "solicitar la portabilidad de los datos",
+          "retirar el consentimiento en cualquier momento",
+          "presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD, www.aepd.es) si considera que el tratamiento no se ajusta a la normativa vigente"
         ]
       },
       {
+        "title": "Cómo ejercer sus derechos",
+        "body": "Puede ejercer cualquiera de estos derechos enviando un correo electrónico a albaventanas@gmail.com indicando claramente el derecho que desea ejercer y adjuntando una copia de un documento de identidad. Responderemos en el plazo máximo de un mes."
+      },
+      {
+        "title": "Medidas de seguridad",
+        "body": "Aplicamos medidas técnicas y organizativas razonables para proteger los datos personales contra acceso no autorizado, pérdida, alteración o divulgación."
+      },
+      {
         "title": "Cookies",
-        "body": "Nuestro sitio utiliza cookies para su correcto funcionamiento, análisis y mejora de la experiencia de usuario. Puede modificar la configuración de cookies en su navegador."
+        "body": "El sitio utiliza únicamente cookies y almacenamiento técnicos estrictamente necesarios. El detalle se encuentra en nuestra Política de cookies."
       },
       {
         "title": "Cambios en la política",
-        "body": "Podemos actualizar esta política de forma periódica. La versión vigente siempre está disponible en esta página."
-      },
-      {
-        "title": "Contacto",
-        "body": "Si tiene preguntas sobre el tratamiento de datos personales, contacte con nosotros a través del formulario del sitio o los contactos indicados."
+        "body": "Esta política puede actualizarse para reflejar cambios legales u operativos. La versión vigente siempre está publicada en esta página, indicando la fecha de la última actualización."
       }
     ]
   },
@@ -347,10 +376,22 @@
       "ctaLabel": "Ver proyectos"
     },
     "stats": [
-      { "value": "250+", "label": "proyectos realizados" },
-      { "value": "300+", "label": "sistemas instalados" },
-      { "value": "10+", "label": "años de experiencia" },
-      { "value": "100%", "label": "clientes satisfechos" }
+      {
+        "value": "250+",
+        "label": "proyectos realizados"
+      },
+      {
+        "value": "300+",
+        "label": "sistemas instalados"
+      },
+      {
+        "value": "10+",
+        "label": "años de experiencia"
+      },
+      {
+        "value": "100%",
+        "label": "clientes satisfechos"
+      }
     ],
     "contact": {
       "title": "Contáctenos",
@@ -445,7 +486,7 @@
     "errorGeneric": "No se pudo enviar la solicitud. Inténtalo de nuevo o llámanos.",
     "errorRequired": "Por favor, indica tu nombre y teléfono.",
     "errorConsent": "Por favor, acepta el tratamiento de los datos personales.",
-    "consentLabel": "Acepto el tratamiento de mis datos personales conforme a la ",
+    "consentLabel": "Acepto el tratamiento de mis datos personales conforme a la",
     "consentLinkLabel": "Política de privacidad"
   },
   "footer": {
@@ -455,14 +496,86 @@
     "phone": "Teléfono",
     "email": "Email",
     "privacy": "Política de privacidad",
-    "terms": "Condiciones de uso"
+    "terms": "Condiciones de uso",
+    "legal": {
+      "title": "Información legal",
+      "lines": [
+        "Alba Ventanas SL",
+        "NIF: B75999268",
+        "Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España"
+      ],
+      "cookiesLink": "Política de cookies",
+      "preferencesLink": "Configuración de cookies"
+    }
   },
   "cookieBanner": {
     "title": "Usamos cookies",
-    "description": "Utilizamos cookies estrictamente necesarias (idioma, tu elección de consentimiento) y, con tu consentimiento, cookies analíticas. Puedes aceptar todo, rechazar las no esenciales o consultar la política.",
+    "description": "Este sitio utiliza cookies técnicas estrictamente necesarias (idioma, tu elección de consentimiento, estado del modal). Si aceptas, también activamos el chat en vivo (Tawk.to) para que puedas hablar con un operador. Puedes rechazarlo en cualquier momento.",
     "accept": "Aceptar todo",
     "reject": "Rechazar no esenciales",
     "settings": "Política de cookies",
     "close": "Cerrar"
+  },
+  "cookiesPage": {
+    "title": "Política de cookies",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbCurrent": "Política de cookies",
+    "lastUpdatedLabel": "Última actualización",
+    "lastUpdatedDate": "3 de mayo de 2026",
+    "intro": "Esta Política explica qué son las cookies y otros mecanismos de almacenamiento local que se utilizan en el sitio web de Alba Ventanas SL, con qué finalidad y cómo puede gestionarlas.",
+    "whatTitle": "¿Qué son las cookies?",
+    "whatBody": "Una cookie es un pequeño fichero que se descarga en su dispositivo al acceder a un sitio web. Permite recordar información sobre la visita. Junto a las cookies utilizamos también el almacenamiento local del navegador (localStorage), que cumple funciones similares.",
+    "typesTitle": "Tipos de cookies que utilizamos",
+    "typesBody": "Este sitio utiliza cookies técnicas estrictamente necesarias para su funcionamiento. Si aceptas todas las cookies en el banner, también se activan cookies funcionales del proveedor de chat en vivo Tawk.to LLC (EE. UU.) para mantener la conversación. No utilizamos cookies analíticas, publicitarias ni de redes sociales.",
+    "tableHeaders": {
+      "name": "Nombre",
+      "type": "Tipo",
+      "purpose": "Finalidad",
+      "retention": "Conservación",
+      "provider": "Proveedor"
+    },
+    "cookies": [
+      {
+        "name": "alba-cookie-consent",
+        "type": "Técnica (localStorage)",
+        "purpose": "Recordar su decisión sobre el banner de cookies (aceptar todo, rechazar no esenciales o cerrar).",
+        "retention": "Permanente hasta que se borre el almacenamiento del navegador",
+        "provider": "Alba Ventanas SL (propia)"
+      },
+      {
+        "name": "lead-modal-auto-fired",
+        "type": "Técnica (sessionStorage)",
+        "purpose": "Evitar mostrar el modal de contacto más de una vez por sesión.",
+        "retention": "Hasta cerrar la pestaña del navegador",
+        "provider": "Alba Ventanas SL (propia)"
+      },
+      {
+        "name": "NEXT_LOCALE",
+        "type": "Técnica (cookie)",
+        "purpose": "Recordar el idioma seleccionado para mostrar la versión correcta del sitio.",
+        "retention": "1 año",
+        "provider": "Alba Ventanas SL (propia)"
+      },
+      {
+        "name": "__tawkuuid",
+        "type": "Funcional · terceros (Tawk.to)",
+        "purpose": "Identifica a la visita de forma anónima dentro del chat en vivo (solo si aceptas todas las cookies).",
+        "retention": "6 meses",
+        "provider": "Tawk.to LLC (EE. UU.)"
+      },
+      {
+        "name": "Tawk_*",
+        "type": "Funcional · terceros (Tawk.to)",
+        "purpose": "Mantiene la sesión activa del chat para no perder el historial de la conversación.",
+        "retention": "Sesión / hasta cerrar el navegador",
+        "provider": "Tawk.to LLC (EE. UU.)"
+      }
+    ],
+    "manageTitle": "Cómo gestionar las cookies",
+    "manageBody": "Puede aceptar o rechazar las cookies no esenciales en el banner que se muestra al entrar al sitio. También puede borrar las cookies y el almacenamiento local desde la configuración de su navegador (Chrome, Safari, Firefox, Edge). El rechazo de las cookies técnicas estrictamente necesarias puede afectar al funcionamiento del sitio.",
+    "changesTitle": "Cambios en la política",
+    "changesBody": "Si en el futuro incorporamos cookies analíticas o de marketing (por ejemplo, Google Analytics), actualizaremos esta política y solicitaremos su consentimiento previo a través del banner antes de activarlas.",
+    "contactTitle": "Contacto",
+    "contactBody": "Para cualquier consulta sobre esta Política de cookies, puede escribirnos a albaventanas@gmail.com."
   }
 }

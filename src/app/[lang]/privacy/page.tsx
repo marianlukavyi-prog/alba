@@ -83,6 +83,9 @@ export default async function PrivacyPage({ params }: PageProps<'/[lang]/privacy
           <h1 className="text-[22px] font-semibold text-[var(--color-brand)] md:text-[28px]">
             {t.title}
           </h1>
+          <p className="mt-2 text-[13px] text-[var(--color-brand-soft)] md:text-[14px]">
+            {t.lastUpdatedLabel}: {t.lastUpdatedDate}
+          </p>
 
           <div className="mt-7 flex flex-col gap-6 md:gap-7">
             {t.sections.map((section) => (

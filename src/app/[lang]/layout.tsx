@@ -3,10 +3,12 @@ import { Onest } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import '../globals.css'
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
+import { TawkChat } from '@/components/tawk-chat/tawk-chat'
 import { Footer } from '@/components/layout/footer'
 import { LeadModalProvider } from '@/components/lead-modal/lead-modal'
 import { JsonLd } from '@/components/seo/json-ld'
 import { EMAIL, PHONES } from '@/data/contact'
+import { COMPANY } from '@/data/legal'
 import { defaultLocale, hasLocale, locales } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -80,15 +82,19 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Alba Ventanas',
+    legalName: COMPANY.legalName,
+    vatID: COMPANY.nif,
+    taxID: COMPANY.nif,
     url: SITE_URL,
     logo: `${SITE_URL}/figma/banner-hero.webp`,
     email: EMAIL,
     telephone: PHONES[0],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Carrer Gabriela Mistral',
-      addressLocality: 'Picanya',
-      addressRegion: 'Valencia',
+      streetAddress: COMPANY.address.street,
+      postalCode: COMPANY.address.postalCode,
+      addressLocality: COMPANY.address.city,
+      addressRegion: COMPANY.address.province,
       addressCountry: 'ES',
     },
     sameAs: [],
@@ -114,8 +120,9 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
         </LeadModalProvider>
         <CookieBanner
           labels={dict.cookieBanner}
-          policyHref={lang === defaultLocale ? '/privacy' : `/${lang}/privacy`}
+          policyHref={lang === defaultLocale ? '/cookies' : `/${lang}/cookies`}
         />
+        <TawkChat />
         <JsonLd data={[organization, website]} />
       </body>
     </html>

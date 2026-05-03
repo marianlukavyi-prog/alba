@@ -7,7 +7,14 @@ import { ArticleBanner } from '@/components/sections/article-banner'
 import { ArticleBody } from '@/components/sections/article-body'
 import { BlogSidebar } from '@/components/sections/blog-sidebar'
 import { JsonLd } from '@/components/seo/json-ld'
-import { BLOG_POSTS, getBlogPost, LATEST_POSTS, POPULAR_POSTS } from '@/data/blog'
+import { sanityFetch, urlFor } from '@/sanity/client'
+import {
+  ALL_POST_PARAMS_QUERY,
+  LATEST_POSTS_QUERY,
+  POPULAR_POSTS_QUERY,
+  POST_BY_SLUG_QUERY,
+} from '@/sanity/queries'
+import type { SanityLatestPost, SanityPopularPost, SanityPost } from '@/sanity/types'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -30,10 +37,20 @@ const READING_LOCALE: Record<Locale, Intl.PluralRules> = {
   ru: new Intl.PluralRules('ru'),
 }
 
-export function generateStaticParams() {
-  return locales.flatMap((lang) =>
-    BLOG_POSTS.map((post) => ({ lang, slug: post.slug })),
-  )
+export async function generateStaticParams() {
+  const all = await sanityFetch<{ slug: string; lang: string }[]>({
+    query: ALL_POST_PARAMS_QUERY,
+    tags: ['posts'],
+  })
+  return all
+    .filter((p) => locales.includes(p.lang as Locale))
+    .map((p) => ({ lang: p.lang as Locale, slug: p.slug }))
+}
+
+const getCoverUrl = (post: SanityPost) => {
+  const src = post.featuredImage?.asset ? post.featuredImage : post.cover
+  if (!src?.asset) return '/figma/banner-hero.webp'
+  return urlFor(src as Parameters<typeof urlFor>[0]).width(1280).height(720).fit('crop').url()
 }
 
 export async function generateMetadata({
@@ -41,15 +58,21 @@ export async function generateMetadata({
 }: PageProps<'/[lang]/blog/[slug]'>): Promise<Metadata> {
   const { lang, slug } = await params
   if (!hasLocale(lang)) return {}
-  const post = getBlogPost(slug)
+  const post = await sanityFetch<SanityPost | null>({
+    query: POST_BY_SLUG_QUERY,
+    params: { lang, slug },
+    tags: [`post:${slug}`],
+  })
   if (!post) return {}
 
   const languages: Record<string, string> = {}
   for (const locale of locales) languages[locale] = localePath(locale, `/blog/${slug}`)
 
+  const cover = getCoverUrl(post)
+
   return {
-    title: post.title[lang],
-    description: post.excerpt[lang],
+    title: post.title,
+    description: post.excerpt,
     alternates: {
       canonical: localePath(lang, `/blog/${slug}`),
       languages,
@@ -57,21 +80,21 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       siteName: 'Alba Ventanas',
-      title: post.title[lang],
-      description: post.excerpt[lang],
+      title: post.title,
+      description: post.excerpt,
       url: localePath(lang, `/blog/${slug}`),
-      images: [post.featuredImage],
+      images: [cover],
       publishedTime: post.publishedAt,
-      authors: [post.author],
+      authors: [post.author?.name],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title[lang],
-      description: post.excerpt[lang],
-      images: [post.featuredImage],
+      title: post.title,
+      description: post.excerpt,
+      images: [cover],
     },
     other: {
-      'reading-time': String(post.readingMinutes),
+      'reading-time': String(post.readingMinutes ?? 0),
     },
   }
 }
@@ -79,7 +102,23 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[slug]'>) {
   const { lang, slug } = await params
   if (!hasLocale(lang)) notFound()
-  const post = getBlogPost(slug)
+  const [post, popularPosts, latestPosts] = await Promise.all([
+    sanityFetch<SanityPost | null>({
+      query: POST_BY_SLUG_QUERY,
+      params: { lang, slug },
+      tags: [`post:${slug}`],
+    }),
+    sanityFetch<SanityPopularPost[]>({
+      query: POPULAR_POSTS_QUERY,
+      params: { lang },
+      tags: ['posts'],
+    }),
+    sanityFetch<SanityLatestPost[]>({
+      query: LATEST_POSTS_QUERY,
+      params: { lang },
+      tags: ['posts'],
+    }),
+  ])
   if (!post) notFound()
 
   const dict = await getDictionary(lang)
@@ -90,20 +129,24 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
     .format(new Date(post.publishedAt))
     .replace(/\s?г\.?$/u, '')
     .replace(/\sр\.?$/u, '')
-  const minutes = post.readingMinutes
-  const minutesForm = tArticle.readingForms[READING_LOCALE[lang].select(minutes) as 'one' | 'few' | 'many' | 'other'] ?? tArticle.readingForms.other
+  const minutes = post.readingMinutes ?? 0
+  const minutesForm =
+    tArticle.readingForms[
+      READING_LOCALE[lang].select(minutes) as 'one' | 'few' | 'many' | 'other'
+    ] ?? tArticle.readingForms.other
   const readingLabel = `${minutes} ${minutesForm}`
 
   const articleUrl = `${SITE_URL}${localePath(lang, `/blog/${slug}`)}`
+  const coverUrl = getCoverUrl(post)
   const article = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title[lang],
-    description: post.excerpt[lang],
-    image: `${SITE_URL}${post.featuredImage}`,
+    headline: post.title,
+    description: post.excerpt,
+    image: coverUrl.startsWith('http') ? coverUrl : `${SITE_URL}${coverUrl}`,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
-    author: { '@type': 'Person', name: post.author },
+    author: { '@type': 'Person', name: post.author?.name ?? '' },
     publisher: {
       '@type': 'Organization',
       name: 'Alba Ventanas',
@@ -128,7 +171,7 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
         name: t.breadcrumbCurrent,
         item: `${SITE_URL}${localePath(lang, '/blog')}`,
       },
-      { '@type': 'ListItem', position: 3, name: post.title[lang], item: articleUrl },
+      { '@type': 'ListItem', position: 3, name: post.title, item: articleUrl },
     ],
   }
 
@@ -138,16 +181,16 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
       <Header lang={lang} dict={dict} position="fixed" />
       <main className="flex flex-1 flex-col">
         <ArticleBanner
-          title={post.title[lang]}
+          title={post.title}
           publishedLabel={publishedLabel}
           readingLabel={readingLabel}
-          views={post.views}
-          tags={post.tags}
-          image={{ src: post.featuredImage, alt: post.title[lang] }}
+          views={post.views ?? 0}
+          tags={post.tags?.map((t) => t.label) ?? []}
+          image={{ src: coverUrl, alt: post.cover?.alt ?? post.title }}
           breadcrumb={[
             { label: t.breadcrumbHome, href: localePath(lang) },
             { label: t.breadcrumbCurrent, href: localePath(lang, '/blog') },
-            { label: post.title[lang] },
+            { label: post.title },
           ]}
         />
 
@@ -177,30 +220,26 @@ export default async function BlogPostPage({ params }: PageProps<'/[lang]/blog/[
               <article className="flex flex-col gap-8">
                 <div className="relative h-[220px] w-full overflow-hidden rounded-[2px] sm:h-[340px] lg:h-[400px]">
                   <Image
-                    src={post.featuredImage}
-                    alt={post.title[lang]}
+                    src={coverUrl}
+                    alt={post.cover?.alt ?? post.title}
                     fill
                     sizes="(min-width: 1024px) 860px, 100vw"
                     className="object-cover"
                   />
                 </div>
-                <ArticleBody blocks={post.body} />
+                {post.body ? <ArticleBody blocks={post.body} /> : null}
               </article>
             </div>
 
             <div className="hidden lg:block">
               <BlogSidebar
-                locale={lang}
                 searchLabel={t.search}
                 searchPlaceholder={t.search}
-                categoriesTitle={t.categoriesTitle}
+                searchAction={localePath(lang, '/blog')}
                 popularTitle={t.popularTitle}
                 latestTitle={t.latestTitle}
-                categoryLabels={t.categories}
-                activeCategory="foreignPromotion"
-                popularPosts={POPULAR_POSTS}
-                latestPosts={LATEST_POSTS}
-                hrefForCategory={(cat) => localePath(lang, `/blog?cat=${cat}`)}
+                popularPosts={popularPosts}
+                latestPosts={latestPosts}
                 hrefForPost={(s) => localePath(lang, `/blog/${s}`)}
               />
             </div>

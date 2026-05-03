@@ -41,11 +41,26 @@
       "title": "Ready-made solutions for modern architecture",
       "description": "Explore our most popular systems and configurations",
       "items": {
-        "aluminumWindows": { "title": "Aluminium windows", "subtitle": "Schüco / Reynaers" },
-        "sliding": { "title": "Sliding systems", "subtitle": "Panoramic solutions" },
-        "facade": { "title": "Façade glazing", "subtitle": "For business" },
-        "pivot": { "title": "Pivot doors", "subtitle": "Modern design" },
-        "shading": { "title": "Solar shading", "subtitle": "Blinds / pergolas" }
+        "aluminumWindows": {
+          "title": "Aluminium windows",
+          "subtitle": "Schüco / Reynaers"
+        },
+        "sliding": {
+          "title": "Sliding systems",
+          "subtitle": "Panoramic solutions"
+        },
+        "facade": {
+          "title": "Façade glazing",
+          "subtitle": "For business"
+        },
+        "pivot": {
+          "title": "Pivot doors",
+          "subtitle": "Modern design"
+        },
+        "shading": {
+          "title": "Solar shading",
+          "subtitle": "Blinds / pergolas"
+        }
       }
     },
     "benefits": {
@@ -221,19 +236,8 @@
     "prev": "Previous page",
     "next": "Next page",
     "search": "Search the blog",
-    "categoriesTitle": "Blog categories",
     "popularTitle": "Popular articles",
-    "latestTitle": "Latest articles",
-    "categories": {
-      "ai": "AI",
-      "instructions": "Instructions",
-      "foreignPromotion": "International promotion",
-      "cases": "Cases",
-      "internetMarketing": "Internet marketing",
-      "contextualAds": "Contextual ads",
-      "siteSeo": "Website SEO",
-      "socialMedia": "Social media"
-    }
+    "latestTitle": "Latest articles"
   },
   "blogPostPage": {
     "readingForms": {
@@ -244,92 +248,117 @@
     }
   },
   "termsPage": {
-    "title": "Terms of use",
+    "title": "Legal notice and terms of use",
     "breadcrumbHome": "Home",
-    "breadcrumbCurrent": "Terms of use",
+    "breadcrumbCurrent": "Legal notice",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdatedDate": "3 May 2026",
     "sections": [
       {
-        "title": "General provisions",
-        "body": "These Terms of Use govern the use of the website and define the rules of interaction between the user and the site administration. By using the site, you agree to these terms."
+        "title": "Site owner",
+        "body": "In compliance with Article 10 of Spanish Law 34/2002 on Information Society Services and E-Commerce (LSSI-CE), the owner of this site is Alba Ventanas SL, tax ID B75999268, registered office at Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España, contact email albaventanas@gmail.com. Registration with the Mercantile Registry of Valencia: in progress."
+      },
+      {
+        "title": "Purpose",
+        "body": "These terms govern access to, navigation through and use of the website, as well as the responsibilities arising from such use. Accessing the site implies acceptance of these terms."
       },
       {
         "title": "Use of the site",
-        "body": "The user agrees to use the site only for lawful purposes and not to infringe the rights of third parties. Any interference with the operation of the site or attempts to gain unauthorised access are prohibited."
+        "body": "The user agrees to use the site only for lawful purposes and not to infringe third-party rights. Any unauthorised access attempt, reverse engineering or introduction of malicious software is prohibited."
       },
       {
-        "title": "Information on the site",
-        "body": "All information on the site is for reference only and may be changed without prior notice. We make every effort to keep the data up to date but do not guarantee complete accuracy."
+        "title": "Information published",
+        "body": "Information on products (Schüco, Reynaers, Aluprof and other systems), prices and availability is indicative. The final quote is always confirmed in writing after a technical visit or measurement. We make reasonable efforts to keep information current but do not warrant complete accuracy."
       },
       {
         "title": "Intellectual property",
-        "body": "All materials on the site — including text, images and design — are the property of the company or are used on lawful grounds. Any copying or use of materials without permission is prohibited."
+        "body": "All site content (texts, images, graphics, logos, design) is property of the owner or of the represented manufacturers (Schüco, Reynaers, Aluprof and others), used with authorisation. Reproduction, distribution or transformation without express permission is prohibited."
+      },
+      {
+        "title": "External links",
+        "body": "The site may include links to external pages (manufacturers, social networks, messaging tools). We are not responsible for the content or privacy policies of such sites."
       },
       {
         "title": "Limitation of liability",
-        "body": "We are not liable for any losses arising from the use, or the inability to use, the site. The user makes decisions independently based on the information received."
+        "body": "We are not liable for damages arising from technical failures, service interruptions, computer viruses or improper use of the site by the user, except where required by law."
       },
       {
-        "title": "Links to third-party resources",
-        "body": "The site may contain links to third-party resources. We are not responsible for their content or privacy practices."
+        "title": "Governing law and jurisdiction",
+        "body": "These terms are governed by Spanish law. Any dispute is submitted to the courts of the owner’s domicile, except where consumer-protection law sets a different jurisdiction."
       },
       {
-        "title": "Changes to the terms",
-        "body": "We reserve the right to change these Terms of Use without prior notice. The updated version will be published on this page."
-      },
-      {
-        "title": "Contact",
-        "body": "For any questions about the use of the site, please contact us via the feedback form or via the contacts listed on the site."
+        "title": "Changes",
+        "body": "We reserve the right to amend these terms at any time. The current version is published on this page with the corresponding date."
       }
     ]
   },
   "privacyPage": {
-    "title": "Privacy policy",
+    "title": "Privacy Policy",
     "breadcrumbHome": "Home",
-    "breadcrumbCurrent": "Privacy policy",
+    "breadcrumbCurrent": "Privacy Policy",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdatedDate": "3 May 2026",
     "sections": [
       {
-        "title": "Information we collect",
-        "body": "We collect the information you provide through forms on the site — including name, phone number, email and other data needed to process your request. Technical data such as IP address, device type and site usage may also be collected automatically."
+        "title": "Data controller",
+        "body": "The data controller is Alba Ventanas SL, tax ID B75999268, registered office at Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España, contact email albaventanas@gmail.com. Registration with the Mercantile Registry of Valencia: in progress (will be updated upon official confirmation)."
       },
       {
-        "title": "How we use information",
-        "body": "We use the data for:",
+        "title": "Data we collect",
+        "body": "We collect the data you voluntarily provide through site forms: name, phone, email and message. We also collect basic technical data (language, cookie consent state, contact modal state) stored locally in your browser to make the site work. We do not use any analytics, marketing or third-party tracking cookies."
+      },
+      {
+        "title": "Purpose of processing",
+        "body": "Data is processed for the following purposes:",
         "items": [
-          "processing requests and providing services",
-          "contacting you regarding your enquiry",
-          "improving the site and service",
-          "meeting legal requirements"
+          "handle your inquiry or quote request",
+          "contact you by phone, email or messaging apps to answer your request",
+          "comply with applicable legal and accounting obligations"
         ]
       },
       {
-        "title": "Data protection",
-        "body": "We apply modern technical and organisational measures to protect personal data from unauthorised access, loss or disclosure."
+        "title": "Legal basis",
+        "body": "The legal basis is your express consent, given by ticking the corresponding box before submitting any form (Art. 6.1.a GDPR), and the performance of pre-contractual measures requested by the data subject (Art. 6.1.b GDPR)."
       },
       {
-        "title": "Sharing data with third parties",
-        "body": "We do not share your personal data with third parties except where required by law, or when necessary to deliver our services (e.g. partners or delivery providers)."
+        "title": "Recipients of the data",
+        "body": "Data submitted through forms is shared, in addition to Alba Ventanas SL, with the following recipient:",
+        "items": [
+          "Telegram FZ-LLC (Dubai, UAE) — we receive form notifications via a Telegram bot to respond as quickly as possible. Telegram acts as a data processor. More info: https://telegram.org/privacy",
+          "Tawk.to LLC (USA) — live chat provider. If you accept all cookies, the chat widget is enabled to talk to an operator. Tawk.to acts as a data processor. More info: https://www.tawk.to/data-protection/GDPR/"
+        ]
+      },
+      {
+        "title": "Retention period",
+        "body": "Data is kept for the time needed to handle your request and, afterwards, for the periods legally required (generally up to 5 years for commercial-relationship data, per Spanish tax law). After that, the data is deleted or anonymised."
       },
       {
         "title": "Your rights",
-        "body": "You have the right to:",
+        "body": "As a data subject, you are entitled to:",
         "items": [
           "access your personal data",
           "request correction or deletion",
-          "withdraw consent to processing",
-          "lodge a complaint with the relevant authority"
+          "restrict or object to processing",
+          "data portability",
+          "withdraw consent at any time",
+          "lodge a complaint with the Spanish Data Protection Agency (AEPD, www.aepd.es) if you consider the processing breaches the applicable rules"
         ]
       },
       {
+        "title": "How to exercise your rights",
+        "body": "You can exercise any of these rights by emailing albaventanas@gmail.com, clearly stating which right you wish to exercise and attaching a copy of an ID document. We will respond within one month."
+      },
+      {
+        "title": "Security measures",
+        "body": "We apply reasonable technical and organisational measures to protect personal data against unauthorised access, loss, alteration or disclosure."
+      },
+      {
         "title": "Cookies",
-        "body": "Our site uses cookies for correct operation, analytics and to improve the user experience. You can change cookie settings in your browser."
+        "body": "The site only uses strictly necessary technical cookies and storage. Details are in our Cookie Policy."
       },
       {
-        "title": "Changes to the policy",
-        "body": "We may update this policy from time to time. The current version is always available on this page."
-      },
-      {
-        "title": "Contact",
-        "body": "If you have any questions about how we process personal data, contact us via the form on the site or the contacts listed."
+        "title": "Policy updates",
+        "body": "This policy may be updated to reflect legal or operational changes. The current version is always published on this page, with the last-updated date."
       }
     ]
   },
@@ -347,10 +376,22 @@
       "ctaLabel": "View projects"
     },
     "stats": [
-      { "value": "250+", "label": "completed projects" },
-      { "value": "300+", "label": "systems installed" },
-      { "value": "10+", "label": "years of experience" },
-      { "value": "100%", "label": "satisfied clients" }
+      {
+        "value": "250+",
+        "label": "completed projects"
+      },
+      {
+        "value": "300+",
+        "label": "systems installed"
+      },
+      {
+        "value": "10+",
+        "label": "years of experience"
+      },
+      {
+        "value": "100%",
+        "label": "satisfied clients"
+      }
     ],
     "contact": {
       "title": "Get in touch",
@@ -445,7 +486,7 @@
     "errorGeneric": "Couldn’t send the request. Please try again or call us.",
     "errorRequired": "Please fill in your name and phone.",
     "errorConsent": "Please agree to the processing of personal data.",
-    "consentLabel": "I agree to the processing of my personal data in accordance with the ",
+    "consentLabel": "I agree to the processing of my personal data in accordance with the",
     "consentLinkLabel": "Privacy Policy"
   },
   "footer": {
@@ -455,14 +496,86 @@
     "phone": "Phone",
     "email": "Email",
     "privacy": "Privacy policy",
-    "terms": "Terms of use"
+    "terms": "Terms of use",
+    "legal": {
+      "title": "Legal information",
+      "lines": [
+        "Alba Ventanas SL",
+        "Tax ID: B75999268",
+        "Av. 9 de Octubre, 89, Pta. 1, 1ª — 46520 Sagunt (Valencia), España"
+      ],
+      "cookiesLink": "Cookie Policy",
+      "preferencesLink": "Cookie preferences"
+    }
   },
   "cookieBanner": {
     "title": "We use cookies",
-    "description": "We use strictly necessary cookies (language, your consent choice) and, with your consent, analytics. You can accept all, reject non-essential, or review our policy.",
+    "description": "This site uses strictly necessary technical cookies (language, consent choice, modal state). If you accept all, we also enable live chat (Tawk.to) so you can talk to an operator. You can decline at any time.",
     "accept": "Accept all",
     "reject": "Reject non-essential",
-    "settings": "Cookie policy",
+    "settings": "Cookie Policy",
     "close": "Close"
+  },
+  "cookiesPage": {
+    "title": "Cookie Policy",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Cookie Policy",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdatedDate": "3 May 2026",
+    "intro": "This Policy explains what cookies and other local-storage mechanisms are used on the Alba Ventanas SL website, for what purpose and how you can manage them.",
+    "whatTitle": "What are cookies?",
+    "whatBody": "A cookie is a small file downloaded to your device when you visit a website. It allows the site to remember information about your visit. Alongside cookies we also use the browser local storage (localStorage), which serves a similar purpose.",
+    "typesTitle": "Types of cookies we use",
+    "typesBody": "This site uses strictly necessary technical cookies for its operation. If you accept all cookies in the banner, functional cookies from the live chat provider Tawk.to LLC (USA) are also enabled to keep the conversation alive. We do not use analytics, advertising or social-media cookies.",
+    "tableHeaders": {
+      "name": "Name",
+      "type": "Type",
+      "purpose": "Purpose",
+      "retention": "Retention",
+      "provider": "Provider"
+    },
+    "cookies": [
+      {
+        "name": "alba-cookie-consent",
+        "type": "Technical (localStorage)",
+        "purpose": "Remembers your choice in the cookie banner (accept all, reject non-essential or close).",
+        "retention": "Persistent until browser storage is cleared",
+        "provider": "Alba Ventanas SL (first-party)"
+      },
+      {
+        "name": "lead-modal-auto-fired",
+        "type": "Technical (sessionStorage)",
+        "purpose": "Prevents showing the contact modal more than once per session.",
+        "retention": "Until the browser tab is closed",
+        "provider": "Alba Ventanas SL (first-party)"
+      },
+      {
+        "name": "NEXT_LOCALE",
+        "type": "Technical (cookie)",
+        "purpose": "Remembers the selected language to show the correct site version.",
+        "retention": "1 year",
+        "provider": "Alba Ventanas SL (first-party)"
+      },
+      {
+        "name": "__tawkuuid",
+        "type": "Functional · third-party (Tawk.to)",
+        "purpose": "Anonymously identifies the visitor inside the live chat (only if you accept all cookies).",
+        "retention": "6 months",
+        "provider": "Tawk.to LLC (USA)"
+      },
+      {
+        "name": "Tawk_*",
+        "type": "Functional · third-party (Tawk.to)",
+        "purpose": "Keeps the active chat session so the conversation history is not lost.",
+        "retention": "Session / until the browser is closed",
+        "provider": "Tawk.to LLC (USA)"
+      }
+    ],
+    "manageTitle": "How to manage cookies",
+    "manageBody": "You can accept or reject non-essential cookies in the banner shown when entering the site. You can also clear cookies and local storage in your browser settings (Chrome, Safari, Firefox, Edge). Rejecting strictly necessary technical cookies may affect site functionality.",
+    "changesTitle": "Policy updates",
+    "changesBody": "If we add analytics or marketing cookies in the future (for example, Google Analytics), we will update this policy and request your consent through the banner before activating them.",
+    "contactTitle": "Contact",
+    "contactBody": "For any question about this Cookie Policy, please email albaventanas@gmail.com."
   }
 }

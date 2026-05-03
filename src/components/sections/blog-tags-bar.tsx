@@ -4,22 +4,24 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRightIcon } from '@/components/icons/arrow-right'
 import { ArrowUpRightIcon } from '@/components/icons/arrow-up-right'
-import { BLOG_TAGS, type BlogTag } from '@/data/blog'
+
+export type BlogTagDisplay = { _id: string; label: string; slug: string }
 
 type Props = {
   sortLabel: string
-  activeTag?: BlogTag
+  activeTag?: string
   /** Base href for the blog list (e.g. `/uk/blog`). Tags append `?tag=...`. */
   baseHref: string
   loadMoreLabel: string
+  tags: BlogTagDisplay[]
 }
 
 const PILL_BASE =
   'inline-flex h-[46px] shrink-0 items-center justify-center gap-1.5 rounded-[2px] px-6 text-[14px] font-medium tracking-[0.28px] whitespace-nowrap text-[var(--color-brand)] transition-colors md:h-[58px] md:text-[15px] md:tracking-[0.3px]'
 
-export function BlogTagsBar({ sortLabel, activeTag, baseHref, loadMoreLabel }: Props) {
-  const tagHref = (tag?: BlogTag) =>
-    tag ? `${baseHref}?tag=${encodeURIComponent(tag)}` : baseHref
+export function BlogTagsBar({ sortLabel, activeTag, baseHref, loadMoreLabel, tags }: Props) {
+  const tagHref = (slug?: string) =>
+    slug ? `${baseHref}?tag=${encodeURIComponent(slug)}` : baseHref
   const ref = useRef<HTMLUListElement>(null)
   const [canScrollNext, setCanScrollNext] = useState(false)
 
@@ -60,19 +62,19 @@ export function BlogTagsBar({ sortLabel, activeTag, baseHref, loadMoreLabel }: P
             <ArrowUpRightIcon size={15} />
           </Link>
         </li>
-        {BLOG_TAGS.map((tag) => {
-          const isActive = activeTag === tag
+        {tags.map((tag) => {
+          const isActive = activeTag === tag.slug
           return (
-            <li key={tag}>
+            <li key={tag._id}>
               <Link
-                href={tagHref(tag)}
-                className={`${PILL_BASE} border border-[#f4f4f4] bg-white ${
+                href={tagHref(tag.slug)}
+                className={`${PILL_BASE} ${
                   isActive
-                    ? 'bg-[var(--color-surface)]'
-                    : 'hover:border-[var(--color-surface)] hover:bg-[var(--color-surface)]'
+                    ? 'bg-[var(--color-accent)] hover:bg-[#e6b801]'
+                    : 'border border-[#f4f4f4] bg-white hover:border-[var(--color-surface)] hover:bg-[var(--color-surface)]'
                 }`}
               >
-                {tag}
+                {tag.label}
                 <ArrowUpRightIcon size={15} />
               </Link>
             </li>
