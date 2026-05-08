@@ -4,7 +4,7 @@ import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
 import { ProductTabs } from '@/components/sections/product-tabs'
 import { ProductsSection } from '@/components/sections/products-section'
-import { PRODUCT_CATEGORIES, PRODUCTS, type Product } from '@/data/products'
+import { getLocalizedProduct, PRODUCT_CATEGORIES, PRODUCTS, type Product } from '@/data/products'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -80,7 +80,7 @@ export default async function ProductsPage({ params }: PageProps<'/[lang]/produc
               cat === 'pvc' || cat === 'aluminum'
                 ? p.family === cat || p.category === cat
                 : p.category === cat,
-            )
+            ).map((p) => getLocalizedProduct(p, lang))
             if (products.length === 0) return null
             return (
               <ProductsSection

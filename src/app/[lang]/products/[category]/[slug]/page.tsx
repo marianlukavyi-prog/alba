@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/header'
 import { ProductDetailView } from '@/components/sections/product-detail-view'
 import { ProjectsBento } from '@/components/sections/projects-bento'
 import { JsonLd } from '@/components/seo/json-ld'
-import { PRODUCTS } from '@/data/products'
+import { getLocalizedProduct, PRODUCTS } from '@/data/products'
 import { defaultLocale, hasLocale, locales, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 
@@ -26,8 +26,9 @@ export async function generateMetadata({
 }: PageProps<'/[lang]/products/[category]/[slug]'>): Promise<Metadata> {
   const { lang, category, slug } = await params
   if (!hasLocale(lang)) return {}
-  const product = PRODUCTS.find((p) => p.slug === slug && p.category === category)
-  if (!product) return {}
+  const rawProduct = PRODUCTS.find((p) => p.slug === slug && p.category === category)
+  if (!rawProduct) return {}
+  const product = getLocalizedProduct(rawProduct, lang)
 
   const languages: Record<string, string> = {}
   for (const locale of locales)
@@ -62,8 +63,9 @@ export default async function ProductDetailPage({
 }: PageProps<'/[lang]/products/[category]/[slug]'>) {
   const { lang, category, slug } = await params
   if (!hasLocale(lang)) notFound()
-  const product = PRODUCTS.find((p) => p.slug === slug && p.category === category)
-  if (!product) notFound()
+  const rawProduct = PRODUCTS.find((p) => p.slug === slug && p.category === category)
+  if (!rawProduct) notFound()
+  const product = getLocalizedProduct(rawProduct, lang)
 
   const dict = await getDictionary(lang)
   const t = dict.productsPage

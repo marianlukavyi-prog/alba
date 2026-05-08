@@ -4,6 +4,7 @@ import { Banner } from '@/components/layout/banner'
 import { Header } from '@/components/layout/header'
 import { CategorySubFilter } from '@/components/sections/category-sub-filter'
 import {
+  getLocalizedProduct,
   PRODUCT_CATEGORIES,
   PRODUCT_SUBCATEGORIES,
   PRODUCTS,
@@ -93,7 +94,7 @@ export default async function ProductCategoryPage({
     category === 'pvc' || category === 'aluminum'
       ? p.family === category || p.category === category
       : p.category === category,
-  )
+  ).map((p) => getLocalizedProduct(p, lang))
   const title = t.categories[category]
   const description = t.categoryDescriptions[category]
   const basePath = localePath(lang, `/products/${category}`)

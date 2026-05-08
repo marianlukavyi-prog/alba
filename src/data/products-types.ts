@@ -60,6 +60,22 @@ export type ProductDetail = {
 
 export type ProductFamily = 'pvc' | 'aluminum'
 
+export const TRANSLATION_LOCALES = ['en', 'es', 'ru'] as const
+export type TranslationLocale = (typeof TRANSLATION_LOCALES)[number]
+
+export type ProductTranslation = {
+  name?: string
+  specsValues?: string[]
+  detail?: {
+    subtitle?: string
+    description?: string
+    highlights?: ProductHighlight[]
+    components?: Array<{ title: string; description: string }>
+  }
+}
+
+export type ProductTranslations = Partial<Record<TranslationLocale, ProductTranslation>>
+
 export type Product = {
   slug: string
   name: string
@@ -69,6 +85,7 @@ export type Product = {
   specs: Spec[]
   image: { src: string }
   detail: ProductDetail
+  translations?: ProductTranslations
 }
 
 /**

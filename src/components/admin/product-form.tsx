@@ -17,6 +17,7 @@ import {
   PALETTE_KEYS,
   PRODUCT_CATEGORIES,
   PRODUCT_SUBCATEGORIES,
+  TRANSLATION_LOCALES,
   type PaletteKey,
   type Product,
   type ProductCategory,
@@ -26,6 +27,7 @@ import {
   type ProductSubcategory,
   type Spec,
   type SpecKey,
+  type TranslationLocale,
 } from '@/data/products-types'
 
 const SPEC_KEYS: SpecKey[] = [
@@ -50,6 +52,15 @@ type ComponentDraft = {
   images: FileValue[]
 }
 
+type TranslationState = {
+  name: string
+  specsValues: string[]
+  subtitle: string
+  description: string
+  highlights: ProductHighlight[]
+  components: { title: string; description: string }[]
+}
+
 type FormState = {
   slug: string
   name: string
@@ -66,7 +77,17 @@ type FormState = {
   paletteKey: PaletteKey
   customColors: ProductColor[]
   gallery: FileValue[]
+  translations: Partial<Record<TranslationLocale, TranslationState>>
 }
+
+const emptyTranslation = (specsLen = 0, highlightsLen = 0, componentsLen = 0): TranslationState => ({
+  name: '',
+  specsValues: Array(specsLen).fill(''),
+  subtitle: '',
+  description: '',
+  highlights: Array.from({ length: highlightsLen }, () => ({ label: '', value: '' })),
+  components: Array.from({ length: componentsLen }, () => ({ title: '', description: '' })),
+})
 
 const emptyState: FormState = {
   slug: '',
@@ -84,6 +105,7 @@ const emptyState: FormState = {
   paletteKey: 'SK_SP',
   customColors: [],
   gallery: [],
+  translations: {},
 }
 
 const detectPaletteKey = (colors: ProductColor[]): PaletteKey | null => {
@@ -102,6 +124,26 @@ const detectPaletteKey = (colors: ProductColor[]): PaletteKey | null => {
 
 const productToState = (p: Product): FormState => {
   const paletteKey = detectPaletteKey(p.detail.colors)
+
+  const translations: Partial<Record<TranslationLocale, TranslationState>> = {}
+  for (const locale of TRANSLATION_LOCALES) {
+    const t = p.translations?.[locale]
+    translations[locale] = {
+      name: t?.name ?? '',
+      specsValues: p.specs.map((_, i) => t?.specsValues?.[i] ?? ''),
+      subtitle: t?.detail?.subtitle ?? '',
+      description: t?.detail?.description ?? '',
+      highlights: p.detail.highlights.map((h, i) => ({
+        label: t?.detail?.highlights?.[i]?.label ?? '',
+        value: t?.detail?.highlights?.[i]?.value ?? '',
+      })),
+      components: p.detail.components.map((_, i) => ({
+        title: t?.detail?.components?.[i]?.title ?? '',
+        description: t?.detail?.components?.[i]?.description ?? '',
+      })),
+    }
+  }
+
   return {
     slug: p.slug,
     name: p.name,
@@ -122,6 +164,7 @@ const productToState = (p: Product): FormState => {
     paletteKey: paletteKey ?? 'SK_SP',
     customColors: paletteKey ? [] : p.detail.colors,
     gallery: p.detail.gallery as FileValue[],
+    translations,
   }
 }
 
@@ -141,6 +184,60 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setState((s) => ({ ...s, [key]: value }))
+
+  const updateTranslation = (locale: TranslationLocale, patch: Partial<TranslationState>) =>
+    setState((s) => ({
+      ...s,
+      translations: {
+        ...s.translations,
+        [locale]: { ...(s.translations[locale] ?? emptyTranslation()), ...patch },
+      },
+    }))
+
+  const handleSpecsChange = (specs: Spec[]) =>
+    setState((s) => {
+      const translations = { ...s.translations }
+      for (const locale of TRANSLATION_LOCALES) {
+        const curr = translations[locale]
+        if (curr) {
+          translations[locale] = {
+            ...curr,
+            specsValues: specs.map((_, i) => curr.specsValues[i] ?? ''),
+          }
+        }
+      }
+      return { ...s, specs, translations }
+    })
+
+  const handleHighlightsChange = (highlights: ProductHighlight[]) =>
+    setState((s) => {
+      const translations = { ...s.translations }
+      for (const locale of TRANSLATION_LOCALES) {
+        const curr = translations[locale]
+        if (curr) {
+          translations[locale] = {
+            ...curr,
+            highlights: highlights.map((_, i) => curr.highlights[i] ?? { label: '', value: '' }),
+          }
+        }
+      }
+      return { ...s, highlights, translations }
+    })
+
+  const handleComponentsChange = (components: ComponentDraft[]) =>
+    setState((s) => {
+      const translations = { ...s.translations }
+      for (const locale of TRANSLATION_LOCALES) {
+        const curr = translations[locale]
+        if (curr) {
+          translations[locale] = {
+            ...curr,
+            components: components.map((_, i) => curr.components[i] ?? { title: '', description: '' }),
+          }
+        }
+      }
+      return { ...s, components, translations }
+    })
 
   const handleNameChange = (name: string) => {
     setState((s) => {
@@ -281,7 +378,7 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
       >
         <DynamicList
           items={state.specs}
-          onChange={(specs) => update('specs', specs)}
+          onChange={handleSpecsChange}
           render={(item, onUpdate) => (
             <div className="grid grid-cols-2 gap-2">
               <SearchableSelect<SpecKey>
@@ -335,7 +432,7 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
       >
         <DynamicList
           items={state.highlights}
-          onChange={(highlights) => update('highlights', highlights)}
+          onChange={handleHighlightsChange}
           render={(item, onUpdate) => (
             <div className="flex gap-2">
               <input
@@ -363,7 +460,7 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
       >
         <DynamicList<ComponentDraft>
           items={state.components}
-          onChange={(components) => update('components', components)}
+          onChange={handleComponentsChange}
           render={(item, onUpdate) => (
             <div className="flex flex-col gap-3 rounded-[2px] border border-[#e3e3e3] bg-[#fafafa] p-3">
               <input
@@ -463,6 +560,8 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
         />
       </Section>
 
+      <TranslationsSection state={state} updateTranslation={updateTranslation} />
+
       <div className="sticky bottom-0 z-20 -mx-px flex justify-end gap-3 rounded-b-[4px] border-t border-[#e3e3e3] bg-white/95 px-6 py-4 backdrop-blur">
         <button
           type="button"
@@ -488,6 +587,156 @@ export function ProductForm({ initial, onSubmit, submitLabel }: Props) {
         </button>
       </div>
     </form>
+  )
+}
+
+const LOCALE_LABELS: Record<TranslationLocale, string> = { en: 'EN', es: 'ES', ru: 'RU' }
+
+function TranslationsSection({
+  state,
+  updateTranslation,
+}: {
+  state: FormState
+  updateTranslation: (locale: TranslationLocale, patch: Partial<TranslationState>) => void
+}) {
+  const [activeLocale, setActiveLocale] = useState<TranslationLocale>('en')
+  const t = state.translations[activeLocale] ?? emptyTranslation()
+
+  const updateHighlight = (i: number, patch: Partial<ProductHighlight>) => {
+    const highlights = t.highlights.map((h, j) => (j === i ? { ...h, ...patch } : h))
+    updateTranslation(activeLocale, { highlights })
+  }
+
+  const updateComponent = (i: number, patch: { title?: string; description?: string }) => {
+    const components = t.components.map((c, j) => (j === i ? { ...c, ...patch } : c))
+    updateTranslation(activeLocale, { components })
+  }
+
+  return (
+    <Section
+      title="Переклади"
+      description="Тексти для інших мов. Порожнє поле — відображається базовий (українській) текст."
+    >
+      <div className="flex gap-1 border-b border-[#e3e3e3] pb-3">
+        {TRANSLATION_LOCALES.map((locale) => (
+          <button
+            key={locale}
+            type="button"
+            onClick={() => setActiveLocale(locale)}
+            className={`rounded-[3px] px-4 py-1.5 text-[13px] font-semibold transition-colors ${
+              activeLocale === locale
+                ? 'bg-[var(--color-brand)] text-white'
+                : 'text-[var(--color-brand-soft)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand)]'
+            }`}
+          >
+            {LOCALE_LABELS[locale]}
+          </button>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <Field label="Назва товару">
+          <input
+            value={t.name}
+            onChange={(e) => updateTranslation(activeLocale, { name: e.target.value })}
+            className={inputCls}
+            placeholder={state.name || 'переклад назви'}
+          />
+        </Field>
+
+        <Field label="Підзаголовок">
+          <textarea
+            value={t.subtitle}
+            onChange={(e) => updateTranslation(activeLocale, { subtitle: e.target.value })}
+            className={`${inputCls} min-h-[60px]`}
+            placeholder={state.subtitle || 'переклад підзаголовка'}
+          />
+        </Field>
+
+        <Field label="Повний опис">
+          <textarea
+            value={t.description}
+            onChange={(e) => updateTranslation(activeLocale, { description: e.target.value })}
+            className={`${inputCls} min-h-[160px] font-mono text-[13px]`}
+            placeholder={state.description || 'переклад опису'}
+          />
+        </Field>
+
+        {state.specs.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            <span className="text-[12px] font-medium uppercase tracking-wide text-[var(--color-brand-soft)]">
+              Технічні характеристики (значення)
+            </span>
+            {state.specs.map((spec, i) => (
+              <div key={i} className="grid grid-cols-2 gap-2">
+                <span className="flex items-center rounded-[2px] border border-[#dcdcdc] bg-[#f7f7f7] px-3 py-2 text-[13px] text-[var(--color-brand-soft)]">
+                  {spec.value}
+                </span>
+                <input
+                  value={t.specsValues[i] ?? ''}
+                  onChange={(e) => {
+                    const specsValues = t.specsValues.map((v, j) =>
+                      j === i ? e.target.value : v,
+                    )
+                    updateTranslation(activeLocale, { specsValues })
+                  }}
+                  className={inputCls}
+                  placeholder="переклад значення"
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {state.highlights.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            <span className="text-[12px] font-medium uppercase tracking-wide text-[var(--color-brand-soft)]">
+              Ключові переваги
+            </span>
+            {state.highlights.map((h, i) => (
+              <div key={i} className="flex gap-2">
+                <input
+                  value={t.highlights[i]?.label ?? ''}
+                  onChange={(e) => updateHighlight(i, { label: e.target.value })}
+                  className={inputCls}
+                  placeholder={h.label || 'назва'}
+                />
+                <input
+                  value={t.highlights[i]?.value ?? ''}
+                  onChange={(e) => updateHighlight(i, { value: e.target.value })}
+                  className={inputCls}
+                  placeholder={h.value || 'значення'}
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {state.components.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            <span className="text-[12px] font-medium uppercase tracking-wide text-[var(--color-brand-soft)]">
+              Складники / опції
+            </span>
+            {state.components.map((c, i) => (
+              <div key={i} className="flex flex-col gap-2 rounded-[2px] border border-[#e3e3e3] bg-[#fafafa] p-3">
+                <input
+                  value={t.components[i]?.title ?? ''}
+                  onChange={(e) => updateComponent(i, { title: e.target.value })}
+                  className={inputCls}
+                  placeholder={c.title || 'назва складника'}
+                />
+                <input
+                  value={t.components[i]?.description ?? ''}
+                  onChange={(e) => updateComponent(i, { description: e.target.value })}
+                  className={inputCls}
+                  placeholder={c.description || 'опис складника'}
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </Section>
   )
 }
 

@@ -4,7 +4,7 @@ import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { revalidatePath } from 'next/cache'
 import productsJson from '@/data/products.json'
-import type { PaletteKey, ProductRaw } from '@/data/products-types'
+import type { PaletteKey, ProductRaw, ProductTranslations } from '@/data/products-types'
 import { validateProducts } from '@/data/validate-products'
 import { resolveUploads } from '@/lib/save-upload'
 
@@ -26,6 +26,7 @@ type RawPayload = {
   paletteKey: PaletteKey
   customColors: { name: string; hex?: string; image?: string }[]
   gallery: string[]
+  translations?: ProductTranslations
 }
 
 const buildRaw = (p: RawPayload): ProductRaw => {
@@ -36,6 +37,33 @@ const buildRaw = (p: RawPayload): ProductRaw => {
     description: c.description,
     ...(c.images && c.images.length > 0 ? { images: c.images.filter(Boolean) } : {}),
   }))
+  const cleanTranslations = p.translations
+    ? Object.fromEntries(
+        Object.entries(p.translations).map(([locale, raw]) => {
+          // Form sends flat TranslationState; stored format nests under `detail`
+          const t = raw as Record<string, unknown> & typeof raw
+          const subtitle = (t.detail as Record<string, unknown> | undefined)?.subtitle ?? (t as Record<string, unknown>).subtitle
+          const description = (t.detail as Record<string, unknown> | undefined)?.description ?? (t as Record<string, unknown>).description
+          const highlights = (t.detail as Record<string, unknown> | undefined)?.highlights ?? (t as Record<string, unknown>).highlights
+          const components = (t.detail as Record<string, unknown> | undefined)?.components ?? (t as Record<string, unknown>).components
+          const specsValues = t.specsValues as string[] | undefined
+
+          const detail: Record<string, unknown> = {}
+          if (subtitle) detail.subtitle = subtitle
+          if (description) detail.description = description
+          if (Array.isArray(highlights) && highlights.length) detail.highlights = highlights
+          if (Array.isArray(components) && components.some((c: Record<string, string>) => c.title || c.description))
+            detail.components = components
+
+          return [locale, {
+            ...(t.name ? { name: t.name } : {}),
+            ...(specsValues?.some(Boolean) ? { specsValues } : {}),
+            ...(Object.keys(detail).length ? { detail } : {}),
+          }]
+        }),
+      )
+    : undefined
+
   return {
     slug: p.slug,
     name: p.name,
@@ -52,6 +80,9 @@ const buildRaw = (p: RawPayload): ProductRaw => {
       colors,
       gallery: p.gallery.filter(Boolean),
     },
+    ...(cleanTranslations && Object.keys(cleanTranslations).length
+      ? { translations: cleanTranslations }
+      : {}),
   }
 }
 

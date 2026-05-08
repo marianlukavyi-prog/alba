@@ -4479,5 +4479,114 @@
         "/figma/products/test-test/test-test-gallery-1-1777812176184.webp"
       ]
     }
+  },
+  {
+    "slug": "test-vikno-pro-80",
+    "name": "Тест Вікно Про 80",
+    "category": "pvc",
+    "subcategory": "windows",
+    "family": "pvc",
+    "specs": [
+      {
+        "key": "depth",
+        "value": "80 мм"
+      },
+      {
+        "key": "thermal",
+        "value": "Uf 1.2 Вт/м²K"
+      }
+    ],
+    "image": {
+      "src": "/figma/products/euro-design-60/photo-1.png"
+    },
+    "detail": {
+      "subtitle": "Преміальна ПВХ-система 80 мм з чотирма камерами для максимальної теплоізоляції",
+      "description": "",
+      "highlights": [
+        {
+          "label": "Теплоізоляція",
+          "value": "Uf 1.2 Вт/м²K"
+        }
+      ],
+      "components": [
+        {
+          "title": "Рамний профіль",
+          "description": "Глибина 80 мм, 4 камери, армування з оцинкованої сталі."
+        }
+      ],
+      "colors": "SK_SP",
+      "gallery": []
+    },
+    "translations": {
+      "en": {
+        "name": "Test Window Pro 80",
+        "specsValues": [
+          "80 mm",
+          "Uf 1.2 W/m²K"
+        ],
+        "detail": {
+          "subtitle": "Premium 80mm PVC system with four chambers for maximum thermal insulation",
+          "description": "Test Window Pro 80 is a modern PVC system with an 80mm construction depth and 4-chamber design.\n\nIt delivers excellent thermal insulation (Uf 1.2 W/m²K) and sound insulation up to 48 dB — ideal for buildings with high comfort and energy-efficiency requirements.",
+          "highlights": [
+            {
+              "label": "Thermal insulation",
+              "value": "Uf 1.2 W/m²K"
+            }
+          ],
+          "components": [
+            {
+              "title": "Frame profile",
+              "description": "80mm depth, 4 chambers, galvanized steel reinforcement."
+            }
+          ]
+        }
+      },
+      "es": {
+        "name": "Ventana de Prueba Pro 80",
+        "specsValues": [
+          "80 mm",
+          "Uf 1.2 W/m²K"
+        ],
+        "detail": {
+          "subtitle": "Sistema PVC premium de 80 mm con cuatro cámaras para máximo aislamiento térmico",
+          "description": "Ventana de Prueba Pro 80 es un moderno sistema PVC con profundidad constructiva de 80 mm y diseño de 4 cámaras.\n\nOfrece un excelente aislamiento térmico (Uf 1.2 W/m²K) y aislamiento acústico de hasta 48 dB, ideal para edificios con altas exigencias de confort y eficiencia energética.",
+          "highlights": [
+            {
+              "label": "Aislamiento térmico",
+              "value": "Uf 1.2 W/m²K"
+            }
+          ],
+          "components": [
+            {
+              "title": "Perfil de marco",
+              "description": "Profundidad 80 mm, 4 cámaras, refuerzo de acero galvanizado."
+            }
+          ]
+        }
+      },
+      "ru": {
+        "name": "Тест Окно Про 80",
+        "specsValues": [
+          "80 мм",
+          "Uf 1.2 Вт/м²K"
+        ],
+        "detail": {
+          "subtitle": "Премиальная ПВХ-система 80 мм с четырьмя камерами для максимальной теплоизоляции",
+          "description": "Тест Окно Про 80 — современная ПВХ-система с конструктивной глубиной 80 мм и 4-камерной конструкцией.\n\nОбеспечивает отличную теплоизоляцию Uf 1.2 Вт/м²K и шумоизоляцию до 48 дБ. Идеально подходит для зданий с повышенными требованиями к комфорту и энергоэффективности.",
+          "highlights": [
+            {
+              "label": "Теплоизоляция",
+              "value": "Uf 1.2 Вт/м²K"
+            }
+          ],
+          "components": [
+            {
+              "title": "Рамный профиль",
+              "description": "Глубина 80 мм, 4 камеры, армирование из оцинкованной стали."
+            }
+          ]
+        }
+      }
+    }
   }
 ]
